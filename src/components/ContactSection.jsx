@@ -6,6 +6,7 @@ import {
   Phone,
   Send,
   Github,
+  Facebook,
   MessageCircle,
   Star,
   Sparkles,
@@ -121,7 +122,7 @@ export const ContactSection = () => {
     { icon: Github, href: " https://github.com/sufyan2618", label: "GitHub", color: "hover:text-purple-400" },
     { icon: Linkedin, href: "https://www.linkedin.com/in/sufyanliaqat2", label: "LinkedIn", color: "hover:text-blue-400" },
     { icon: Instagram, href: "https://www.instagram.com/sufyan_liaquat1/", label: "Instagram", color: "hover:text-pink-400" },
-    { icon: MessageCircle, href: "#", label: "Discord", color: "hover:text-cyan-400" },
+    { icon: Facebook, href: "https://www.facebook.com/sufyan.liaquat.73", label: "Facebook", color: "hover:text-cyan-400" },
   ];
 
   return (

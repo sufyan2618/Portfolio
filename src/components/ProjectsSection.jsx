@@ -30,8 +30,8 @@ const projects = [
     description: "Stunning dark-themed portfolio website with advanced animations, glassmorphism effects, and responsive design.",
     image: "/projects/portfolio.png",
     tags: ["React", "Next.js", "Tailwind CSS", "Framer Motion"],
-    demoUrl: "#",
-    githubUrl: "#",
+    demoUrl: "https://sufyanliaqat.me",
+    githubUrl: "https://github.com/sufyan2618/Portfolio",
     featured: true,
     category: "Frontend / Web Development"
   },
@@ -60,7 +60,7 @@ const projects = [
     },
   {
     id: 6,
-    title: "E-commerce Platform with Chatbot",
+    title: "E-commerce with AI Chatbot",
     description: "Full-featured e-commerce platform with user authentication, admin panel and a custom chatbot built with NLP.js.",
     image: "/projects/lals.png",
     tags: ["React", "Node.js", "Express", "MongoDB", "NLP.js"],

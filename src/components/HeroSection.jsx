@@ -156,7 +156,7 @@ export const HeroSection = () => {
 
           {/* Right Content - Photo - Much Smaller */}
           <div className={`relative order-1 lg:order-2 transition-all duration-1000 delay-200 ${isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-10'}`}>
-            <div className="relative max-w-[200px] mx-auto lg:max-w-[240px]">
+            <div className="relative max-w-[200px] mx-auto lg:max-w-[280px]">
               
               {/* Animated border rings - smaller */}
               <div className="absolute inset-0 rounded-full bg-gradient-to-r from-purple-500 via-pink-500 to-cyan-500 p-1 animate-spin-slow">
@@ -188,7 +188,7 @@ export const HeroSection = () => {
             </div>
 
             {/* Status indicator - smaller */}
-            <div className="absolute bottom-1 right-1 flex items-center gap-1.5 bg-gray-900/80 backdrop-blur-sm px-2 py-1 rounded-full border border-gray-700/50">
+            <div className="absolute bottom-1 right-1 lg:right-12 flex items-center gap-1.5 bg-gray-900/80 backdrop-blur-sm px-2 py-1 rounded-full border border-gray-700/50">
               <div className="w-1.5 h-1.5 bg-green-500 rounded-full animate-pulse" />
               <span className="text-xs text-gray-300">Available for work</span>
             </div>
