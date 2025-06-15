@@ -21,7 +21,7 @@ export const Navbar = () => {
   const scrollToSection = (sectionId) => {
     const element = document.querySelector(sectionId);
     if (element) {
-      const navbarHeight = 80; // Adjust based on your navbar height
+      const navbarHeight = 80;
       const elementPosition = element.offsetTop - navbarHeight;
       
       window.scrollTo({
@@ -33,10 +33,10 @@ export const Navbar = () => {
 
   // Handle navigation click
   const handleNavClick = (href) => {
-    setIsMenuOpen(false); // Close mobile menu
+    setIsMenuOpen(false);
     setTimeout(() => {
       scrollToSection(href);
-    }, 100); // Small delay to ensure menu closes first
+    }, 100);
   };
 
   // Handle opening the menu
@@ -52,20 +52,21 @@ export const Navbar = () => {
     }
   }, [isMenuOpen]);
 
-  // Handle closing the menu
+  // Handle closing the menu - FIXED VERSION
   useEffect(() => {
-    if (!isMenuOpen && savedScrollY > 0) {
+    if (!isMenuOpen) {
+      // Always restore body styles when menu closes
       document.body.style.position = '';
       document.body.style.top = '';
       document.body.style.width = '';
       document.body.style.overflow = '';
 
-      // Use requestAnimationFrame for better timing
+      // Restore scroll position
       requestAnimationFrame(() => {
         window.scrollTo(0, savedScrollY);
       });
     }
-  }, [isMenuOpen, savedScrollY]);
+  }, [isMenuOpen]);
 
   // Cleanup on unmount
   useEffect(() => {
@@ -76,24 +77,6 @@ export const Navbar = () => {
       document.body.style.overflow = '';
     };
   }, []);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
-    };
-    const handleMouseMove = (e) => {
-      setMousePosition({ x: e.clientX, y: e.clientY });
-    };
-
-    window.addEventListener("scroll", handleScroll);
-    window.addEventListener("mousemove", handleMouseMove);
-
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-      window.removeEventListener("mousemove", handleMouseMove);
-    };
-  }, []);
-
   return (
     <>
       {/* Background particles - only show when menu is closed */}
