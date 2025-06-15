@@ -1,3 +1,15 @@
 @import "tailwindcss";
 
+html, body {
+    overscroll-behavior: none;
+    -webkit-overscroll-behavior: none;
+    background-color: #0a0a0f !important;
+  }
+  
+  /* Ensure root element has dark background */
+  #root {
+    background-color: #0a0a0f;
+    min-height: 100vh;
+  }
+  
 

@@ -1,18 +1,21 @@
 import {
-  Instagram,
-  Linkedin,
   Mail,
   MapPin,
   Phone,
   Send,
-  Github,
-  Facebook,
   MessageCircle,
   Star,
   Sparkles,
   ArrowRight,
   CheckCircle
 } from "lucide-react";
+// Import Simple Icons from react-icons
+import { 
+  SiGithub, 
+  SiLinkedin, 
+  SiInstagram, 
+  SiFacebook 
+} from 'react-icons/si';
 import { cn } from "@/lib/utils";
 import { useToast } from "@/hooks/use-toast";
 import { useState, useEffect } from "react";
@@ -85,7 +88,6 @@ export const ContactSection = () => {
       setIsSubmitting(false);
     }
   };
-  
 
   const handleInputChange = (e) => {
     setFormData({
@@ -118,11 +120,32 @@ export const ContactSection = () => {
     }
   ];
 
+  // Updated social links with Simple Icons
   const socialLinks = [
-    { icon: Github, href: " https://github.com/sufyan2618", label: "GitHub", color: "hover:text-purple-400" },
-    { icon: Linkedin, href: "https://www.linkedin.com/in/sufyanliaqat2", label: "LinkedIn", color: "hover:text-blue-400" },
-    { icon: Instagram, href: "https://www.instagram.com/sufyan_liaquat1/", label: "Instagram", color: "hover:text-pink-400" },
-    { icon: Facebook, href: "https://www.facebook.com/sufyan.liaquat.73", label: "Facebook", color: "hover:text-cyan-400" },
+    { 
+      icon: SiGithub, 
+      href: "https://github.com/sufyan2618", 
+      label: "GitHub", 
+      color: "hover:text-white"
+    },
+    { 
+      icon: SiLinkedin, 
+      href: "https://www.linkedin.com/in/sufyanliaqat2", 
+      label: "LinkedIn", 
+      color: "hover:text-blue-400"
+    },
+    { 
+      icon: SiInstagram, 
+      href: "https://www.instagram.com/sufyan_liaquat1/", 
+      label: "Instagram", 
+      color: "hover:text-pink-400"
+    },
+    { 
+      icon: SiFacebook, 
+      href: "https://www.facebook.com/sufyan.liaquat.73", 
+      label: "Facebook", 
+      color: "hover:text-blue-500"
+    },
   ];
 
   return (
@@ -252,30 +275,32 @@ export const ContactSection = () => {
               })}
             </div>
 
-            {/* Social Links - reduced spacing */}
+            {/* Social Links with Simple Icons - reduced spacing */}
             <div className="pt-4">
-              <h4 className="text-base font-semibold text-white mb-4 flex items-center gap-2">
-                <Sparkles className="w-4 h-4 text-cyan-400 animate-pulse" />
-                Connect With Me
-              </h4>
-              <div className="flex gap-3">
-                {socialLinks.map((social, index) => {
-                  const Icon = social.icon;
-                  return (
-                    <a
-                      key={index}
-                      href={social.href}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className={`group p-3 bg-gray-800/50 backdrop-blur-sm border border-gray-700/50 rounded-lg hover:border-gray-600/70 transition-all duration-300 hover:scale-110 ${social.color}`}
-                      aria-label={social.label}
-                    >
-                      <Icon className="w-5 h-5 text-gray-400 group-hover:text-current transition-colors duration-300" />
-                    </a>
-                  );
-                })}
-              </div>
-            </div>
+        <h4 className="text-base font-semibold text-white mb-4 flex items-center gap-2">
+          <Sparkles className="w-4 h-4 text-cyan-400 animate-pulse" />
+          Connect With Me
+        </h4>
+        <div className="flex gap-3">
+          {socialLinks.map((social, index) => {
+            const Icon = social.icon;
+            return (
+              <a
+                key={index}
+                href={social.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={`group p-3 bg-gray-800/50 backdrop-blur-sm border border-gray-700/50 rounded-lg hover:border-gray-600/70 transition-all duration-300 hover:scale-110 ${social.color}`}
+                aria-label={social.label}
+              >
+                <Icon 
+                  className="w-5 h-5 text-gray-400 group-hover:text-current transition-colors duration-300" 
+                />
+              </a>
+            );
+          })}
+        </div>
+      </div>
           </div>
 
           {/* Right Side - Contact Form - reduced spacing */}
@@ -339,8 +364,7 @@ export const ContactSection = () => {
                       onChange={handleInputChange}
                       required
                       rows={4}
-                      className="w-full px-4 py-2.5 bg-gray-800/50 backdrop-blur-sm border
-                    border-gray-600/50 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-pink-400/50 focus:bg-gray-800/70 transition-all duration-300 resize-none"
+                      className="w-full px-4 py-2.5 bg-gray-800/50 backdrop-blur-sm border border-gray-600/50 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-pink-400/50 focus:bg-gray-800/70 transition-all duration-300 resize-none"
                       placeholder="Hello! I'd love to discuss a project with you..."
                     />
                   </div>
