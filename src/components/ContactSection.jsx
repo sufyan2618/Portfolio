@@ -100,14 +100,14 @@ export const ContactSection = () => {
     {
       icon: Mail,
       title: "Email",
-      value: "sufyanliaqat@gmail.com",
-      href: "mailto:sufyanliaqat@gmail.com",
+      value: "sufyanliaquat58@gmail.com",
+      href: "mailto:sufyanliaquat58@gmail.com",
       gradient: "from-purple-500 to-blue-500"
     },
     {
       icon: Phone,
       title: "Phone",
-      value: "+92 300 1234567",
+      value: "+92 313 6487106",
       href: "tel:+923136487106",
       gradient: "from-blue-500 to-cyan-500"
     },

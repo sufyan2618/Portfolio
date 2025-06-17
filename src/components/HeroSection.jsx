@@ -1,6 +1,7 @@
 import { ArrowDown, Download, Github, Linkedin, Mail, Sparkles } from "lucide-react";
 import { useEffect, useState } from "react";
 import newImage from '../assets/new.jpg';
+import resume from "../assets/Sufyan_Liaqat_MERN_Stack.pdf"
 
 export const HeroSection = () => {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
@@ -94,11 +95,11 @@ export const HeroSection = () => {
                 
                 <p className="text-sm text-gray-400 leading-relaxed max-w-md mx-auto lg:mx-0">
                   I craft exceptional digital experiences using the 
-                  <span className="text-purple-400 font-semibold"> MERN Stack</span> ,<span className="text-pink-400 font-semibold">Flutter</span> and cutting-edge 
+                  <span className="text-purple-400 font-semibold"> MERN Stack</span>, <span className="text-pink-400 font-semibold">Flutter</span> and cutting-edge 
                   <span className="text-cyan-400 font-semibold"> AI technologies</span>. 
                   Passionate about building scalable, beautiful, and intelligent web applications.
                 </p>
-              </div>
+              </div>  
 
               {/* Tech Stack Pills - Smaller */}
               <div className="flex flex-wrap gap-1.5 justify-center lg:justify-start">
@@ -140,11 +141,12 @@ export const HeroSection = () => {
               {[
                 { icon: Github, href: " https://github.com/sufyan2618", label: "GitHub" },
                 { icon: Linkedin, href: "https://www.linkedin.com/in/sufyanliaqat2", label: "LinkedIn" },
-                { icon: Download, href: "#", label: "Resume" },
-              ].map(({ icon: Icon, href, label }) => (
+                { icon: Download, href: resume, label: "Resume", download: true },
+              ].map(({ icon: Icon, href, label, download }) => (
                 <a
                   key={label}
                   href={href}
+                  {...(download ? { download: true } : {})}
                   className="group p-2 bg-gray-800/50 backdrop-blur-sm border border-gray-700/50 rounded-full hover:border-purple-400/50 hover:bg-gray-700/50 transition-all duration-300"
                   aria-label={label}
                 >

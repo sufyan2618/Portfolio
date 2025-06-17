@@ -29,6 +29,7 @@ export const Footer = () => {
     });
   };
 
+
   return (
     <footer className="relative bg-gray-950 border-t border-gray-800/30 overflow-hidden">
       {/* Minimal background effect */}
@@ -59,7 +60,7 @@ export const Footer = () => {
               <Heart className="w-4 h-4 text-red-400 animate-pulse" />
               <span>and</span>
               <Coffee className="w-4 h-4 text-amber-400" />
-              <span>in Lahore</span>
+              <span>by Sufyan</span>
             </div>
 
             {/* Right Side - Back to Top */}

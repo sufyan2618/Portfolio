@@ -1,5 +1,6 @@
 import { Briefcase, Code, Smartphone, Brain, Star, Sparkles, ArrowRight } from "lucide-react";
 import { useEffect, useState } from "react";
+import resume from "../assets/Sufyan_Liaqat_MERN_Stack.pdf"
 
 export const AboutSection = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -175,7 +176,7 @@ export const AboutSection = () => {
               </a>
               
               <a
-                href="/Sufyan_Resume.pdf" 
+                href={resume} 
                 download
                 className="group px-5 py-2.5 border-2 border-gray-700 hover:border-purple-400 rounded-full font-semibold text-gray-300 hover:text-white text-sm transition-all duration-300 hover:bg-gray-800/50 backdrop-blur-sm text-center"
               >

@@ -41,8 +41,8 @@ const projects = [
     description: " Real-time chat application built with React, Node.js, and Socket.IO featuring user authentication, file sharing .",
     image: "/projects/chatapp.png",
     tags: ["React", "Tailwind CSS", "Node.js", "Socket.IO", "Express"],
-    demoUrl: "#",
-    githubUrl: "#",
+    demoUrl: "https://chat-app-mv76.onrender.com",
+    githubUrl: "https://github.com/sufyan2618/Chat-App",
     featured: true,
     category: "Web Development"
   },
@@ -64,8 +64,8 @@ const projects = [
     description: "Full-featured e-commerce platform with user authentication, admin panel and a custom chatbot built with NLP.js.",
     image: "/projects/lals.png",
     tags: ["React", "Node.js", "Express", "MongoDB", "NLP.js"],
-    demoUrl: "#",
-    githubUrl: "#",
+    demoUrl: "https://lals-m9p7.onrender.com",
+    githubUrl: "https://github.com/sufyan2618/Lals",
     featured: true,
     category: "Full Stack / AI"
   },
