@@ -205,7 +205,6 @@ export const SkillsSection = () => {
                       <img 
                         src={`/${skill.icon}`} 
                         alt={skill.name}
-                        loading="lazy"
                         className="w-6 h-6 object-contain"
                       />
                     )}

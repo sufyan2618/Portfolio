@@ -123,7 +123,7 @@ export const Navbar = () => {
               <div className="absolute inset-0 bg-gradient-to-r from-purple-500 to-cyan-500 rounded-full blur-md opacity-70 group-hover:opacity-100 transition-all duration-500 animate-pulse" />
               <div className="relative w-full h-full rounded-full border border-gray-700/50 group-hover:border-purple-400/50 transition-all duration-300 overflow-hidden">
                 <img
-                  src="/logo.png"
+                  src="/logo.webp"
                   className="w-full h-full object-cover"
                   alt="Logo"
                 />
