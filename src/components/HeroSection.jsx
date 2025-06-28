@@ -1,6 +1,5 @@
 import { ArrowDown, Download, Github, Linkedin, Mail, Sparkles } from "lucide-react";
 import { useEffect, useState } from "react";
-import newImage from '../assets/new.jpg';
 import resume from "../assets/Sufyan_Liaqat_MERN_Stack.pdf"
 
 export const HeroSection = () => {
@@ -173,8 +172,10 @@ export const HeroSection = () => {
               <div className="relative z-10 p-1">
                 <div className="relative overflow-hidden rounded-full bg-gradient-to-br from-gray-800 to-gray-900 p-1">
                   <img
-                    src={newImage}
+                    src='./hero.webp'
                     alt="Sufyan Liaqat - Full Stack Developer"
+                    loading="eager"
+                    fetchPriority="high"
                     className="w-full h-full object-cover rounded-full grayscale hover:grayscale-0 transition-all duration-500 hover:scale-105"
                   />
                   
@@ -190,7 +191,7 @@ export const HeroSection = () => {
             </div>
 
             {/* Status indicator - smaller */}
-            <div className="absolute bottom-1 right-1 lg:right-12 flex items-center gap-1.5 bg-gray-900/80 backdrop-blur-sm px-2 py-1 rounded-full border border-gray-700/50">
+            <div className="absolute bottom-1 right-1 md:right-30 lg:right-1 xl:right-10 flex items-center gap-1.5 bg-gray-900/80 backdrop-blur-sm px-2 py-1 rounded-full border border-gray-700/50">
               <div className="w-1.5 h-1.5 bg-green-500 rounded-full animate-pulse" />
               <span className="text-xs text-gray-300">Available for work</span>
             </div>

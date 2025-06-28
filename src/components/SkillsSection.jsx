@@ -28,11 +28,11 @@ const skills = [
   // Tools
   { name: "Git", level: 90, category: "tools", icon: "git.png" },
   { name: "GitHub", level: 90, category: "tools", icon: "github.png" },
-  { name: "Zustand", level: 80, category: "tools", icon: "zustand.svg" },
   { name: "Axios", level: 85, category: "tools", icon: "axios.png" },
   { name: "NLP.js", level: 70, category: "tools", icon: "🧠" },
   { name: "Clerk", level: 75, category: "tools", icon: "🔐" },
   { name: "Lemon Squeezy", level: 70, category: "tools", icon: "🍋" },
+  { name: "Docker", level: 70, category: "tools", icon: "Docker.png" },
 ];
 
 const categories = [
@@ -205,6 +205,7 @@ export const SkillsSection = () => {
                       <img 
                         src={`/${skill.icon}`} 
                         alt={skill.name}
+                        loading="lazy"
                         className="w-6 h-6 object-contain"
                       />
                     )}
