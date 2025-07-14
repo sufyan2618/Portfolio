@@ -20,7 +20,7 @@ export const HeroSection = () => {
   return (
     <section
       id="hero"
-      className="relative h-screen flex items-center justify-center overflow-hidden bg-gray-950"
+      className="relative h-screen  flex items-center justify-center overflow-hidden bg-gray-950"
     >
       {/* Animated background elements - smaller */}
       <div className="absolute inset-0 overflow-hidden">
@@ -157,7 +157,7 @@ export const HeroSection = () => {
 
           {/* Right Content - Photo - Much Smaller */}
           <div className={`relative order-1 lg:order-2 transition-all duration-1000 delay-200 ${isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-10'}`}>
-            <div className="relative max-w-[200px] mx-auto lg:max-w-[280px]">
+            <div className="relative max-w-[170px] mx-auto lg:max-w-[280px]">
               
               {/* Animated border rings - smaller */}
               <div className="absolute inset-0 rounded-full bg-gradient-to-r from-purple-500 via-pink-500 to-cyan-500 p-1 animate-spin-slow">
@@ -191,16 +191,16 @@ export const HeroSection = () => {
             </div>
 
             {/* Status indicator - smaller */}
-            <div className="absolute bottom-1 right-1 md:right-30 lg:right-1 xl:right-10 flex items-center gap-1.5 bg-gray-900/80 backdrop-blur-sm px-2 py-1 rounded-full border border-gray-700/50">
-              <div className="w-1.5 h-1.5 bg-green-500 rounded-full animate-pulse" />
-              <span className="text-xs text-gray-300">Available for work</span>
+            <div className="absolute max-[290px]:mt-8 bottom-1  -right-6 md:right-30 lg:right-1 xl:right-10 flex items-center gap-1.5 bg-gray-900/80 backdrop-blur-sm px-2 py-1 rounded-full border border-gray-700/50">
+              <div className="w-1.5 h-1.5 max-[290px]:w-1 bg-green-500 rounded-full animate-pulse" />
+              <span className="text-xs max-[290px]:text-[10px] text-gray-300">Available for work</span>
             </div>
           </div>
         </div>
       </div>
 
       {/* Scroll indicator  */}
-      <div className="absolute bottom-6 left-1/2 transform -translate-x-1/2 hidden sm:flex flex-col items-center animate-bounce z-20">
+      <div className="absolute mb-36 bottom-6 left-1/2 transform -translate-x-1/2 hidden sm:flex flex-col items-center animate-bounce z-20">
         <span className="text-xs text-gray-400 mb-1">Scroll to explore</span>
         <ArrowDown className="h-5 w-5 text-purple-400" />
       </div>

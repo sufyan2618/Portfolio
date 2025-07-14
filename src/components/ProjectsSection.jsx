@@ -8,7 +8,7 @@ const projects = [
     description: "Voice-activated AI assistant web app built with MERN stack featuring natural speech interaction and real-time responses.",
     image: "/projects/assistant.webp",
     tags: ["React", "Node.js", "MongoDB", "Gemini AI", "Web Speech API"],
-    demoUrl: "https://nova-voices.onrender.com/",
+    demoUrl: "https://novavoices.sufyanliaqat.me",
     githubUrl: "https://github.com/sufyan2618/Nova-Voices",
     featured: true,
     category: "AI / MERN Stack"
@@ -64,7 +64,7 @@ const projects = [
     description: "Full-featured e-commerce platform with user authentication, admin panel and a custom chatbot built with NLP.js.",
     image: "/projects/lals.webp",
     tags: ["React", "Node.js", "Express", "MongoDB", "NLP.js"],
-    demoUrl: "https://lals-m9p7.onrender.com",
+    demoUrl: "https://lals.sufyanliaqat.me",
     githubUrl: "https://github.com/sufyan2618/Lals",
     featured: true,
     category: "Full Stack / AI"
