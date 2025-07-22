@@ -28,7 +28,6 @@ A modern, dark-themed, fully responsive personal portfolio website built with cu
 - **Lucide React:** Icon library for UI icons.
 - **React Icons:** For social media brand icons (Simple Icons, FontAwesome, etc.).
 - **Intersection Observer API:** Triggers animations on scroll.
-- **Web Speech API:** Used in the AI Voice Assistant project for voice interaction.
 
 ---
 
@@ -61,15 +60,12 @@ This structure helps organize your portfolio project using Next.js and React.
 git clone https://github.com/sufyan2618/portfolio.git
 cd portfolio
 
-text
-
 2. **Install dependencies:**
 npm install
 
 or
 yarn install
 
-text
 
 3. **Run the development server:**
 npm run dev
@@ -77,12 +73,10 @@ npm run dev
 or
 yarn dev
 
-text
 
 4. **Open your browser:**
-http://localhost:3000
+http://localhost:5173
 
-text
 
 ### Build for Production
 
@@ -92,8 +86,6 @@ npm start
 or
 yarn build
 yarn start
-
-text
 
 ---
 
@@ -121,11 +113,6 @@ Contributions are welcome! Please open an issue or submit a pull request for imp
 
 ---
 
-## 📜 License
-
-This project is licensed under the **MIT License**.
-
----
 
 ## 📞 Contact
 
