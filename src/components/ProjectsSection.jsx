@@ -4,6 +4,17 @@ import { useState, useEffect, useRef } from "react";
 const projects = [
   {
     id: 1,
+    title: "Online-Identity",
+    description: "Create stunning portfolios with Online-Identity, a full-stack MERN application featuring user authentication, data caching, dynamic portfolio creation, and real-time updates.",
+    image: "/projects/portfolio_creator.webp",
+    tags: ["MERN", "Redis", "Github Action", "Nginx", "Digital Ocean"],
+    demoUrl: "https://online-identity.tech",
+    githubUrl: "https://github.com/sufyan2618/portfolio_creator",
+    featured: true,
+    category: "Full Stack / Dev Ops"
+  },
+  {
+    id: 3,
     title: "AI Voice Assistant",
     description: "Voice-activated AI assistant web app built with MERN stack featuring natural speech interaction and real-time responses.",
     image: "/projects/assistant.webp",
@@ -25,7 +36,7 @@ const projects = [
     category: "AI / Web Development"
   },
   {
-    id: 4,
+    id: 5,
     title: "Modern Portfolio Website",
     description: "Stunning dark-themed portfolio website with advanced animations, glassmorphism effects, and responsive design.",
     image: "/projects/portfolio.webp",
@@ -36,7 +47,7 @@ const projects = [
     category: "Frontend / Web Development"
   },
   {
-    id: 3,
+    id: 4,
     title: "Linkit: A Chat App",
     description: " Real-time chat application built with React, Node.js, and Socket.IO featuring user authentication, file sharing .",
     image: "/projects/chatapp.webp",
@@ -46,20 +57,20 @@ const projects = [
     featured: true,
     category: "Web Development"
   },
-  
-    {
-      id: 5,
-      title: "Wrap VPN",
-      description: "Wrap VPN is a secure, cross-platform VPN app built with Flutter, featuring OVPN support, Supabase authentication, and a custom Android VPN engine.",
-      image: "/projects/vpn.webp",
-      tags: ["Flutter", "Dart", "Supabase", "OVPN", "Android", "iOS"],
-      demoUrl: "https://github.com/sufyan2618/vpn_app",
-      githubUrl: "https://github.com/sufyan2618/vpn_app",
-      featured: true,
-      category: "Cross-Platform App / Flutter"  
-    },
+
   {
     id: 6,
+    title: "Wrap VPN",
+    description: "Wrap VPN is a secure, cross-platform VPN app built with Flutter, featuring OVPN support, Supabase authentication, and a custom Android VPN engine.",
+    image: "/projects/vpn.webp",
+    tags: ["Flutter", "Dart", "Supabase", "OVPN", "Android", "iOS"],
+    demoUrl: "https://github.com/sufyan2618/vpn_app",
+    githubUrl: "https://github.com/sufyan2618/vpn_app",
+    featured: true,
+    category: "Cross-Platform App / Flutter"
+  },
+  {
+    id: 7,
     title: "E-commerce with AI Chatbot",
     description: "Full-featured e-commerce platform with user authentication, admin panel and a custom chatbot built with NLP.js.",
     image: "/projects/lals.webp",
@@ -94,7 +105,7 @@ export const ProjectsSection = () => {
     };
 
     window.addEventListener('mousemove', handleMouseMove);
-    
+
     return () => {
       if (section) observer.unobserve(section);
       window.removeEventListener('mousemove', handleMouseMove);
@@ -114,13 +125,13 @@ export const ProjectsSection = () => {
   };
 
   return (
-    <section 
-      id="projects" 
+    <section
+      id="projects"
       className="relative min-h-screen flex items-start justify-center overflow-hidden bg-gray-950 px-4 py-8"
     >
       {/* Animated background elements - reduced size */}
       <div className="absolute inset-0 overflow-hidden">
-        <div 
+        <div
           className="absolute w-72 h-72 opacity-15 blur-3xl animate-pulse"
           style={{
             background: 'radial-gradient(circle, #8b5cf6 0%, #06b6d4 50%, #ec4899 100%)',
@@ -129,7 +140,7 @@ export const ProjectsSection = () => {
             right: '10%',
           }}
         />
-        <div 
+        <div
           className="absolute w-64 h-64 opacity-10 blur-3xl animate-pulse"
           style={{
             background: 'radial-gradient(circle, #06b6d4 0%, #8b5cf6 50%, #ec4899 100%)',
@@ -169,23 +180,23 @@ export const ProjectsSection = () => {
             <span className="text-purple-400 font-medium text-sm tracking-wider uppercase">My Work</span>
             <Code2 className="w-4 h-4 text-cyan-400 animate-pulse delay-1000" />
           </div>
-          
+
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4">
             <span className="text-white">Featured</span>
             <span className="bg-gradient-to-r from-purple-400 via-pink-400 to-cyan-400 bg-clip-text text-transparent bg-300% animate-gradient"> Projects</span>
           </h2>
-          
+
           <p className="text-gray-400 text-base max-w-2xl mx-auto leading-relaxed">
-            Here are some of my recent projects showcasing expertise in full-stack development, 
+            Here are some of my recent projects showcasing expertise in full-stack development,
             AI integration, and modern web technologies.
           </p>
-          
+
           <div className="w-20 h-1 bg-gradient-to-r from-purple-500 to-cyan-500 rounded-full mx-auto mt-4" />
         </div>
 
         {/* Projects Container - reduced spacing */}
         <div className={`relative transition-all duration-1000 delay-300 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
-          
+
           {/* Scroll Navigation - smaller */}
           <div className="flex justify-between items-center mb-6">
             <div className="flex gap-3">
@@ -202,14 +213,14 @@ export const ProjectsSection = () => {
                 <ArrowRight className="w-4 h-4 text-gray-400 group-hover:text-purple-400 transition-colors duration-300" />
               </button>
             </div>
-            
+
             <div className="text-xs text-gray-400">
-              Scroll to explore → 
+              Scroll to explore →
             </div>
           </div>
 
           {/* Horizontal Scrolling Projects - smaller cards */}
-          <div 
+          <div
             ref={scrollContainerRef}
             className="flex gap-4 overflow-x-auto scrollbar-hide pb-3"
             style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
@@ -234,10 +245,10 @@ export const ProjectsSection = () => {
 
                 {/* Glow effect */}
                 <div className="absolute inset-0 bg-gradient-to-r from-purple-500/20 to-cyan-500/20 opacity-0 group-hover:opacity-100 rounded-xl blur-lg transition-all duration-300" />
-                
+
                 {/* Main Card - smaller */}
                 <div className="relative bg-gray-900/40 backdrop-blur-xl border border-gray-700/50 rounded-xl overflow-hidden group-hover:border-gray-600/70 transition-all duration-300">
-                  
+
                   {/* Image Container - smaller */}
                   <div className="relative h-36 overflow-hidden">
                     <img
@@ -245,10 +256,10 @@ export const ProjectsSection = () => {
                       alt={project.title}
                       className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                     />
-                    
+
                     {/* Overlay */}
                     <div className="absolute inset-0 bg-gradient-to-t from-gray-900/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                    
+
                     {/* Hover Actions - smaller */}
                     <div className="absolute inset-0 flex items-center justify-center gap-3 opacity-0 group-hover:opacity-100 transition-all duration-300">
                       <a
@@ -282,7 +293,7 @@ export const ProjectsSection = () => {
                     {/* Tags - smaller */}
                     <div className="flex flex-wrap gap-1.5 mb-3">
                       {project.tags.slice(0, 3).map((tag, tagIndex) => (
-                        <span 
+                        <span
                           key={tagIndex}
                           className="px-2 py-0.5 bg-gray-800/60 backdrop-blur-sm border border-gray-600/50 rounded-full text-xs text-gray-300 hover:border-purple-400/50 hover:text-purple-400 transition-all duration-300"
                         >
@@ -301,9 +312,10 @@ export const ProjectsSection = () => {
                       {project.title}
                     </h3>
 
-                    {/* Description - smaller */}
                     <p className="text-gray-400 text-xs leading-relaxed group-hover:text-gray-300 transition-colors duration-300">
-                      {project.description}
+                      {project.description.length > 150
+                        ? `${project.description.substring(0, 120)}...`
+                        : project.description}
                     </p>
 
                     {/* Links - smaller spacing */}
@@ -326,7 +338,7 @@ export const ProjectsSection = () => {
                           <Github size={16} />
                         </a>
                       </div>
-                      
+
                       <div className="text-xs text-gray-500">
                         0{index + 1}
                       </div>
@@ -339,18 +351,18 @@ export const ProjectsSection = () => {
         </div>
 
         <div className={`text-center mt-12 mb-8 transition-all duration-1000 delay-600 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
-      <a
-        href="https://github.com/sufyan2618"
-        target="_blank"
-        rel="noopener noreferrer"
-        className="group relative inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-purple-500 to-cyan-500 rounded-full font-semibold text-white text-sm overflow-hidden transition-all duration-300 hover:scale-105 hover:shadow-xl hover:shadow-purple-500/25"
-      >
-        <span className="relative z-10">Explore All Projects on GitHub</span>
-        <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" />
-        <div className="absolute inset-0 bg-gradient-to-r from-cyan-500 to-purple-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-      </a>
-    </div>
-  </div>
-</section>
+          <a
+            href="https://github.com/sufyan2618"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group relative inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-purple-500 to-cyan-500 rounded-full font-semibold text-white text-sm overflow-hidden transition-all duration-300 hover:scale-105 hover:shadow-xl hover:shadow-purple-500/25"
+          >
+            <span className="relative z-10">Explore All Projects on GitHub</span>
+            <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" />
+            <div className="absolute inset-0 bg-gradient-to-r from-cyan-500 to-purple-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+          </a>
+        </div>
+      </div>
+    </section>
   );
 };

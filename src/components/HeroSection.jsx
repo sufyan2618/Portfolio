@@ -200,7 +200,7 @@ export const HeroSection = () => {
       </div>
 
       {/* Scroll indicator  */}
-      <div className="absolute mb-36 bottom-6 left-1/2 transform -translate-x-1/2 hidden sm:flex flex-col items-center animate-bounce z-20">
+      <div className="absolute mb-36 lg:mb-0 bottom-6 left-1/2 transform -translate-x-1/2 hidden sm:flex flex-col items-center animate-bounce z-20">
         <span className="text-xs text-gray-400 mb-1">Scroll to explore</span>
         <ArrowDown className="h-5 w-5 text-purple-400" />
       </div>
