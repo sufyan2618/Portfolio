@@ -1,6 +1,6 @@
 import { ArrowDown, Download, Github, Linkedin, Mail, Sparkles } from "lucide-react";
 import { useEffect, useState } from "react";
-import resume from "../assets/Sufyan_Liaqat_MERN_Stack.pdf"
+import resume from "../assets/Sufyan_Liaqat_FullStack_Engineer.pdf"
 
 export const HeroSection = () => {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });

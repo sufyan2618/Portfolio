@@ -8,10 +8,10 @@ const skills = [
   { name: "React.js", level: 90, category: "frontend", icon: "react.png" },
   { name: "Next.js", level: 85, category: "frontend", icon: "next.png" },
   { name: "JavaScript", level: 90, category: "frontend", icon: "javaScript.png" },
-  { name: "TypeScript", level: 60, category: "frontend", icon: "typeScript.png" },
+  { name: "TypeScript", level: 60, category: "frontend", icon: "typeScript.png", },
   { name: "Tailwind CSS", level: 85, category: "frontend", icon: "tailwind.png" },
   { name: "Material UI", level: 80, category: "frontend", icon: "materialui.png" },
-  { name: "Framer Motion", level: 75, category: "frontend", icon: "vite.svg" }, // Using vite.svg as placeholder
+  { name: "Framer Motion", level: 75, category: "frontend", icon: "framer-motion.png" }, 
   { name: "Flutter", level: 85, category: "frontend", icon: "flutter.png" },
 
   // Backend
@@ -19,11 +19,13 @@ const skills = [
   { name: "Express.js", level: 85, category: "backend", icon: "express.png" },
   { name: "MongoDB", level: 80, category: "backend", icon: "mongodb.png" },
   { name: "Socket.io", level: 75, category: "backend", icon: "socket.io.png" },
-  { name: "Convex", level: 70, category: "backend", icon: "vite.svg" }, // Using vite.svg as placeholder
+  { name: "GraphQL", level: 70, category: "backend", icon: "GraphQL.webp" },
+  { name: "Redis", level: 70, category: "backend", icon: "Redis.png" },
+  { name: "Convex", level: 70, category: "backend", icon: "convex.png" }, 
   { name: "Python", level: 75, category: "backend", icon: "python.png" },
   { name: "Supabase", level: 85, category: "backend", icon: "supabase-logo-icon.png" },
+  { name: "PostgreSQL", level: 80, category: "backend", icon: "postgres.png" },
   { name: "Firebase", level: 85, category: "backend", icon: "firebase.png" },
-  { name: "Java", level: 75, category: "backend", icon: "java.png" },
 
   // Tools
   { name: "Git", level: 90, category: "tools", icon: "git.png" },
@@ -33,6 +35,9 @@ const skills = [
   { name: "Clerk", level: 75, category: "tools", icon: "🔐" },
   { name: "Lemon Squeezy", level: 70, category: "tools", icon: "🍋" },
   { name: "Docker", level: 70, category: "tools", icon: "Docker.png" },
+  { name: "Postman", level: 80, category: "tools", icon: "postman.png" },
+  { name: "Swagger", level: 60, category: "tools", icon: "swagger.webp" },
+  { name: "AWS", level: 60, category: "tools", icon: "AWS.webp" },
 ];
 
 const categories = [
@@ -57,18 +62,18 @@ export const SkillsSection = () => {
       { threshold: 0.1 }
     );
 
-    const section = document.getElementById('skills');
+    const section = document.getElementById("skills");
     if (section) observer.observe(section);
 
     const handleMouseMove = (e) => {
       setMousePosition({ x: e.clientX, y: e.clientY });
     };
 
-    window.addEventListener('mousemove', handleMouseMove);
+    window.addEventListener("mousemove", handleMouseMove);
 
     return () => {
       if (section) observer.unobserve(section);
-      window.removeEventListener('mousemove', handleMouseMove);
+      window.removeEventListener("mousemove", handleMouseMove);
     };
   }, []);
 
@@ -86,20 +91,24 @@ export const SkillsSection = () => {
         <div
           className="absolute w-80 h-80 opacity-15 blur-3xl animate-pulse"
           style={{
-            background: 'radial-gradient(circle, #8b5cf6 0%, #06b6d4 50%, #ec4899 100%)',
-            transform: `translate(${mousePosition.x * 0.02}px, ${mousePosition.y * 0.02}px)`,
-            top: '5%',
-            right: '10%',
+            background:
+              "radial-gradient(circle, #8b5cf6 0%, #06b6d4 50%, #ec4899 100%)",
+            transform: `translate(${mousePosition.x * 0.02}px, ${mousePosition.y * 0.02
+              }px)`,
+            top: "5%",
+            right: "10%",
           }}
         />
         <div
           className="absolute w-72 h-72 opacity-10 blur-3xl animate-pulse"
           style={{
-            background: 'radial-gradient(circle, #06b6d4 0%, #8b5cf6 50%, #ec4899 100%)',
-            transform: `translate(${mousePosition.x * -0.01}px, ${mousePosition.y * -0.01}px)`,
-            bottom: '10%',
-            left: '5%',
-            animationDelay: '1s',
+            background:
+              "radial-gradient(circle, #06b6d4 0%, #8b5cf6 50%, #ec4899 100%)",
+            transform: `translate(${mousePosition.x * -0.01}px, ${mousePosition.y * -0.01
+              }px)`,
+            bottom: "10%",
+            left: "5%",
+            animationDelay: "1s",
           }}
         />
 
@@ -126,23 +135,34 @@ export const SkillsSection = () => {
 
       <div className="container mx-auto max-w-7xl relative z-10 h-full flex flex-col justify-center py-16">
         {/* Section Header */}
-        <div className={`text-center mb-8 transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+        <div
+          className={`text-center mb-8 transition-all duration-1000 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
+            }`}
+        >
           <div className="inline-flex items-center gap-2 mb-3">
             <Zap className="w-5 h-5 text-purple-400 animate-pulse" />
-            <span className="text-purple-400 font-medium text-sm tracking-wider uppercase">Technical Expertise</span>
+            <span className="text-purple-400 font-medium text-sm tracking-wider uppercase">
+              Technical Expertise
+            </span>
             <Zap className="w-5 h-5 text-cyan-400 animate-pulse delay-1000" />
           </div>
 
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4">
             <span className="text-white">My</span>
-            <span className="bg-gradient-to-r from-purple-400 via-pink-400 to-cyan-400 bg-clip-text text-transparent bg-300% animate-gradient"> Skills</span>
+            <span className="bg-gradient-to-r from-purple-400 via-pink-400 to-cyan-400 bg-clip-text text-transparent bg-300% animate-gradient">
+              {" "}
+              Skills
+            </span>
           </h2>
 
           <div className="w-20 h-1 bg-gradient-to-r from-purple-500 to-cyan-500 rounded-full mx-auto" />
         </div>
 
         {/* Category Filter */}
-        <div className={`flex flex-wrap justify-center gap-3 mb-8 transition-all duration-1000 delay-200 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+        <div
+          className={`flex flex-wrap justify-center gap-3 mb-8 transition-all duration-1000 delay-200 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
+            }`}
+        >
           {categories.map((category) => {
             const Icon = category.icon;
             return (
@@ -175,14 +195,17 @@ export const SkillsSection = () => {
         </div>
 
         {/* Skills Grid */}
-        <div className={`grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 transition-all duration-1000 delay-400 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+        <div
+          className={`grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 transition-all duration-1000 delay-400 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
+            }`}
+        >
           {filteredSkills.map((skill, index) => (
             <div
               key={skill.name}
               className="group relative transition-all duration-500 hover:scale-105"
               style={{
                 animationDelay: `${index * 50}ms`,
-                animation: isVisible ? 'fadeInUp 0.6s ease-out forwards' : '',
+                animation: isVisible ? "fadeInUp 0.6s ease-out forwards" : "",
               }}
             >
               {/* Glow effect */}
@@ -190,7 +213,6 @@ export const SkillsSection = () => {
 
               {/* Main Card */}
               <div className="relative bg-gray-900/40 backdrop-blur-xl border border-gray-700/50 rounded-xl p-4 group-hover:border-gray-600/70 transition-all duration-300 overflow-hidden">
-
                 {/* Background Pattern */}
                 <div className="absolute top-0 right-0 w-20 h-20 opacity-5">
                   <div className="w-full h-full bg-gradient-to-br from-purple-500 to-cyan-500 rounded-full blur-xl" />
@@ -199,11 +221,12 @@ export const SkillsSection = () => {
                 {/* Skill Header */}
                 <div className="relative flex items-center gap-3 mb-3">
                   <div className="text-2xl group-hover:scale-110 transition-transform duration-300">
-                    {typeof skill.icon === "string" && !skill.icon.includes('.') ? (
+                    {typeof skill.icon === "string" &&
+                      !skill.icon.includes(".") ? (
                       <span>{skill.icon}</span>
                     ) : (
-                      <img 
-                        src={`/${skill.icon}`} 
+                      <img
+                        src={`/${skill.icon}`}
                         alt={skill.name}
                         className="w-6 h-6 object-contain"
                       />
@@ -226,8 +249,8 @@ export const SkillsSection = () => {
                     <div
                       className="h-2 rounded-full bg-gradient-to-r from-purple-500 to-cyan-500 origin-left transition-all duration-1000 ease-out"
                       style={{
-                        width: isVisible ? `${skill.level}%` : '0%',
-                        animationDelay: `${index * 100}ms`
+                        width: isVisible ? `${skill.level}%` : "0%",
+                        animationDelay: `${index * 100}ms`,
                       }}
                     />
                   </div>
@@ -244,7 +267,10 @@ export const SkillsSection = () => {
         </div>
 
         {/* Bottom Stats */}
-        <div className={`flex justify-center items-center gap-8 mt-8 transition-all duration-1000 delay-600 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+        <div
+          className={`flex justify-center items-center gap-8 mt-8 transition-all duration-1000 delay-600 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
+            }`}
+        >
           <div className="text-center">
             <div className="text-2xl font-bold bg-gradient-to-r from-purple-400 to-cyan-400 bg-clip-text text-transparent">
               {skills.length}+
