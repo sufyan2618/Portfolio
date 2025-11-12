@@ -4,36 +4,68 @@ import { useEffect, useState } from "react";
 const experiences = [
   {
     id: 1,
-    company: "Bug Monks",
-    logo : "/bug-monks.jpg",
-    role: "Full Stack Intern",
-    location: "Remote",
-    duration: "August 2024 - Present",
-    startDate: "Aug 2024",
-    type: "Internship",
-    description: "Contributing to the development of cutting-edge SaaS products by integrating new features, optimizing performance, and implementing scalable solutions. Working closely with senior developers to deliver high-quality code and enhance user experience.",
+    company: "BugMonks",
+    logo: "/bug-monks.jpg",
+    role: "Junior Full Stack Developer",
+    location: "Onsite - Lahore, Pakistan",
+    duration: "April 2025 - Present",
+    startDate: "Apr 2025",
+    type: "Full-time",
+    description: "Working on multiple enterprise-level SaaS projects, contributing to both frontend and backend development. Built production-grade applications serving 2000+ active users with focus on scalability, performance optimization, and modern architecture patterns.",
     responsibilities: [
-      "Developed and integrated new features for multiple SaaS platforms using modern web technologies",
-      "Collaborated with cross-functional teams to implement user-centric solutions and improve product functionality",
-      "Participated in code reviews, debugging sessions, and performance optimization initiatives",
-      "Contributed to the full software development lifecycle from planning to deployment"
+      "Developed a full-stack real estate analysis platform that scrapes and analyzes rental data from apartments.com, calculating Cap Rate, DSCR, CFBT, and other key financial metrics using Bull queues for background processing",
+      "Built a LinkedIn email marketing tool with web scraping capabilities and bulk campaign automation for lead generation",
+      "Implemented secure authentication systems, payment integrations (Stripe), and interactive admin dashboards serving 2k+ active users",
+      "Optimized MongoDB and PostgreSQL database queries, reducing API response times by 30% through indexing and query optimization",
+      "Deployed applications using Docker, NGINX reverse proxy, and CI/CD pipelines on Digital Ocean and AWS",
+      "Collaborated with cross-functional teams using Agile methodologies and version control with Git/GitHub"
     ],
-    technologies: ["React", "Node.js", "TypeScript", "MongoDB", "Express", "Git", "Docker", "GraphQL", "Redis", "AWS", "Sentry", "Swagger", "Postman"],
+    technologies: ["React", "Node.js", "Express.js", "MongoDB", "PostgreSQL", "FastAPI", "Bull", "GraphQL", "Redis", "TypeScript", "Docker", "NGINX", "AWS", "Digital Ocean", "Stripe", "Git", "Postman", "Swagger", "Jira"],
     achievements: [
-      "Successfully delivered multiple feature integrations within tight deadlines",
-      "Improved application performance and user experience through code optimization",
-      "Gained hands-on experience with enterprise-level SaaS product development"
+      "Successfully delivered multiple production-grade features within tight deadlines for enterprise SaaS platforms",
+      "Reduced API response times by 30% through database optimization and caching strategies",
+      "Built applications serving 2000+ active users with 99.9% uptime",
+      "Implemented scalable microservices architecture using Node.js and FastAPI"
     ],
     isActive: true,
     companyType: "SaaS Development",
     gradient: "from-purple-500 to-cyan-500"
+  },
+  {
+    id: 2,
+    company: "Freelance",
+    logo: "/freelance-icon.png",
+    role: "Full Stack Developer",
+    location: "Remote",
+    duration: "December 2024 - April 2025",
+    startDate: "Dec 2024",
+    type: "Contract",
+    description: "Delivered end-to-end web applications for multiple clients, focusing on e-commerce solutions, AI-powered SaaS platforms, and production-grade deployments with modern DevOps practices.",
+    responsibilities: [
+      "Developed a feature-rich e-commerce web application with user authentication, shopping cart, order management, and integrated payment system using Stripe and MongoDB",
+      "Built an AI-powered SaaS platform that conducts user interviews via chat and generates personalized biographies using Gemini API and Node.js backend",
+      "Implemented responsive UI/UX using React.js, Tailwind CSS, and modern design patterns for optimal user experience",
+      "Deployed production-grade applications on Digital Ocean with Docker containerization, NGINX reverse proxy, and automated CI/CD pipelines using GitHub Actions",
+      "Integrated third-party APIs including payment gateways, AI services, and cloud storage solutions",
+      "Managed full project lifecycle from requirements gathering to deployment and maintenance"
+    ],
+    technologies: ["React", "Node.js", "Express.js", "MongoDB", "PostgreSQL", "Docker", "NGINX", "Tailwind CSS", "Stripe", "Gemini API", "Digital Ocean", "GitHub Actions", "Redis", "Cloudinary", "EJS"],
+    achievements: [
+      "Successfully delivered multiple client projects on time with 100% client satisfaction",
+      "Implemented production-ready CI/CD pipelines reducing deployment time by 70%",
+      "Built scalable applications handling thousands of concurrent users",
+      "Gained hands-on experience with modern DevOps practices and cloud infrastructure"
+    ],
+    isActive: false,
+    companyType: "Freelance/Contract",
+    gradient: "from-cyan-500 to-pink-500"
   }
 ];
 
 export const ExperienceSection = () => {
   const [isVisible, setIsVisible] = useState(false);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
-  const [activeTab, setActiveTab] = useState('overview');
+  const [activeTab, setActiveTab] = useState({});
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -54,11 +86,22 @@ export const ExperienceSection = () => {
 
     window.addEventListener('mousemove', handleMouseMove);
     
+    // Initialize active tabs for each experience
+    const initialTabs = {};
+    experiences.forEach(exp => {
+      initialTabs[exp.id] = 'overview';
+    });
+    setActiveTab(initialTabs);
+    
     return () => {
       if (section) observer.unobserve(section);
       window.removeEventListener('mousemove', handleMouseMove);
     };
   }, []);
+
+  const handleTabChange = (expId, tab) => {
+    setActiveTab(prev => ({ ...prev, [expId]: tab }));
+  };
 
   return (
     <section 
@@ -123,7 +166,7 @@ export const ExperienceSection = () => {
           </h2>
           
           <p className="text-gray-400 text-base max-w-2xl mx-auto leading-relaxed">
-            My professional experience in software development, working on innovative SaaS products and modern web technologies.
+            Over 1 year of professional experience in full-stack development, building scalable SaaS products and modern web applications.
           </p>
           
           <div className="w-20 h-1 bg-gradient-to-r from-purple-500 to-cyan-500 rounded-full mx-auto mt-4" />
@@ -135,7 +178,7 @@ export const ExperienceSection = () => {
             <div
               key={experience.id}
               className={`group relative transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}
-              style={{ animationDelay: `${index * 200}ms` }}
+              style={{ transitionDelay: `${index * 200}ms` }}
             >
               {/* Glow effect */}
               <div className={`absolute inset-0 bg-gradient-to-r ${experience.gradient} opacity-0 group-hover:opacity-10 rounded-xl blur-lg transition-all duration-300`} />
@@ -156,7 +199,7 @@ export const ExperienceSection = () => {
                       </div>
 
                       <div className="flex-1">
-                        <div className="flex items-center gap-2 mb-1">
+                        <div className="flex items-center gap-2 mb-1 flex-wrap">
                           <h3 className="text-xl sm:text-2xl font-bold text-white group-hover:text-transparent group-hover:bg-gradient-to-r group-hover:bg-clip-text group-hover:from-purple-400 group-hover:to-cyan-400 transition-all duration-300">
                             {experience.role}
                           </h3>
@@ -170,7 +213,7 @@ export const ExperienceSection = () => {
                         
                         <div className="flex flex-wrap items-center gap-4 text-sm text-gray-400">
                           <span className="flex items-center gap-1 font-semibold text-purple-400">
-                            <img src={experience.logo} alt={`${experience.company} logo`} className="w-7 h-7 rounded-full" />
+                            <Building2 className="w-4 h-4" />
                             {experience.company}
                           </span>
                           <span className="flex items-center gap-1">
@@ -183,7 +226,7 @@ export const ExperienceSection = () => {
                           </span>
                         </div>
                         
-                        <div className="flex items-center gap-2 mt-2">
+                        <div className="flex items-center gap-2 mt-2 flex-wrap">
                           <span className="px-2 py-1 bg-cyan-500/20 border border-cyan-500/50 rounded-full text-xs text-cyan-400">
                             {experience.type}
                           </span>
@@ -204,9 +247,9 @@ export const ExperienceSection = () => {
                     {['overview', 'responsibilities', 'technologies', 'achievements'].map((tab) => (
                       <button
                         key={tab}
-                        onClick={() => setActiveTab(tab)}
+                        onClick={() => handleTabChange(experience.id, tab)}
                         className={`px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300 ${
-                          activeTab === tab
+                          activeTab[experience.id] === tab
                             ? 'bg-gradient-to-r from-purple-500/20 to-cyan-500/20 border border-purple-400/50 text-purple-400'
                             : 'text-gray-400 hover:text-gray-300 hover:bg-gray-800/50'
                         }`}
@@ -220,7 +263,7 @@ export const ExperienceSection = () => {
                   <div className="min-h-[200px]">
                     
                     {/* Overview Tab */}
-                    {activeTab === 'overview' && (
+                    {activeTab[experience.id] === 'overview' && (
                       <div className="space-y-4 animate-fade-in">
                         <p className="text-gray-300 leading-relaxed text-base">
                           {experience.description}
@@ -245,7 +288,7 @@ export const ExperienceSection = () => {
                     )}
 
                     {/* Responsibilities Tab */}
-                    {activeTab === 'responsibilities' && (
+                    {activeTab[experience.id] === 'responsibilities' && (
                       <div className="space-y-3 animate-fade-in">
                         {experience.responsibilities.map((responsibility, idx) => (
                           <div key={idx} className="flex items-start gap-3 p-3 rounded-lg hover:bg-gray-800/30 transition-colors duration-300">
@@ -257,14 +300,14 @@ export const ExperienceSection = () => {
                     )}
 
                     {/* Technologies Tab */}
-                    {activeTab === 'technologies' && (
+                    {activeTab[experience.id] === 'technologies' && (
                       <div className="animate-fade-in">
                         <div className="flex flex-wrap gap-2">
                           {experience.technologies.map((tech, idx) => (
                             <span 
                               key={tech}
                               className="px-3 py-2 bg-gray-800/50 backdrop-blur-sm border border-gray-600/50 rounded-lg text-sm text-gray-300 hover:border-purple-400/50 hover:text-purple-400 transition-all duration-300 cursor-default"
-                              style={{ animationDelay: `${idx * 100}ms` }}
+                              style={{ animationDelay: `${idx * 50}ms` }}
                             >
                               {tech}
                             </span>
@@ -274,7 +317,7 @@ export const ExperienceSection = () => {
                     )}
 
                     {/* Achievements Tab */}
-                    {activeTab === 'achievements' && (
+                    {activeTab[experience.id] === 'achievements' && (
                       <div className="space-y-3 animate-fade-in">
                         {experience.achievements.map((achievement, idx) => (
                           <div key={idx} className="flex items-start gap-3 p-3 rounded-lg hover:bg-gray-800/30 transition-colors duration-300">

@@ -4,6 +4,17 @@ import { useState, useEffect, useRef } from "react";
 const projects = [
   {
     id: 1,
+    title: "Real Estate Property Analyzer",
+    description: "Comprehensive real estate analysis platform that calculates key investment metrics including CFBT, Cash on Cash Return, DSCR, and Purchase Amount. Features automated rent comparison module that scrapes apartments.com data to provide competitive rental pricing insights for property investments.",
+    image: "/projects/real-estate-analyzer.webp",
+    tags: ["Node.js", "Bull Queue", "GPT API", "MongoDB", "React", "Web Scraping", "Real Estate"],
+    demoUrl: "http://152.70.131.240/",
+    githubUrl: "https://github.com/sufyan2618",
+    featured: true,
+    category: "Full Stack / Real Estate Tech"
+  },
+  {
+    id: 2,
     title: "Online-Identity",
     description: "Create stunning portfolios with Online-Identity, a full-stack MERN application featuring user authentication, data caching, dynamic portfolio creation, and real-time updates.",
     image: "/projects/portfolio_creator.webp",
@@ -25,7 +36,7 @@ const projects = [
     category: "AI / MERN Stack"
   },
   {
-    id: 2,
+    id: 4,
     title: "Devnity AI Code Editor",
     description: "AI-powered Code Editor built with React and Next.js, having Convex for database and Gemini AI for error correction ",
     image: "/projects/editor.webp",
@@ -47,7 +58,7 @@ const projects = [
     category: "Frontend / Web Development"
   },
   {
-    id: 4,
+    id: 6,
     title: "Linkit: A Chat App",
     description: " Real-time chat application built with React, Node.js, and Socket.IO featuring user authentication, file sharing .",
     image: "/projects/chatapp.webp",
@@ -57,9 +68,8 @@ const projects = [
     featured: true,
     category: "Web Development"
   },
-
   {
-    id: 6,
+    id: 7,
     title: "Wrap VPN",
     description: "Wrap VPN is a secure, cross-platform VPN app built with Flutter, featuring OVPN support, Supabase authentication, and a custom Android VPN engine.",
     image: "/projects/vpn.webp",
@@ -70,7 +80,7 @@ const projects = [
     category: "Cross-Platform App / Flutter"
   },
   {
-    id: 7,
+    id: 8,
     title: "E-commerce with AI Chatbot",
     description: "Full-featured e-commerce platform with user authentication, admin panel and a custom chatbot built with NLP.js.",
     image: "/projects/lals.webp",
@@ -203,12 +213,14 @@ export const ProjectsSection = () => {
               <button
                 onClick={scrollLeft}
                 className="group p-2 bg-gray-800/50 backdrop-blur-sm border border-gray-700/50 rounded-full hover:border-purple-400/50 hover:bg-gray-700/50 transition-all duration-300"
+                aria-label="Scroll left"
               >
                 <ArrowRight className="w-4 h-4 text-gray-400 group-hover:text-purple-400 rotate-180 transition-colors duration-300" />
               </button>
               <button
                 onClick={scrollRight}
                 className="group p-2 bg-gray-800/50 backdrop-blur-sm border border-gray-700/50 rounded-full hover:border-purple-400/50 hover:bg-gray-700/50 transition-all duration-300"
+                aria-label="Scroll right"
               >
                 <ArrowRight className="w-4 h-4 text-gray-400 group-hover:text-purple-400 transition-colors duration-300" />
               </button>
@@ -267,6 +279,7 @@ export const ProjectsSection = () => {
                         target="_blank"
                         rel="noopener noreferrer"
                         className="p-2 bg-gray-900/80 backdrop-blur-sm border border-gray-600/50 rounded-full hover:border-purple-400/50 hover:bg-purple-500/20 transition-all duration-300 group/btn"
+                        aria-label={`View ${project.title} demo`}
                       >
                         <Eye className="w-4 h-4 text-gray-300 group-hover/btn:text-purple-400 transition-colors duration-300" />
                       </a>
@@ -275,6 +288,7 @@ export const ProjectsSection = () => {
                         target="_blank"
                         rel="noopener noreferrer"
                         className="p-2 bg-gray-900/80 backdrop-blur-sm border border-gray-600/50 rounded-full hover:border-cyan-400/50 hover:bg-cyan-500/20 transition-all duration-300 group/btn"
+                        aria-label={`View ${project.title} on GitHub`}
                       >
                         <Github className="w-4 h-4 text-gray-300 group-hover/btn:text-cyan-400 transition-colors duration-300" />
                       </a>
@@ -326,6 +340,7 @@ export const ProjectsSection = () => {
                           target="_blank"
                           rel="noopener noreferrer"
                           className="text-gray-400 hover:text-purple-400 transition-colors duration-300"
+                          aria-label={`View ${project.title} demo`}
                         >
                           <ExternalLink size={16} />
                         </a>
@@ -334,6 +349,7 @@ export const ProjectsSection = () => {
                           target="_blank"
                           rel="noopener noreferrer"
                           className="text-gray-400 hover:text-cyan-400 transition-colors duration-300"
+                          aria-label={`View ${project.title} on GitHub`}
                         >
                           <Github size={16} />
                         </a>
