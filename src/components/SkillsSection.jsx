@@ -1,5 +1,4 @@
-import { useState, useEffect } from "react";
-import React from "react";
+import { useState, useEffect, useMemo, useCallback, memo } from "react";
 import { cn } from "@/lib/utils";
 import { Code, Database, Cloud, Wrench, Sparkles, Star, Zap } from "lucide-react";
 
@@ -76,20 +75,31 @@ export const SkillsSection = () => {
     const section = document.getElementById("skills");
     if (section) observer.observe(section);
 
+    // Throttle mouse movement for better performance
+    let timeoutId;
     const handleMouseMove = (e) => {
-      setMousePosition({ x: e.clientX, y: e.clientY });
+      if (!timeoutId) {
+        timeoutId = setTimeout(() => {
+          setMousePosition({ x: e.clientX, y: e.clientY });
+          timeoutId = null;
+        }, 50); // Update every 50ms instead of every frame
+      }
     };
 
-    window.addEventListener("mousemove", handleMouseMove);
+    window.addEventListener("mousemove", handleMouseMove, { passive: true });
 
     return () => {
       if (section) observer.unobserve(section);
       window.removeEventListener("mousemove", handleMouseMove);
+      if (timeoutId) clearTimeout(timeoutId);
     };
   }, []);
 
-  const filteredSkills = skills.filter(
-    (skill) => activeCategory === "all" || skill.category === activeCategory
+  const filteredSkills = useMemo(
+    () => skills.filter(
+      (skill) => activeCategory === "all" || skill.category === activeCategory
+    ),
+    [activeCategory]
   );
 
   return (

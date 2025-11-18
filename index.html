@@ -2,9 +2,53 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/logo.webp" />
+    
+    <!-- Preconnect to external domains for faster loading -->
+    <link rel="preconnect" href="https://formspree.io" crossorigin />
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/webp" href="/logo.webp" />
+    
+    <!-- Viewport -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Sufyan Portfolio</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Sufyan Liaqat - Full-Stack Developer specializing in MERN, React Native, and FastAPI. Building scalable web and mobile applications." />
+    <meta name="keywords" content="Full Stack Developer, MERN Stack, React Native, FastAPI, Web Development, Portfolio" />
+    <meta name="author" content="Sufyan Liaqat" />
+    
+    <!-- Open Graph / Social Media -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Sufyan Liaqat - Full-Stack Developer" />
+    <meta property="og:description" content="Full-Stack Developer specializing in MERN, React Native, and FastAPI" />
+    <meta property="og:image" content="/hero.webp" />
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Sufyan Liaqat - Full-Stack Developer" />
+    <meta name="twitter:description" content="Full-Stack Developer specializing in MERN, React Native, and FastAPI" />
+    
+    <!-- Theme Color -->
+    <meta name="theme-color" content="#0a0a0f" />
+    
+    <title>Sufyan Liaqat - Full-Stack Developer | Portfolio</title>
+    
+    <!-- Inline critical CSS for instant rendering -->
+    <style>
+      /* Prevent FOUC and layout shift */
+      html, body {
+        margin: 0;
+        padding: 0;
+        background-color: #0a0a0f;
+        color: #fff;
+        font-family: system-ui, -apple-system, sans-serif;
+      }
+      
+      #root {
+        min-height: 100vh;
+        background-color: #0a0a0f;
+      }
+    </style>
   </head>
   <body>
     <script>
@@ -13,6 +57,7 @@
       document.documentElement.setAttribute('data-theme', theme);
       document.documentElement.style.colorScheme = theme;
     </script>
+    
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
   </body>
