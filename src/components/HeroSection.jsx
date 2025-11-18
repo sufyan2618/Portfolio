@@ -88,21 +88,21 @@ export const HeroSection = () => {
             <div className={`space-y-3 transition-all duration-1000 delay-300 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
               <div className="relative">
                 <h2 className="text-lg sm:text-xl font-semibold text-gray-200 mb-2">
-                  Full-Stack Developer & 
-                  <span className="text-cyan-400"> AI/ML Enthusiast</span>
+                  Full-Stack Developer &
+                  <span className="text-cyan-400"> Software Engineer</span>
                 </h2>
                 
                 <p className="text-sm text-gray-400 leading-relaxed max-w-md mx-auto lg:mx-0">
                   I craft exceptional digital experiences using the 
-                  <span className="text-purple-400 font-semibold"> MERN Stack</span>, <span className="text-pink-400 font-semibold">Flutter</span> and cutting-edge 
-                  <span className="text-cyan-400 font-semibold"> AI technologies</span>. 
-                  Passionate about building scalable, beautiful, and intelligent web applications.
+                  <span className="text-purple-400 font-semibold"> MERN Stack</span>, <span className="text-pink-400 font-semibold">React Native</span>, and 
+                  <span className="text-cyan-400 font-semibold"> FastAPI</span>. 
+                  Passionate about building scalable, performant, and production-ready applications.
                 </p>
               </div>  
 
               {/* Tech Stack Pills - Smaller */}
               <div className="flex flex-wrap gap-1.5 justify-center lg:justify-start">
-                {['React', 'Node.js', 'MongoDB', 'Python', 'AI/ML', 'TypeScript', 'Flutter'].map((tech, index) => (
+                {['React', 'Node.js', 'MongoDB', 'TypeScript', 'FastAPI', 'React Native', 'Expo'].map((tech, index) => (
                   <span 
                     key={tech}
                     className="px-2 py-1 bg-gray-800/50 backdrop-blur-sm border border-gray-700/50 rounded-full text-xs text-gray-300 hover:border-purple-400/50 hover:text-purple-400 transition-all duration-300"

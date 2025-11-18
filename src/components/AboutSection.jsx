@@ -34,22 +34,22 @@ export const AboutSection = () => {
   const skills = [
     {
       icon: Code,
-      title: "Web Development",
-      description: "Full-stack development with MERN stack, creating scalable web applications.",
+      title: "Full-Stack Development",
+      description: "Building scalable web applications with MERN stack, serving 2000+ active users.",
       gradient: "from-purple-500 to-blue-500",
       delay: "delay-100"
     },
     {
       icon: Smartphone,
-      title: "Android Development",
-      description: "Native Android apps using Flutter and Dart with modern UI/UX principles.",
+      title: "Mobile Development",
+      description: "Cross-platform mobile apps using React Native and Expo with modern UI/UX.",
       gradient: "from-blue-500 to-cyan-500",
       delay: "delay-200"
     },
     {
       icon: Brain,
-      title: "AI/ML Enthusiast",
-      description: "Implementing intelligent solutions with cutting-edge AI technologies.",
+      title: "DevOps & Cloud",
+      description: "Deploying production applications with Docker, CI/CD, and cloud infrastructure.",
       gradient: "from-cyan-500 to-pink-500",
       delay: "delay-300"
     }
@@ -150,7 +150,7 @@ export const AboutSection = () => {
 
                 {/* Tech Stack Tags */}
                 <div className="flex flex-wrap gap-2 mt-4">
-                  {['React', 'Node.js', 'MongoDB', 'Express', 'Flutter', 'Python'].map((tech, index) => (
+                  {['React', 'Node.js', 'MongoDB', 'Express', 'React Native', 'FastAPI', 'Python'].map((tech, index) => (
                     <span 
                       key={tech}
                       className="px-2 py-1 bg-gray-800/60 backdrop-blur-sm border border-gray-600/50 rounded-full text-xs text-gray-300 hover:border-purple-400/50 hover:text-purple-400 transition-all duration-300 cursor-default"

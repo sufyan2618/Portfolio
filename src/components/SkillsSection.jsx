@@ -1,49 +1,65 @@
 import { useState, useEffect } from "react";
 import React from "react";
 import { cn } from "@/lib/utils";
-import { Code, Database, Wrench, Sparkles, Star, Zap } from "lucide-react";
+import { Code, Database, Cloud, Wrench, Sparkles, Star, Zap } from "lucide-react";
 
 const skills = [
   // Frontend
-  { name: "React.js", level: 90, category: "frontend", icon: "react.png" },
-  { name: "Next.js", level: 85, category: "frontend", icon: "next.png" },
-  { name: "JavaScript", level: 90, category: "frontend", icon: "javaScript.png" },
-  { name: "TypeScript", level: 60, category: "frontend", icon: "typeScript.png", },
-  { name: "Tailwind CSS", level: 85, category: "frontend", icon: "tailwind.png" },
-  { name: "Material UI", level: 80, category: "frontend", icon: "materialui.png" },
-  { name: "Framer Motion", level: 75, category: "frontend", icon: "framer-motion.png" }, 
-  { name: "Flutter", level: 85, category: "frontend", icon: "flutter.png" },
+  { name: "React.js", category: "frontend", icon: "react.png" },
+  { name: "Next.js", category: "frontend", icon: "next.png" },
+  { name: "React Native", category: "frontend", icon: "react.png" },
+  { name: "Expo", category: "frontend", icon: "expo.png" },
+  { name: "JavaScript", category: "frontend", icon: "javaScript.png" },
+  { name: "TypeScript", category: "frontend", icon: "typeScript.png" },
+  { name: "Tailwind CSS", category: "frontend", icon: "tailwind.png" },
+  { name: "HTML", category: "frontend", icon: "html.png" },
+  { name: "CSS", category: "frontend", icon: "css.png" },
+  { name: "EJS", category: "frontend", icon: "ejs.png" },
+  { name: "Zustand", category: "frontend", icon: "zustand.png" },
 
   // Backend
-  { name: "Node.js", level: 85, category: "backend", icon: "node.png" },
-  { name: "Express.js", level: 85, category: "backend", icon: "express.png" },
-  { name: "MongoDB", level: 80, category: "backend", icon: "mongodb.png" },
-  { name: "Socket.io", level: 75, category: "backend", icon: "socket.io.png" },
-  { name: "GraphQL", level: 70, category: "backend", icon: "GraphQL.webp" },
-  { name: "Redis", level: 70, category: "backend", icon: "Redis.png" },
-  { name: "Convex", level: 70, category: "backend", icon: "convex.png" }, 
-  { name: "Python", level: 75, category: "backend", icon: "python.png" },
-  { name: "Supabase", level: 85, category: "backend", icon: "supabase-logo-icon.png" },
-  { name: "PostgreSQL", level: 80, category: "backend", icon: "postgres.png" },
-  { name: "Firebase", level: 85, category: "backend", icon: "firebase.png" },
+  { name: "Node.js", category: "backend", icon: "node.png" },
+  { name: "Express.js", category: "backend", icon: "express.png" },
+  { name: "FastAPI", category: "backend", icon: "fastapi.png" },
+  { name: "Python", category: "backend", icon: "python.png" },
+  { name: "MongoDB", category: "backend", icon: "mongodb.png" },
+  { name: "PostgreSQL", category: "backend", icon: "postgres.png" },
+  { name: "SQL", category: "backend", icon: "sql.png" },
+  { name: "GraphQL", category: "backend", icon: "GraphQL.webp" },
+  { name: "Redis", category: "backend", icon: "Redis.png" },
+  { name: "Socket.io", category: "backend", icon: "socket.io.png" },
+  { name: "Bull", category: "backend", icon: "bull.png" },
+  { name: "Stripe", category: "backend", icon: "stripe.png" },
 
-  // Tools
-  { name: "Git", level: 90, category: "tools", icon: "git.png" },
-  { name: "GitHub", level: 90, category: "tools", icon: "github.png" },
-  { name: "Axios", level: 85, category: "tools", icon: "axios.png" },
-  { name: "NLP.js", level: 70, category: "tools", icon: "🧠" },
-  { name: "Clerk", level: 75, category: "tools", icon: "🔐" },
-  { name: "Lemon Squeezy", level: 70, category: "tools", icon: "🍋" },
-  { name: "Docker", level: 70, category: "tools", icon: "Docker.png" },
-  { name: "Postman", level: 80, category: "tools", icon: "postman.png" },
-  { name: "Swagger", level: 60, category: "tools", icon: "swagger.webp" },
-  { name: "AWS", level: 60, category: "tools", icon: "AWS.webp" },
+  // Cloud & DevOps
+  { name: "Docker", category: "cloud", icon: "Docker.png" },
+  { name: "NGINX", category: "cloud", icon: "nginx.png" },
+  { name: "CI/CD", category: "cloud", icon: "cicd.png" },
+  { name: "GitHub Actions", category: "cloud", icon: "github-actions.png" },
+  { name: "Digital Ocean", category: "cloud", icon: "digitalocean.png" },
+  { name: "AWS", category: "cloud", icon: "AWS.webp" },
+  { name: "Supabase", category: "cloud", icon: "supabase-logo-icon.png" },
+  { name: "Firebase", category: "cloud", icon: "firebase.png" },
+  { name: "Cloudinary", category: "cloud", icon: "cloudinary.png" },
+
+  // Tools & Libraries
+  { name: "Git", category: "tools", icon: "git.png" },
+  { name: "GitHub", category: "tools", icon: "github.png" },
+  { name: "VS Code", category: "tools", icon: "vscode.png" },
+  { name: "Postman", category: "tools", icon: "postman.png" },
+  { name: "Swagger", category: "tools", icon: "swagger.webp" },
+  { name: "Jira", category: "tools", icon: "jira.png" },
+  { name: "Convex", category: "tools", icon: "convex.png" },
+  { name: "Gemini AI", category: "tools", icon: "gemini.png" },
+  { name: "SQLAlchemy", category: "tools", icon: "sqlalchemy.png" },
+  { name: "Alembic", category: "tools", icon: "alembic.png" },
 ];
 
 const categories = [
   { id: "all", name: "All Skills", icon: Sparkles },
   { id: "frontend", name: "Frontend", icon: Code },
   { id: "backend", name: "Backend", icon: Database },
+  { id: "cloud", name: "Cloud & DevOps", icon: Cloud },
   { id: "tools", name: "Tools & Libraries", icon: Wrench },
 ];
 
@@ -93,8 +109,9 @@ export const SkillsSection = () => {
           style={{
             background:
               "radial-gradient(circle, #8b5cf6 0%, #06b6d4 50%, #ec4899 100%)",
-            transform: `translate(${mousePosition.x * 0.02}px, ${mousePosition.y * 0.02
-              }px)`,
+            transform: `translate(${mousePosition.x * 0.02}px, ${
+              mousePosition.y * 0.02
+            }px)`,
             top: "5%",
             right: "10%",
           }}
@@ -104,8 +121,9 @@ export const SkillsSection = () => {
           style={{
             background:
               "radial-gradient(circle, #06b6d4 0%, #8b5cf6 50%, #ec4899 100%)",
-            transform: `translate(${mousePosition.x * -0.01}px, ${mousePosition.y * -0.01
-              }px)`,
+            transform: `translate(${mousePosition.x * -0.01}px, ${
+              mousePosition.y * -0.01
+            }px)`,
             bottom: "10%",
             left: "5%",
             animationDelay: "1s",
@@ -136,8 +154,9 @@ export const SkillsSection = () => {
       <div className="container mx-auto max-w-7xl relative z-10 h-full flex flex-col justify-center py-16">
         {/* Section Header */}
         <div
-          className={`text-center mb-8 transition-all duration-1000 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
-            }`}
+          className={`text-center mb-8 transition-all duration-1000 ${
+            isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
+          }`}
         >
           <div className="inline-flex items-center gap-2 mb-3">
             <Zap className="w-5 h-5 text-purple-400 animate-pulse" />
@@ -155,13 +174,18 @@ export const SkillsSection = () => {
             </span>
           </h2>
 
-          <div className="w-20 h-1 bg-gradient-to-r from-purple-500 to-cyan-500 rounded-full mx-auto" />
+          <p className="text-gray-400 text-base max-w-2xl mx-auto leading-relaxed">
+            A comprehensive toolkit of modern technologies spanning frontend, backend, cloud infrastructure, and development tools.
+          </p>
+
+          <div className="w-20 h-1 bg-gradient-to-r from-purple-500 to-cyan-500 rounded-full mx-auto mt-4" />
         </div>
 
         {/* Category Filter */}
         <div
-          className={`flex flex-wrap justify-center gap-3 mb-8 transition-all duration-1000 delay-200 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
-            }`}
+          className={`flex flex-wrap justify-center gap-3 mb-8 transition-all duration-1000 delay-200 ${
+            isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
+          }`}
         >
           {categories.map((category) => {
             const Icon = category.icon;
@@ -196,8 +220,9 @@ export const SkillsSection = () => {
 
         {/* Skills Grid */}
         <div
-          className={`grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 transition-all duration-1000 delay-400 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
-            }`}
+          className={`grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 transition-all duration-1000 delay-400 ${
+            isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
+          }`}
         >
           {filteredSkills.map((skill, index) => (
             <div
@@ -219,47 +244,25 @@ export const SkillsSection = () => {
                 </div>
 
                 {/* Skill Header */}
-                <div className="relative flex items-center gap-3 mb-3">
+                <div className="relative flex items-center gap-3">
                   <div className="text-2xl group-hover:scale-110 transition-transform duration-300">
                     {typeof skill.icon === "string" &&
-                      !skill.icon.includes(".") ? (
+                    !skill.icon.includes(".") ? (
                       <span>{skill.icon}</span>
                     ) : (
                       <img
                         src={`/${skill.icon}`}
                         alt={skill.name}
-                        className="w-6 h-6 object-contain"
+                        className="w-8 h-8 object-contain"
                       />
                     )}
                   </div>
 
                   <div className="flex-1 min-w-0">
-                    <h3 className="font-bold text-white text-sm group-hover:text-purple-300 transition-colors duration-300 truncate">
+                    <h3 className="font-bold text-white text-base group-hover:text-transparent group-hover:bg-gradient-to-r group-hover:from-purple-400 group-hover:to-cyan-400 group-hover:bg-clip-text transition-all duration-300 truncate">
                       {skill.name}
                     </h3>
                   </div>
-                  <span className="text-xs text-gray-400 font-medium">
-                    {skill.level}%
-                  </span>
-                </div>
-
-                {/* Progress Bar */}
-                <div className="relative">
-                  <div className="w-full bg-gray-800/50 h-2 rounded-full overflow-hidden">
-                    <div
-                      className="h-2 rounded-full bg-gradient-to-r from-purple-500 to-cyan-500 origin-left transition-all duration-1000 ease-out"
-                      style={{
-                        width: isVisible ? `${skill.level}%` : "0%",
-                        animationDelay: `${index * 100}ms`,
-                      }}
-                    />
-                  </div>
-
-                  {/* Animated glow on progress bar */}
-                  <div
-                    className="absolute top-0 h-2 rounded-full bg-gradient-to-r from-purple-400/50 to-cyan-400/50 blur-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                    style={{ width: `${skill.level}%` }}
-                  />
                 </div>
               </div>
             </div>
@@ -268,8 +271,9 @@ export const SkillsSection = () => {
 
         {/* Bottom Stats */}
         <div
-          className={`flex justify-center items-center gap-8 mt-8 transition-all duration-1000 delay-600 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
-            }`}
+          className={`flex flex-wrap justify-center items-center gap-8 mt-12 transition-all duration-1000 delay-600 ${
+            isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
+          }`}
         >
           <div className="text-center">
             <div className="text-2xl font-bold bg-gradient-to-r from-purple-400 to-cyan-400 bg-clip-text text-transparent">
@@ -282,14 +286,14 @@ export const SkillsSection = () => {
             <div className="text-2xl font-bold bg-gradient-to-r from-cyan-400 to-pink-400 bg-clip-text text-transparent">
               1+
             </div>
-            <div className="text-xs text-gray-400">Years Learning</div>
+            <div className="text-xs text-gray-400">Years Experience</div>
           </div>
           <div className="w-px h-8 bg-gray-700"></div>
           <div className="text-center">
             <div className="text-2xl font-bold bg-gradient-to-r from-pink-400 to-purple-400 bg-clip-text text-transparent">
-              6+
+              10+
             </div>
-            <div className="text-xs text-gray-400">Projects Built</div>
+            <div className="text-xs text-gray-400">Projects Completed</div>
           </div>
         </div>
       </div>
