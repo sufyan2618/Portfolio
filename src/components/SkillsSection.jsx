@@ -89,12 +89,12 @@ export const SkillsSection = () => {
   return (
     <section
       id="skills"
-      className="relative py-20 px-4 overflow-hidden bg-black"
+      className="relative py-20 overflow-hidden bg-black"
     >
       {/* Subtle grid pattern */}
       <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:40px_40px]" />
 
-      <div className="container mx-auto max-w-7xl relative z-10 h-full flex flex-col justify-center py-16">
+      <div className="container mx-auto max-w-7xl relative z-10 h-full flex flex-col justify-center py-16 px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div
           className={`text-center mb-12 transition-all duration-1000 ${
