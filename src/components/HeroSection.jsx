@@ -1,69 +1,21 @@
-import { ArrowDown, Download, Github, Linkedin, Mail, Sparkles } from "lucide-react";
+import { ArrowDown, Download, Github, Linkedin, Mail } from "lucide-react";
 import { useEffect, useState } from "react";
 import resume from "../assets/Sufyan_Liaqat_FullStack_Engineer.pdf"
 
 export const HeroSection = () => {
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
     setIsVisible(true);
-    
-    const handleMouseMove = (e) => {
-      setMousePosition({ x: e.clientX, y: e.clientY });
-    };
-
-    window.addEventListener("mousemove", handleMouseMove);
-    return () => window.removeEventListener("mousemove", handleMouseMove);
   }, []);
 
   return (
     <section
       id="hero"
-      className="relative h-screen  flex items-center justify-center overflow-hidden bg-gray-950"
+      className="relative h-screen flex items-center justify-center overflow-hidden bg-black"
     >
-      {/* Animated background elements - smaller */}
-      <div className="absolute inset-0 overflow-hidden">
-        <div 
-          className="absolute w-64 h-64 opacity-20 blur-3xl animate-pulse"
-          style={{
-            background: 'radial-gradient(circle, #8b5cf6 0%, #06b6d4 50%, #ec4899 100%)',
-            transform: `translate(${mousePosition.x * 0.02}px, ${mousePosition.y * 0.02}px)`,
-            top: '10%',
-            right: '10%',
-          }}
-        />
-        <div 
-          className="absolute w-56 h-56 opacity-15 blur-3xl animate-pulse"
-          style={{
-            background: 'radial-gradient(circle, #06b6d4 0%, #3b82f6 50%, #8b5cf6 100%)',
-            transform: `translate(${mousePosition.x * -0.01}px, ${mousePosition.y * -0.01}px)`,
-            bottom: '20%',
-            left: '15%',
-            animationDelay: '1s',
-          }}
-        />
-        
-        {/* Reduced floating particles */}
-        <div className="absolute inset-0">
-          {[...Array(4)].map((_, i) => (
-            <Sparkles
-              key={i}
-              className="absolute text-purple-400/20 animate-ping"
-              size={Math.random() * 4 + 2}
-              style={{
-                top: `${Math.random() * 100}%`,
-                left: `${Math.random() * 100}%`,
-                animationDelay: `${i * 0.5}s`,
-                animationDuration: `${2 + Math.random() * 2}s`,
-              }}
-            />
-          ))}
-        </div>
-
-        {/* Grid pattern overlay */}
-        <div className="absolute inset-0 bg-[linear-gradient(rgba(139,92,246,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(139,92,246,0.03)_1px,transparent_1px)] bg-[size:40px_40px]" />
-      </div>
+      {/* Subtle grid pattern */}
+      <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:40px_40px]" />
 
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="grid lg:grid-cols-2 gap-6 lg:gap-12 items-center h-screen py-16">
@@ -71,41 +23,34 @@ export const HeroSection = () => {
           {/* Left Content - Much Smaller */}
           <div className="space-y-4 lg:pl-12   text-center lg:text-left order-2 lg:order-1">
             {/* Greeting - Smaller */}
-            <div className={`space-y-1 transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
-              <p className="text-purple-400 font-medium text-sm tracking-wide">
-                👋 Hello, I'm
+            <div className={`space-y-1 transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0 animate-slide-in-left' : 'opacity-0 translate-y-10'}`}>
+              <p className="text-emerald-400 font-medium text-sm tracking-wide uppercase animate-shimmer">
+                Full-Stack Developer
               </p>
-              <h1 className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-bold leading-tight">
-                <span className="text-white">Sufyan</span>
+              <h1 className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-bold leading-tight">
+                <span className="text-white animate-fade-in">Sufyan</span>
                 <br />
-                <span className="bg-gradient-to-r from-purple-400 via-pink-400 to-cyan-400 bg-clip-text text-transparent bg-300% animate-gradient">
+                <span className="text-gradient-animate">
                   Liaqat
                 </span>
               </h1>
             </div>
 
             {/* Role & Description - Much Smaller */}
-            <div className={`space-y-3 transition-all duration-1000 delay-300 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+            <div className={`space-y-4 transition-all duration-1000 delay-300 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
               <div className="relative">
-                <h2 className="text-lg sm:text-xl font-semibold text-gray-200 mb-2">
-                  Full-Stack Developer &
-                  <span className="text-cyan-400"> Software Engineer</span>
-                </h2>
-                
-                <p className="text-sm text-gray-400 leading-relaxed max-w-md mx-auto lg:mx-0">
-                  I craft exceptional digital experiences using the 
-                  <span className="text-purple-400 font-semibold"> MERN Stack</span>, <span className="text-pink-400 font-semibold">React Native</span>, and 
-                  <span className="text-cyan-400 font-semibold"> FastAPI</span>. 
-                  Passionate about building scalable, performant, and production-ready applications.
+                <p className="text-base sm:text-lg text-gray-400 leading-relaxed max-w-md mx-auto lg:mx-0">
+                  Specialized in <span className="text-white font-semibold">MERN Stack</span>, <span className="text-white font-semibold">React Native</span>, and <span className="text-white font-semibold">FastAPI</span>. 
+                  Building scalable, production-ready applications.
                 </p>
               </div>  
 
-              {/* Tech Stack Pills - Smaller */}
-              <div className="flex flex-wrap gap-1.5 justify-center lg:justify-start">
-                {['React', 'Node.js', 'MongoDB', 'TypeScript', 'FastAPI', 'React Native', 'Expo'].map((tech, index) => (
+              {/* Tech Stack Pills */}
+              <div className="flex flex-wrap gap-2 justify-center lg:justify-start">
+                {['React', 'Node.js', 'MongoDB', 'TypeScript', 'FastAPI', 'React Native'].map((tech, index) => (
                   <span 
                     key={tech}
-                    className="px-2 py-1 bg-gray-800/50 backdrop-blur-sm border border-gray-700/50 rounded-full text-xs text-gray-300 hover:border-purple-400/50 hover:text-purple-400 transition-all duration-300"
+                    className="px-3 py-1.5 bg-gray-900 border border-gray-800 rounded-md text-xs text-gray-300 hover:border-emerald-500 hover:text-emerald-400 hover:shadow-glow-emerald transition-all duration-300 hover:scale-110 animate-fade-in"
                     style={{ animationDelay: `${index * 100}ms` }}
                   >
                     {tech}
@@ -115,41 +60,43 @@ export const HeroSection = () => {
             </div>
 
             {/* CTA Buttons - Smaller */}
-            <div className={`flex flex-col sm:flex-row gap-2 justify-center lg:justify-start transition-all duration-1000 delay-500 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+            <div className={`flex flex-col sm:flex-row gap-3 justify-center lg:justify-start transition-all duration-1000 delay-500 ${isVisible ? 'opacity-100 translate-y-0 animate-bounce-in' : 'opacity-0 translate-y-10'}`}>
               <a
                 href="#projects"
-                className="group relative px-5 py-2.5 bg-gradient-to-r from-purple-500 to-cyan-500 rounded-full font-semibold text-white text-sm overflow-hidden transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-purple-500/25"
+                className="group px-6 py-3 bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 rounded-md font-semibold text-white text-sm transition-all duration-300 shadow-glow-emerald hover:shadow-glow-teal hover:scale-105"
               >
-                <span className="relative z-10">View My Work</span>
-                <div className="absolute inset-0 bg-gradient-to-r from-cyan-500 to-purple-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                <span className="flex items-center justify-center gap-2">
+                  View My Work
+                  <svg className="w-4 h-4 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                  </svg>
+                </span>
               </a>
               
               <a
                 href="#contact"
-                className="group px-5 py-2.5 border-2 border-gray-700 hover:border-purple-400 rounded-full font-semibold text-gray-300 hover:text-white text-sm transition-all duration-300 hover:bg-gray-800/50 backdrop-blur-sm"
+                className="px-6 py-3 border-2 border-emerald-600 hover:border-teal-500 hover:bg-emerald-950 rounded-md font-semibold text-emerald-400 hover:text-teal-400 text-sm transition-all duration-300 hover:scale-105"
               >
-                <span className="flex items-center justify-center gap-2">
-                  <Mail size={14} />
-                  Get In Touch
-                </span>
+                Get In Touch
               </a>
             </div>
 
             {/* Social Links - Repositioned and Smaller */}
-            <div className={`flex gap-3 justify-center lg:justify-start mb-8 lg:mb-0 transition-all duration-1000 delay-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+            <div className={`flex gap-4 justify-center lg:justify-start mb-8 lg:mb-0 transition-all duration-1000 delay-700 ${isVisible ? 'opacity-100 translate-y-0 animate-scale-in' : 'opacity-0 translate-y-10'}`}>
               {[
-                { icon: Github, href: " https://github.com/sufyan2618", label: "GitHub" },
+                { icon: Github, href: "https://github.com/sufyan2618", label: "GitHub" },
                 { icon: Linkedin, href: "https://www.linkedin.com/in/sufyanliaqat2", label: "LinkedIn" },
                 { icon: Download, href: resume, label: "Resume", download: true },
-              ].map(({ icon: Icon, href, label, download }) => (
+              ].map(({ icon: Icon, href, label, download }, index) => (
                 <a
                   key={label}
                   href={href}
                   {...(download ? { download: true } : {})}
-                  className="group p-2 bg-gray-800/50 backdrop-blur-sm border border-gray-700/50 rounded-full hover:border-purple-400/50 hover:bg-gray-700/50 transition-all duration-300"
+                  className="p-2.5 bg-gray-900 border border-gray-800 rounded-md hover:border-emerald-500 hover:bg-gray-800 hover:shadow-glow-emerald transition-all duration-300 hover:scale-110 hover:-rotate-6 animate-bounce-in"
+                  style={{ animationDelay: `${index * 150}ms` }}
                   aria-label={label}
                 >
-                  <Icon className="w-4 h-4 text-gray-400 group-hover:text-purple-400 transition-colors duration-300" />
+                  <Icon className="w-5 h-5 text-gray-400 hover:text-emerald-400 transition-colors duration-300" />
                 </a>
               ))}
             </div>
@@ -176,7 +123,7 @@ export const HeroSection = () => {
                     alt="Sufyan Liaqat - Full Stack Developer"
                     loading="eager"
                     fetchPriority="high"
-                    className="w-full h-full object-cover rounded-full grayscale hover:grayscale-0 transition-all duration-500 hover:scale-105"
+                    className="w-full h-full object-cover rounded-full hover:grayscale-0 transition-all duration-500 hover:scale-105"
                   />
                   
                   {/* Overlay gradient */}

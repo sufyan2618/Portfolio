@@ -1,4 +1,4 @@
-import { ArrowRight, ExternalLink, Github, Star, Sparkles, Eye, Code2 } from "lucide-react";
+import { ArrowRight, ExternalLink, Github, Star, Eye } from "lucide-react";
 import { useState, useEffect, useRef } from "react";
 
 const projects = [
@@ -94,7 +94,6 @@ const projects = [
 
 export const ProjectsSection = () => {
   const [isVisible, setIsVisible] = useState(false);
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const scrollContainerRef = useRef(null);
 
   useEffect(() => {
@@ -110,15 +109,8 @@ export const ProjectsSection = () => {
     const section = document.getElementById('projects');
     if (section) observer.observe(section);
 
-    const handleMouseMove = (e) => {
-      setMousePosition({ x: e.clientX, y: e.clientY });
-    };
-
-    window.addEventListener('mousemove', handleMouseMove);
-
     return () => {
       if (section) observer.unobserve(section);
-      window.removeEventListener('mousemove', handleMouseMove);
     };
   }, []);
 
@@ -137,63 +129,17 @@ export const ProjectsSection = () => {
   return (
     <section
       id="projects"
-      className="relative min-h-screen flex items-start justify-center overflow-hidden bg-gray-950 px-4 py-8"
+      className="relative min-h-screen flex items-start justify-center overflow-hidden bg-black px-4 py-20"
     >
-      {/* Animated background elements - reduced size */}
-      <div className="absolute inset-0 overflow-hidden">
-        <div
-          className="absolute w-72 h-72 opacity-15 blur-3xl animate-pulse"
-          style={{
-            background: 'radial-gradient(circle, #8b5cf6 0%, #06b6d4 50%, #ec4899 100%)',
-            transform: `translate(${mousePosition.x * 0.02}px, ${mousePosition.y * 0.02}px)`,
-            top: '20%',
-            right: '10%',
-          }}
-        />
-        <div
-          className="absolute w-64 h-64 opacity-10 blur-3xl animate-pulse"
-          style={{
-            background: 'radial-gradient(circle, #06b6d4 0%, #8b5cf6 50%, #ec4899 100%)',
-            transform: `translate(${mousePosition.x * -0.01}px, ${mousePosition.y * -0.01}px)`,
-            bottom: '10%',
-            left: '5%',
-            animationDelay: '1s',
-          }}
-        />
-
-        {/* Reduced floating particles */}
-        <div className="absolute inset-0">
-          {[...Array(4)].map((_, i) => (
-            <Sparkles
-              key={i}
-              className="absolute text-purple-400/20 animate-ping"
-              size={Math.random() * 4 + 3}
-              style={{
-                top: `${Math.random() * 100}%`,
-                left: `${Math.random() * 100}%`,
-                animationDelay: `${i * 0.8}s`,
-                animationDuration: `${3 + Math.random() * 2}s`,
-              }}
-            />
-          ))}
-        </div>
-
-        {/* Grid pattern overlay */}
-        <div className="absolute inset-0 bg-[linear-gradient(rgba(139,92,246,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(139,92,246,0.02)_1px,transparent_1px)] bg-[size:40px_40px]" />
-      </div>
+      {/* Subtle grid pattern */}
+      <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:40px_40px]" />
 
       <div className="container mx-auto max-w-7xl relative z-10 h-full flex flex-col justify-center py-12">
-        {/* Section Header - reduced spacing */}
-        <div className={`text-center mb-8 transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
-          <div className="inline-flex items-center gap-2 mb-3">
-            <Code2 className="w-4 h-4 text-purple-400 animate-pulse" />
-            <span className="text-purple-400 font-medium text-sm tracking-wider uppercase">My Work</span>
-            <Code2 className="w-4 h-4 text-cyan-400 animate-pulse delay-1000" />
-          </div>
-
+        {/* Section Header */}
+        <div className={`text-center mb-12 transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4">
             <span className="text-white">Featured</span>
-            <span className="bg-gradient-to-r from-purple-400 via-pink-400 to-cyan-400 bg-clip-text text-transparent bg-300% animate-gradient"> Projects</span>
+            <span className="text-gradient-animate"> Projects</span>
           </h2>
 
           <p className="text-gray-400 text-base max-w-2xl mx-auto leading-relaxed">
@@ -201,163 +147,154 @@ export const ProjectsSection = () => {
             AI integration, and modern web technologies.
           </p>
 
-          <div className="w-20 h-1 bg-gradient-to-r from-purple-500 to-cyan-500 rounded-full mx-auto mt-4" />
+          <div className="w-20 h-1 bg-gradient-to-r from-emerald-600 to-teal-600 rounded-full mx-auto mt-6 animate-shimmer" />
         </div>
 
         {/* Projects Container - reduced spacing */}
         <div className={`relative transition-all duration-1000 delay-300 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
 
-          {/* Scroll Navigation - smaller */}
+          {/* Scroll Navigation */}
           <div className="flex justify-between items-center mb-6">
             <div className="flex gap-3">
               <button
                 onClick={scrollLeft}
-                className="group p-2 bg-gray-800/50 backdrop-blur-sm border border-gray-700/50 rounded-full hover:border-purple-400/50 hover:bg-gray-700/50 transition-all duration-300"
+                className="p-2.5 bg-gray-900 border border-gray-800 rounded-md hover:border-emerald-600 hover:bg-gray-800 hover:shadow-glow-emerald transition-all duration-300 hover:scale-110"
                 aria-label="Scroll left"
               >
-                <ArrowRight className="w-4 h-4 text-gray-400 group-hover:text-purple-400 rotate-180 transition-colors duration-300" />
+                <ArrowRight className="w-5 h-5 text-gray-400 hover:text-emerald-400 rotate-180 transition-colors duration-300" />
               </button>
               <button
                 onClick={scrollRight}
-                className="group p-2 bg-gray-800/50 backdrop-blur-sm border border-gray-700/50 rounded-full hover:border-purple-400/50 hover:bg-gray-700/50 transition-all duration-300"
+                className="p-2.5 bg-gray-900 border border-gray-800 rounded-md hover:border-teal-600 hover:bg-gray-800 hover:shadow-glow-teal transition-all duration-300 hover:scale-110"
                 aria-label="Scroll right"
               >
-                <ArrowRight className="w-4 h-4 text-gray-400 group-hover:text-purple-400 transition-colors duration-300" />
+                <ArrowRight className="w-5 h-5 text-gray-400 hover:text-teal-400 transition-colors duration-300" />
               </button>
             </div>
 
-            <div className="text-xs text-gray-400">
+            <div className="text-sm text-gray-400">
               Scroll to explore →
             </div>
           </div>
 
-          {/* Horizontal Scrolling Projects - smaller cards */}
+          {/* Horizontal Scrolling Projects */}
           <div
             ref={scrollContainerRef}
-            className="flex gap-4 overflow-x-auto scrollbar-hide pb-3"
+            className="flex gap-6 overflow-x-auto scrollbar-hide pb-4"
             style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
           >
             {projects.map((project, index) => (
               <div
                 key={project.id}
-                className="group relative flex-none w-72 sm:w-80 transition-all duration-300 hover:scale-105"
+                className="flex-none w-80 sm:w-96 bg-gray-900 border border-gray-800 rounded-lg overflow-hidden hover:border-emerald-600 hover:shadow-glow-emerald transition-all duration-500 group animate-scale-in"
                 style={{
                   animationDelay: `${index * 100}ms`,
                   animation: isVisible ? 'slideInRight 0.8s ease-out forwards' : '',
                 }}
               >
-                {/* Featured Badge - smaller */}
+                {/* Featured Badge */}
                 {project.featured && (
-                  <div className="absolute -top-1 -right-1 z-20">
-                    <div className="bg-gradient-to-r from-purple-500 to-cyan-500 rounded-full p-1.5 animate-pulse">
-                      <Star className="w-3 h-3 text-white" />
+                  <div className="absolute top-3 right-3 z-20">
+                    <div className="bg-gradient-to-r from-emerald-600 to-teal-600 rounded-full p-2 shadow-glow-emerald animate-glow-pulse">
+                      <Star className="w-4 h-4 text-white" />
                     </div>
                   </div>
                 )}
 
-                {/* Glow effect */}
-                <div className="absolute inset-0 bg-gradient-to-r from-purple-500/20 to-cyan-500/20 opacity-0 group-hover:opacity-100 rounded-xl blur-lg transition-all duration-300" />
+                {/* Image Container */}
+                <div className="relative h-48 overflow-hidden">
+                  <img
+                    src={project.image}
+                    alt={project.title}
+                    className="w-full h-full object-cover"
+                  />
 
-                {/* Main Card - smaller */}
-                <div className="relative bg-gray-900/40 backdrop-blur-xl border border-gray-700/50 rounded-xl overflow-hidden group-hover:border-gray-600/70 transition-all duration-300">
+                  {/* Hover Actions */}
+                  <div className="absolute inset-0 bg-black/60 flex items-center justify-center gap-4 opacity-0 hover:opacity-100 transition-all duration-300">
+                    <a
+                      href={project.demoUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="p-3 bg-gray-900 border border-gray-700 rounded-md hover:border-emerald-500 hover:bg-emerald-600 hover:shadow-glow-emerald transition-all duration-300 hover:scale-110"
+                      aria-label={`View ${project.title} demo`}
+                    >
+                      <Eye className="w-5 h-5 text-white" />
+                    </a>
+                    <a
+                      href={project.githubUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="p-3 bg-gray-900 border border-gray-700 rounded-md hover:border-teal-500 hover:bg-teal-600 hover:shadow-glow-teal transition-all duration-300 hover:scale-110"
+                      aria-label={`View ${project.title} on GitHub`}
+                    >
+                      <Github className="w-5 h-5 text-white" />
+                    </a>
+                  </div>
 
-                  {/* Image Container - smaller */}
-                  <div className="relative h-36 overflow-hidden">
-                    <img
-                      src={project.image}
-                      alt={project.title}
-                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                    />
+                  {/* Category Badge */}
+                  <div className="absolute top-3 left-3">
+                    <span className="px-3 py-1.5 bg-gray-900 border border-emerald-500/30 rounded-md text-xs text-emerald-400 font-medium animate-fade-in">
+                      {project.category}
+                    </span>
+                  </div>
+                </div>
 
-                    {/* Overlay */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-gray-900/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                {/* Content */}
+                <div className="p-5">
+                  {/* Tags */}
+                  <div className="flex flex-wrap gap-2 mb-4">
+                    {project.tags.slice(0, 4).map((tag, tagIndex) => (
+                      <span
+                        key={tagIndex}
+                        className="px-2.5 py-1 bg-gray-800 border border-gray-700 rounded-md text-xs text-gray-300 hover:border-teal-500 hover:text-teal-400 transition-all duration-300 hover:scale-110 animate-fade-in"
+                        style={{ animationDelay: `${tagIndex * 50}ms` }}
+                      >
+                        {tag}
+                      </span>
+                    ))}
+                    {project.tags.length > 4 && (
+                      <span className="px-2.5 py-1 bg-gray-800 border border-gray-700 rounded-md text-xs text-gray-400">
+                        +{project.tags.length - 4}
+                      </span>
+                    )}
+                  </div>
 
-                    {/* Hover Actions - smaller */}
-                    <div className="absolute inset-0 flex items-center justify-center gap-3 opacity-0 group-hover:opacity-100 transition-all duration-300">
+                  {/* Title */}
+                  <h3 className="text-xl font-bold text-white mb-3">
+                    {project.title}
+                  </h3>
+
+                  <p className="text-gray-400 text-sm leading-relaxed mb-4">
+                    {project.description.length > 120
+                      ? `${project.description.substring(0, 120)}...`
+                      : project.description}
+                  </p>
+
+                  {/* Links */}
+                  <div className="flex justify-between items-center pt-4 border-t border-gray-800">
+                    <div className="flex gap-3">
                       <a
                         href={project.demoUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="p-2 bg-gray-900/80 backdrop-blur-sm border border-gray-600/50 rounded-full hover:border-purple-400/50 hover:bg-purple-500/20 transition-all duration-300 group/btn"
+                        className="text-gray-400 hover:text-emerald-400 transition-all duration-300 hover:scale-125"
                         aria-label={`View ${project.title} demo`}
                       >
-                        <Eye className="w-4 h-4 text-gray-300 group-hover/btn:text-purple-400 transition-colors duration-300" />
+                        <ExternalLink size={18} />
                       </a>
                       <a
                         href={project.githubUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="p-2 bg-gray-900/80 backdrop-blur-sm border border-gray-600/50 rounded-full hover:border-cyan-400/50 hover:bg-cyan-500/20 transition-all duration-300 group/btn"
+                        className="text-gray-400 hover:text-teal-400 transition-all duration-300 hover:scale-125"
                         aria-label={`View ${project.title} on GitHub`}
                       >
-                        <Github className="w-4 h-4 text-gray-300 group-hover/btn:text-cyan-400 transition-colors duration-300" />
+                        <Github size={18} />
                       </a>
                     </div>
 
-                    {/* Category Badge - smaller */}
-                    <div className="absolute top-3 left-3">
-                      <span className="px-2 py-1 bg-gray-900/80 backdrop-blur-sm border border-gray-600/50 rounded-full text-xs text-purple-400 font-medium">
-                        {project.category}
-                      </span>
-                    </div>
-                  </div>
-
-                  {/* Content - reduced padding */}
-                  <div className="p-4">
-                    {/* Tags - smaller */}
-                    <div className="flex flex-wrap gap-1.5 mb-3">
-                      {project.tags.slice(0, 3).map((tag, tagIndex) => (
-                        <span
-                          key={tagIndex}
-                          className="px-2 py-0.5 bg-gray-800/60 backdrop-blur-sm border border-gray-600/50 rounded-full text-xs text-gray-300 hover:border-purple-400/50 hover:text-purple-400 transition-all duration-300"
-                        >
-                          {tag}
-                        </span>
-                      ))}
-                      {project.tags.length > 3 && (
-                        <span className="px-2 py-0.5 bg-gray-800/60 backdrop-blur-sm border border-gray-600/50 rounded-full text-xs text-gray-400">
-                          +{project.tags.length - 3}
-                        </span>
-                      )}
-                    </div>
-
-                    {/* Title - smaller */}
-                    <h3 className="text-lg font-bold text-white mb-2 group-hover:text-transparent group-hover:bg-gradient-to-r group-hover:bg-clip-text group-hover:from-purple-400 group-hover:to-cyan-400 transition-all duration-300">
-                      {project.title}
-                    </h3>
-
-                    <p className="text-gray-400 text-xs leading-relaxed group-hover:text-gray-300 transition-colors duration-300">
-                      {project.description.length > 150
-                        ? `${project.description.substring(0, 120)}...`
-                        : project.description}
-                    </p>
-
-                    {/* Links - smaller spacing */}
-                    <div className="flex justify-between items-center mt-4">
-                      <div className="flex gap-2">
-                        <a
-                          href={project.demoUrl}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="text-gray-400 hover:text-purple-400 transition-colors duration-300"
-                          aria-label={`View ${project.title} demo`}
-                        >
-                          <ExternalLink size={16} />
-                        </a>
-                        <a
-                          href={project.githubUrl}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="text-gray-400 hover:text-cyan-400 transition-colors duration-300"
-                          aria-label={`View ${project.title} on GitHub`}
-                        >
-                          <Github size={16} />
-                        </a>
-                      </div>
-
-                      <div className="text-xs text-gray-500">
-                        0{index + 1}
-                      </div>
+                    <div className="text-sm text-emerald-500 font-semibold">
+                      0{index + 1}
                     </div>
                   </div>
                 </div>
@@ -366,16 +303,15 @@ export const ProjectsSection = () => {
           </div>
         </div>
 
-        <div className={`text-center mt-12 mb-8 transition-all duration-1000 delay-600 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+        <div className={`text-center mt-16 transition-all duration-1000 delay-600 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
           <a
             href="https://github.com/sufyan2618"
             target="_blank"
             rel="noopener noreferrer"
-            className="group relative inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-purple-500 to-cyan-500 rounded-full font-semibold text-white text-sm overflow-hidden transition-all duration-300 hover:scale-105 hover:shadow-xl hover:shadow-purple-500/25"
+            className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-emerald-600 to-teal-600 hover:shadow-glow-emerald rounded-md font-semibold text-white transition-all duration-300 hover:scale-105"
           >
-            <span className="relative z-10">Explore All Projects on GitHub</span>
-            <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" />
-            <div className="absolute inset-0 bg-gradient-to-r from-cyan-500 to-purple-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+            Explore All Projects on GitHub
+            <ArrowRight className="w-5 h-5" />
           </a>
         </div>
       </div>
