@@ -6,7 +6,7 @@ const experiences = [
     id: 1,
     company: "BugMonks",
     logo: "/bug-monks.jpg",
-    role: "Junior Full Stack Developer",
+    role: "Full Stack Engineer",
     location: "Onsite - Lahore, Pakistan",
     duration: "April 2025 - Present",
     startDate: "Apr 2025",
