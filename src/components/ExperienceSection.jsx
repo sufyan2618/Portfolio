@@ -66,8 +66,7 @@ const experiences = [
 
 export const ExperienceSection = () => {
   const [isVisible, setIsVisible] = useState(false);
-  const [activeTab, setActiveTab] = useState({});
-  const [expandedItems, setExpandedItems] = useState({});
+  const [expandedId, setExpandedId] = useState(null);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -82,24 +81,13 @@ export const ExperienceSection = () => {
     const section = document.getElementById('experience');
     if (section) observer.observe(section);
     
-    // Initialize active tabs for each experience
-    const initialTabs = {};
-    experiences.forEach(exp => {
-      initialTabs[exp.id] = 'overview';
-    });
-    setActiveTab(initialTabs);
-    
     return () => {
       if (section) observer.unobserve(section);
     };
   }, []);
 
-  const handleTabChange = (expId, tab) => {
-    setActiveTab(prev => ({ ...prev, [expId]: tab }));
-  };
-
   const toggleExpand = (id) => {
-    setExpandedItems(prev => ({ ...prev, [id]: !prev[id] }));
+    setExpandedId(expandedId === id ? null : id);
   };
 
   return (
@@ -175,167 +163,137 @@ export const ExperienceSection = () => {
 
                   <div className="bg-gradient-to-br from-gray-900 via-gray-900 to-gray-950 border border-gray-800 rounded-xl overflow-hidden hover:border-emerald-600 hover:shadow-glow-emerald transition-all duration-500 group animate-scale-in">
                 
-                {/* Header Section with gradient background */}
-                <div className="relative p-6 sm:p-8 border-b border-gray-800/50 overflow-hidden">
-                  {/* Animated background gradient */}
+                {/* Compact Header */}
+                <div className="relative p-5 border-b border-gray-800/50 overflow-hidden">
                   <div className="absolute inset-0 bg-gradient-to-r from-emerald-600/5 via-teal-600/5 to-transparent opacity-50 group-hover:opacity-100 transition-opacity duration-500" />
                   
-                  <div className="relative">
-                    <div className="flex items-start gap-4 mb-4">
-                      {/* Company Icon with glow */}
-                      <div className="relative">
-                        <div className="absolute inset-0 bg-gradient-to-br from-emerald-600 to-teal-600 rounded-xl blur opacity-50 group-hover:opacity-75 transition-opacity" />
-                        <div className="relative p-3 rounded-xl bg-gradient-to-br from-emerald-600 to-teal-600 animate-float">
-                          <Building2 className="w-7 h-7 text-white" />
-                        </div>
-                      </div>
+                  <div className="relative flex items-start gap-3">
+                    {/* Company Icon */}
+                    <div className="p-2.5 rounded-lg bg-gradient-to-br from-emerald-600 to-teal-600 flex-shrink-0">
+                      <Building2 className="w-5 h-5 text-white" />
+                    </div>
 
-                      <div className="flex-1 min-w-0">
-                        {/* Role with status badge */}
-                        <div className="flex items-center gap-2 mb-2 flex-wrap">
-                          <h3 className="text-xl sm:text-2xl font-bold text-white group-hover:text-emerald-400 transition-colors">
+                    <div className="flex-1 min-w-0">
+                      {/* Role & Company */}
+                      <div className="flex items-start justify-between gap-2 mb-2">
+                        <div>
+                          <h3 className="text-lg font-bold text-white group-hover:text-emerald-400 transition-colors mb-1">
                             {experience.role}
                           </h3>
-                          {experience.isActive && (
-                            <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-gradient-to-r from-emerald-500/20 to-teal-500/20 border border-emerald-500/50 rounded-full text-xs text-emerald-400 font-semibold animate-glow-pulse">
-                              <Zap className="w-3 h-3 animate-pulse" />
-                              Currently Working
-                            </span>
-                          )}
+                          <div className="text-base font-semibold text-emerald-400">
+                            {experience.company}
+                          </div>
                         </div>
+                        {experience.isActive && (
+                          <span className="inline-flex items-center gap-1 px-2 py-0.5 bg-emerald-500/20 border border-emerald-500/50 rounded-full text-[10px] text-emerald-400 font-semibold animate-glow-pulse whitespace-nowrap">
+                            <Zap className="w-2.5 h-2.5" />
+                            Active
+                          </span>
+                        )}
+                      </div>
 
-                        {/* Company name with emphasis */}
-                        <div className="text-lg font-bold text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-teal-400 mb-3">
-                          {experience.company}
-                        </div>
-
-                        {/* Meta information */}
-                        <div className="flex flex-wrap items-center gap-x-4 gap-y-2 text-sm text-gray-400">
-                          <span className="flex items-center gap-1.5 hover:text-emerald-400 transition-colors">
-                            <MapPin className="w-4 h-4" />
-                            {experience.location}
-                          </span>
-                          <span className="hidden md:flex items-center gap-1.5 px-3 py-1 bg-gray-800/50 border border-gray-700 rounded-lg text-xs font-medium">
-                            <Calendar className="w-3.5 h-3.5" />
-                            {experience.period}
-                          </span>
-                          <span className="px-3 py-1 bg-gray-800/50 border border-gray-700 rounded-lg text-xs font-medium">
-                            {experience.type}
-                          </span>
-                        </div>
+                      {/* Meta info */}
+                      <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-gray-400">
+                        <span className="flex items-center gap-1">
+                          <MapPin className="w-3 h-3" />
+                          {experience.location}
+                        </span>
+                        <span>•</span>
+                        <span>{experience.period}</span>
+                        <span>•</span>
+                        <span>{experience.type}</span>
                       </div>
                     </div>
                   </div>
                 </div>
 
-                {/* Content Section */}
-                <div className="p-6 sm:p-8">
-                  
-                  {/* Enhanced Tab Navigation */}
-                  <div className="flex flex-wrap gap-2 mb-6">
-                    {['overview', 'responsibilities', 'technologies', 'achievements'].map((tab) => (
-                      <button
-                        key={tab}
-                        onClick={() => handleTabChange(experience.id, tab)}
-                        className={`relative px-5 py-2.5 rounded-lg text-sm font-semibold transition-all duration-300 hover:scale-105 ${
-                          activeTab[experience.id] === tab
-                            ? 'bg-gradient-to-r from-emerald-600 to-teal-600 text-white shadow-glow-emerald'
-                            : 'text-gray-400 hover:text-white bg-gray-800/50 border border-gray-700 hover:border-emerald-600/50'
-                        }`}
-                      >
-                        {activeTab[experience.id] === tab && (
-                          <div className="absolute inset-0 bg-gradient-to-r from-emerald-600 to-teal-600 rounded-lg blur opacity-50 -z-10" />
-                        )}
-                        {tab.charAt(0).toUpperCase() + tab.slice(1)}
-                      </button>
+                {/* Compact Content */}
+                <div className="p-5">
+                  {/* Description */}
+                  <p className="text-gray-300 text-sm leading-relaxed mb-4">
+                    {experience.description}
+                  </p>
+
+                  {/* Key Highlights - Show first 3 by default */}
+                  <div className="space-y-2 mb-4">
+                    {experience.responsibilities.slice(0, expandedId === experience.id ? undefined : 3).map((responsibility, idx) => (
+                      <div key={idx} className="flex items-start gap-2 text-xs text-gray-400">
+                        <div className="p-0.5 rounded bg-emerald-600/20 mt-1">
+                          <ArrowRight className="w-3 h-3 text-emerald-400" />
+                        </div>
+                        <span className="flex-1">{responsibility}</span>
+                      </div>
                     ))}
                   </div>
 
-                  {/* Tab Content */}
-                  <div className="min-h-[200px]">
-                    
-                    {/* Overview Tab */}
-                    {activeTab[experience.id] === 'overview' && (
-                      <div className="space-y-4 animate-fade-in">
-                        <p className="text-gray-300 leading-relaxed text-base">
-                          {experience.description}
-                        </p>
-                        <div className="grid sm:grid-cols-2 gap-4 mt-6">
-                          <div className="p-4 bg-gray-800 rounded-lg border border-gray-700 hover:border-emerald-600 hover:shadow-glow-emerald transition-all duration-300 hover:scale-105">
-                            <div className="flex items-center gap-2 mb-2">
-                              <Users className="w-4 h-4 text-emerald-400" />
-                              <span className="text-sm font-semibold text-white">Team Collaboration</span>
-                            </div>
-                            <p className="text-gray-400 text-sm">Working with cross-functional teams on enterprise SaaS solutions</p>
-                          </div>
-                          <div className="p-4 bg-gray-800 rounded-lg border border-gray-700 hover:border-teal-600 hover:shadow-glow-teal transition-all duration-300 hover:scale-105">
-                            <div className="flex items-center gap-2 mb-2">
-                              <Code2 className="w-4 h-4 text-teal-400" />
-                              <span className="text-sm font-semibold text-white">Full-Stack Development</span>
-                            </div>
-                            <p className="text-gray-400 text-sm">End-to-end development of features and integrations</p>
-                          </div>
-                        </div>
-                      </div>
-                    )}
+                  {/* Tech Stack - Compact */}
+                  <div className="mb-4">
+                    <div className="flex flex-wrap gap-1.5">
+                      {experience.technologies.slice(0, 8).map((tech) => (
+                        <span 
+                          key={tech}
+                          className="px-2 py-1 bg-gray-800/50 border border-gray-700 rounded text-[10px] text-gray-400 hover:border-emerald-500/50 hover:text-emerald-400 transition-all duration-300"
+                        >
+                          {tech}
+                        </span>
+                      ))}
+                      {experience.technologies.length > 8 && (
+                        <span className="px-2 py-1 text-[10px] text-gray-500">
+                          +{experience.technologies.length - 8} more
+                        </span>
+                      )}
+                    </div>
+                  </div>
 
-                    {/* Responsibilities Tab */}
-                    {activeTab[experience.id] === 'responsibilities' && (
-                      <div className="space-y-2 animate-fade-in">
-                        {experience.responsibilities.slice(0, expandedItems[experience.id] ? undefined : 4).map((responsibility, idx) => (
-                          <div key={idx} className="flex items-start gap-3 p-4 rounded-lg bg-gray-800/30 hover:bg-gray-800/60 border border-gray-800 hover:border-emerald-600/30 transition-all duration-300 group animate-fade-in" style={{ animationDelay: `${idx * 50}ms` }}>
-                            <div className="p-1 rounded bg-gradient-to-br from-emerald-600/20 to-teal-600/20 mt-0.5">
-                              <ArrowRight className="w-3.5 h-3.5 text-emerald-400 group-hover:translate-x-1 transition-transform" />
-                            </div>
-                            <span className="text-gray-300 text-sm leading-relaxed flex-1">{responsibility}</span>
-                          </div>
-                        ))}
-                        {experience.responsibilities.length > 4 && (
-                          <button
-                            onClick={() => toggleExpand(experience.id)}
-                            className="mt-4 text-sm text-emerald-400 hover:text-emerald-300 flex items-center gap-2 font-medium transition-colors"
-                          >
-                            {expandedItems[experience.id] ? 'Show less' : `Show ${experience.responsibilities.length - 4} more responsibilities`}
-                            <ChevronDown className={`w-4 h-4 transition-transform ${expandedItems[experience.id] ? 'rotate-180' : ''}`} />
-                          </button>
-                        )}
-                      </div>
-                    )}
+                  {/* Expand/Collapse Button */}
+                  {experience.responsibilities.length > 3 && (
+                    <button
+                      onClick={() => toggleExpand(experience.id)}
+                      className="text-xs text-emerald-400 hover:text-emerald-300 flex items-center gap-1 font-medium transition-colors"
+                    >
+                      {expandedId === experience.id ? 'Show less' : `View all details (${experience.responsibilities.length} highlights)`}
+                      <ChevronDown className={`w-3 h-3 transition-transform ${expandedId === experience.id ? 'rotate-180' : ''}`} />
+                    </button>
+                  )}
 
-                    {/* Technologies Tab */}
-                    {activeTab[experience.id] === 'technologies' && (
-                      <div className="animate-fade-in">
-                        <div className="flex flex-wrap gap-2.5">
-                          {experience.technologies.map((tech, idx) => (
+                  {/* Expanded Content */}
+                  {expandedId === experience.id && (
+                    <div className="mt-4 pt-4 border-t border-gray-800 space-y-4 animate-fade-in">
+                      {/* All Technologies */}
+                      <div>
+                        <h4 className="text-xs font-semibold text-white mb-2 flex items-center gap-1">
+                          <Code2 className="w-3 h-3 text-emerald-400" />
+                          Full Tech Stack
+                        </h4>
+                        <div className="flex flex-wrap gap-1.5">
+                          {experience.technologies.map((tech) => (
                             <span 
                               key={tech}
-                              className="px-4 py-2 bg-gradient-to-br from-gray-800 to-gray-900 border border-gray-700 rounded-lg text-sm text-gray-300 hover:border-emerald-500 hover:text-emerald-400 hover:shadow-glow-emerald transition-all duration-300 hover:scale-110 hover:-translate-y-0.5 font-medium animate-bounce-in cursor-default"
-                              style={{ animationDelay: `${idx * 20}ms` }}
+                              className="px-2 py-1 bg-gray-800/50 border border-gray-700 rounded text-[10px] text-gray-400 hover:border-emerald-500/50 hover:text-emerald-400 transition-all duration-300"
                             >
                               {tech}
                             </span>
                           ))}
                         </div>
                       </div>
-                    )}
 
-                    {/* Achievements Tab */}
-                    {activeTab[experience.id] === 'achievements' && (
-                      <div className="grid gap-3 animate-fade-in">
-                        {experience.achievements.map((achievement, idx) => (
-                          <div key={idx} className="relative p-4 rounded-lg bg-gradient-to-r from-gray-800/50 to-transparent border border-gray-700 hover:border-teal-600/50 transition-all duration-300 group animate-fade-in overflow-hidden" style={{ animationDelay: `${idx * 80}ms` }}>
-                            <div className="absolute inset-0 bg-gradient-to-r from-teal-600/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
-                            <div className="relative flex items-start gap-3">
-                              <div className="p-1.5 rounded-lg bg-gradient-to-br from-teal-600/20 to-emerald-600/20 mt-0.5">
-                                <TrendingUp className="w-4 h-4 text-teal-400 group-hover:scale-110 transition-transform" />
-                              </div>
-                              <span className="text-gray-300 text-sm leading-relaxed flex-1">{achievement}</span>
+                      {/* Achievements */}
+                      <div>
+                        <h4 className="text-xs font-semibold text-white mb-2 flex items-center gap-1">
+                          <TrendingUp className="w-3 h-3 text-teal-400" />
+                          Key Achievements
+                        </h4>
+                        <div className="space-y-2">
+                          {experience.achievements.map((achievement, idx) => (
+                            <div key={idx} className="flex items-start gap-2 text-xs text-gray-400">
+                              <div className="w-1 h-1 bg-teal-400 rounded-full mt-1.5" />
+                              <span className="flex-1">{achievement}</span>
                             </div>
-                          </div>
-                        ))}
+                          ))}
+                        </div>
                       </div>
-                    )}
-                  </div>
+                    </div>
+                  )}
                 </div>
               </div>
                 </div>
