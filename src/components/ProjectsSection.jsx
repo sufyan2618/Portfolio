@@ -1,5 +1,6 @@
 import { ArrowRight, ExternalLink, Github, Star, Eye } from "lucide-react";
-import { useState, useEffect, useRef } from "react";
+import { useRef } from "react";
+import { motion } from "framer-motion";
 
 const projects = [
   {
@@ -93,26 +94,7 @@ const projects = [
 ];
 
 export const ProjectsSection = () => {
-  const [isVisible, setIsVisible] = useState(false);
   const scrollContainerRef = useRef(null);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true);
-        }
-      },
-      { threshold: 0.1 }
-    );
-
-    const section = document.getElementById('projects');
-    if (section) observer.observe(section);
-
-    return () => {
-      if (section) observer.unobserve(section);
-    };
-  }, []);
 
   const scrollLeft = () => {
     if (scrollContainerRef.current) {
@@ -129,43 +111,52 @@ export const ProjectsSection = () => {
   return (
     <section
       id="projects"
-      className="relative min-h-screen flex items-start justify-center overflow-hidden bg-black px-4 py-20"
+      className="relative min-h-screen flex items-start justify-center overflow-hidden px-4 py-20"
     >
-      {/* Subtle grid pattern */}
-      <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:40px_40px]" />
-
       <div className="container mx-auto max-w-7xl relative z-10 h-full flex flex-col justify-center py-12">
         {/* Section Header */}
-        <div className={`text-center mb-12 transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="text-center mb-12"
+        >
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4">
             <span className="text-white">Featured</span>
-            <span className="text-gradient-animate"> Projects</span>
+            <span className="bg-clip-text text-transparent bg-gradient-to-r from-emerald-400 to-teal-500"> Projects</span>
           </h2>
 
-          <p className="text-gray-400 text-base max-w-2xl mx-auto leading-relaxed">
+          <p className="text-gray-300 text-base max-w-2xl mx-auto leading-relaxed">
             Here are some of my recent projects showcasing expertise in full-stack development,
             AI integration, and modern web technologies.
           </p>
 
-          <div className="w-20 h-1 bg-gradient-to-r from-emerald-600 to-teal-600 rounded-full mx-auto mt-6 animate-shimmer" />
-        </div>
+          <div className="w-20 h-1 bg-gradient-to-r from-emerald-600 to-teal-600 rounded-full mx-auto mt-6" />
+        </motion.div>
 
         {/* Projects Container - reduced spacing */}
-        <div className={`relative transition-all duration-1000 delay-300 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+        <motion.div 
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8 }}
+          className="relative"
+        >
 
           {/* Scroll Navigation */}
           <div className="flex justify-between items-center mb-6">
             <div className="flex gap-3">
               <button
                 onClick={scrollLeft}
-                className="p-2.5 bg-gray-900 border border-gray-800 rounded-md hover:border-emerald-600 hover:bg-gray-800 hover:shadow-glow-emerald transition-all duration-300 hover:scale-110"
+                className="p-2.5 bg-white/5 backdrop-blur-md border border-white/10 rounded-full hover:border-emerald-600 hover:bg-emerald-600/20 hover:text-emerald-400 transition-all duration-300 hover:scale-110"
                 aria-label="Scroll left"
               >
                 <ArrowRight className="w-5 h-5 text-gray-400 hover:text-emerald-400 rotate-180 transition-colors duration-300" />
               </button>
               <button
                 onClick={scrollRight}
-                className="p-2.5 bg-gray-900 border border-gray-800 rounded-md hover:border-teal-600 hover:bg-gray-800 hover:shadow-glow-teal transition-all duration-300 hover:scale-110"
+                className="p-2.5 bg-white/5 backdrop-blur-md border border-white/10 rounded-full hover:border-teal-600 hover:bg-teal-600/20 hover:text-teal-400 transition-all duration-300 hover:scale-110"
                 aria-label="Scroll right"
               >
                 <ArrowRight className="w-5 h-5 text-gray-400 hover:text-teal-400 transition-colors duration-300" />
@@ -184,18 +175,18 @@ export const ProjectsSection = () => {
             style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
           >
             {projects.map((project, index) => (
-              <div
+              <motion.div
                 key={project.id}
-                className="flex-none w-80 sm:w-96 bg-gray-900 border border-gray-800 rounded-lg overflow-hidden hover:border-emerald-600 hover:shadow-glow-emerald transition-all duration-500 group animate-scale-in"
-                style={{
-                  animationDelay: `${index * 100}ms`,
-                  animation: isVisible ? 'slideInRight 0.8s ease-out forwards' : '',
-                }}
+                initial={{ opacity: 0, x: 50 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+                className="flex-none w-80 sm:w-96 bg-white/5 backdrop-blur-md border border-white/10 rounded-xl overflow-hidden hover:border-emerald-600 hover:shadow-lg hover:shadow-emerald-500/20 transition-all duration-500 group"
               >
                 {/* Featured Badge */}
                 {project.featured && (
                   <div className="absolute top-3 right-3 z-20">
-                    <div className="bg-gradient-to-r from-emerald-600 to-teal-600 rounded-full p-2 shadow-glow-emerald animate-glow-pulse">
+                    <div className="bg-gradient-to-r from-emerald-600 to-teal-600 rounded-full p-2 shadow-lg shadow-emerald-500/50 animate-pulse">
                       <Star className="w-4 h-4 text-white" />
                     </div>
                   </div>
@@ -206,16 +197,16 @@ export const ProjectsSection = () => {
                   <img
                     src={project.image}
                     alt={project.title}
-                    className="w-full h-full object-cover"
+                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                   />
 
                   {/* Hover Actions */}
-                  <div className="absolute inset-0 bg-black/60 flex items-center justify-center gap-4 opacity-0 hover:opacity-100 transition-all duration-300">
+                  <div className="absolute inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center gap-4 opacity-0 group-hover:opacity-100 transition-all duration-300">
                     <a
                       href={project.demoUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="p-3 bg-gray-900 border border-gray-700 rounded-md hover:border-emerald-500 hover:bg-emerald-600 hover:shadow-glow-emerald transition-all duration-300 hover:scale-110"
+                      className="p-3 bg-white/10 border border-white/20 rounded-full hover:border-emerald-500 hover:bg-emerald-600 hover:shadow-lg hover:shadow-emerald-500/50 transition-all duration-300 hover:scale-110"
                       aria-label={`View ${project.title} demo`}
                     >
                       <Eye className="w-5 h-5 text-white" />
@@ -224,7 +215,7 @@ export const ProjectsSection = () => {
                       href={project.githubUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="p-3 bg-gray-900 border border-gray-700 rounded-md hover:border-teal-500 hover:bg-teal-600 hover:shadow-glow-teal transition-all duration-300 hover:scale-110"
+                      className="p-3 bg-white/10 border border-white/20 rounded-full hover:border-teal-500 hover:bg-teal-600 hover:shadow-lg hover:shadow-teal-500/50 transition-all duration-300 hover:scale-110"
                       aria-label={`View ${project.title} on GitHub`}
                     >
                       <Github className="w-5 h-5 text-white" />
@@ -233,7 +224,7 @@ export const ProjectsSection = () => {
 
                   {/* Category Badge */}
                   <div className="absolute top-3 left-3">
-                    <span className="px-3 py-1.5 bg-gray-900 border border-emerald-500/30 rounded-md text-xs text-emerald-400 font-medium animate-fade-in">
+                    <span className="px-3 py-1.5 bg-black/50 backdrop-blur-md border border-emerald-500/30 rounded-full text-xs text-emerald-400 font-medium">
                       {project.category}
                     </span>
                   </div>
@@ -246,21 +237,20 @@ export const ProjectsSection = () => {
                     {project.tags.slice(0, 4).map((tag, tagIndex) => (
                       <span
                         key={tagIndex}
-                        className="px-2.5 py-1 bg-gray-800 border border-gray-700 rounded-md text-xs text-gray-300 hover:border-teal-500 hover:text-teal-400 transition-all duration-300 hover:scale-110 animate-fade-in"
-                        style={{ animationDelay: `${tagIndex * 50}ms` }}
+                        className="px-2.5 py-1 bg-white/5 border border-white/10 rounded-md text-xs text-gray-300 hover:border-teal-500 hover:text-teal-400 transition-all duration-300 hover:scale-110"
                       >
                         {tag}
                       </span>
                     ))}
                     {project.tags.length > 4 && (
-                      <span className="px-2.5 py-1 bg-gray-800 border border-gray-700 rounded-md text-xs text-gray-400">
+                      <span className="px-2.5 py-1 bg-white/5 border border-white/10 rounded-md text-xs text-gray-400">
                         +{project.tags.length - 4}
                       </span>
                     )}
                   </div>
 
                   {/* Title */}
-                  <h3 className="text-xl font-bold text-white mb-3">
+                  <h3 className="text-xl font-bold text-white mb-3 group-hover:text-emerald-400 transition-colors">
                     {project.title}
                   </h3>
 
@@ -271,7 +261,7 @@ export const ProjectsSection = () => {
                   </p>
 
                   {/* Links */}
-                  <div className="flex justify-between items-center pt-4 border-t border-gray-800">
+                  <div className="flex justify-between items-center pt-4 border-t border-white/10">
                     <div className="flex gap-3">
                       <a
                         href={project.demoUrl}
@@ -298,23 +288,30 @@ export const ProjectsSection = () => {
                     </div>
                   </div>
                 </div>
-              </div>
+              </motion.div>
             ))}
           </div>
-        </div>
+        </motion.div>
 
-        <div className={`text-center mt-16 transition-all duration-1000 delay-600 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.4 }}
+          className="text-center mt-16"
+        >
           <a
             href="https://github.com/sufyan2618"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-emerald-600 to-teal-600 hover:shadow-glow-emerald rounded-md font-semibold text-white transition-all duration-300 hover:scale-105"
+            className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-emerald-600 to-teal-600 hover:shadow-lg hover:shadow-emerald-500/40 rounded-full font-semibold text-white transition-all duration-300 hover:scale-105"
           >
             Explore All Projects on GitHub
             <ArrowRight className="w-5 h-5" />
           </a>
-        </div>
+        </motion.div>
       </div>
     </section>
   );
 };
+

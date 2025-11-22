@@ -1,6 +1,7 @@
-import { useState, useEffect, useMemo, memo } from "react";
+import { useState, useMemo } from "react";
 import { cn } from "@/lib/utils";
 import { Code, Database, Cloud, Wrench } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
 
 const skills = [
   // Frontend
@@ -59,25 +60,6 @@ const categories = [
 
 export const SkillsSection = () => {
   const [activeCategory, setActiveCategory] = useState("all");
-  const [isVisible, setIsVisible] = useState(false);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true);
-        }
-      },
-      { threshold: 0.1 }
-    );
-
-    const section = document.getElementById("skills");
-    if (section) observer.observe(section);
-
-    return () => {
-      if (section) observer.unobserve(section);
-    };
-  }, []);
 
   const filteredSkills = useMemo(
     () => skills.filter(
@@ -89,38 +71,39 @@ export const SkillsSection = () => {
   return (
     <section
       id="skills"
-      className="relative py-20 overflow-hidden bg-black"
+      className="relative py-20 overflow-hidden"
     >
-      {/* Subtle grid pattern */}
-      <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:40px_40px]" />
-
       <div className="container mx-auto max-w-7xl relative z-10 h-full flex flex-col justify-center py-16 px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
-        <div
-          className={`text-center mb-12 transition-all duration-1000 ${
-            isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
-          }`}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="text-center mb-12"
         >
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4">
             <span className="text-white">My</span>
-            <span className="text-gradient-animate">
+            <span className="bg-clip-text text-transparent bg-gradient-to-r from-emerald-400 to-teal-500">
               {" "}
               Skills
             </span>
           </h2>
 
-          <p className="text-gray-400 text-base max-w-2xl mx-auto leading-relaxed">
+          <p className="text-gray-300 text-base max-w-2xl mx-auto leading-relaxed">
             A comprehensive toolkit of modern technologies spanning frontend, backend, cloud infrastructure, and development tools.
           </p>
 
-          <div className="w-20 h-1 bg-gradient-to-r from-emerald-600 to-teal-600 rounded-full mx-auto mt-6 animate-shimmer" />
-        </div>
+          <div className="w-20 h-1 bg-gradient-to-r from-emerald-600 to-teal-600 rounded-full mx-auto mt-6" />
+        </motion.div>
 
         {/* Category Filter */}
-        <div
-          className={`flex flex-wrap justify-center gap-3 mb-10 transition-all duration-1000 delay-200 ${
-            isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
-          }`}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.2 }}
+          className="flex flex-wrap justify-center gap-3 mb-10"
         >
           {categories.map((category) => {
             const Icon = category.icon;
@@ -129,10 +112,10 @@ export const SkillsSection = () => {
                 key={category.id}
                 onClick={() => setActiveCategory(category.id)}
                 className={cn(
-                  "px-5 py-2.5 rounded-md font-medium text-sm transition-all duration-300 flex items-center gap-2 hover:scale-105",
+                  "px-5 py-2.5 rounded-full font-medium text-sm transition-all duration-300 flex items-center gap-2 hover:scale-105 backdrop-blur-md",
                   activeCategory === category.id
-                    ? "bg-gradient-to-r from-emerald-600 to-teal-600 text-white border-2 border-emerald-500 shadow-glow-emerald"
-                    : "bg-gray-900 text-gray-400 border border-gray-800 hover:border-emerald-600 hover:text-emerald-400"
+                    ? "bg-gradient-to-r from-emerald-600 to-teal-600 text-white shadow-lg shadow-emerald-500/20"
+                    : "bg-white/5 text-gray-300 border border-white/10 hover:border-emerald-500 hover:text-emerald-400"
                 )}
               >
                 <Icon className="w-4 h-4" />
@@ -140,73 +123,79 @@ export const SkillsSection = () => {
               </button>
             );
           })}
-        </div>
+        </motion.div>
 
         {/* Skills Grid */}
-        <div
-          className={`grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 transition-all duration-1000 delay-400 ${
-            isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
-          }`}
+        <motion.div
+          layout
+          className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4"
         >
-          {filteredSkills.map((skill, index) => (
-            <div
-              key={skill.name}
-              className="bg-gray-900 border border-gray-800 rounded-lg p-4 hover:border-emerald-600 hover:shadow-glow-emerald transition-all duration-300 hover:scale-110 hover:-rotate-3 animate-bounce-in"
-              style={{
-                animationDelay: `${index * 50}ms`,
-              }}
-            >
-              {/* Skill Content */}
-              <div className="flex flex-col items-center gap-3 text-center">
-                <div className="w-12 h-12 flex items-center justify-center">
-                  {typeof skill.icon === "string" &&
-                  !skill.icon.includes(".") ? (
-                    <span className="text-3xl">{skill.icon}</span>
-                  ) : (
-                    <img
-                      src={`/${skill.icon}`}
-                      alt={skill.name}
-                      className="w-10 h-10 object-contain"
-                    />
-                  )}
-                </div>
+          <AnimatePresence>
+            {filteredSkills.map((skill, index) => (
+              <motion.div
+                layout
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.8 }}
+                transition={{ duration: 0.3 }}
+                key={skill.name}
+                className="bg-white/5 backdrop-blur-md border border-white/10 rounded-xl p-4 hover:border-emerald-500/50 hover:bg-white/10 transition-all duration-300 hover:scale-110 hover:-rotate-2 group"
+              >
+                {/* Skill Content */}
+                <div className="flex flex-col items-center gap-3 text-center">
+                  <div className="w-12 h-12 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                    {typeof skill.icon === "string" &&
+                    !skill.icon.includes(".") ? (
+                      <span className="text-3xl">{skill.icon}</span>
+                    ) : (
+                      <img
+                        src={`/${skill.icon}`}
+                        alt={skill.name}
+                        className="w-10 h-10 object-contain drop-shadow-lg"
+                      />
+                    )}
+                  </div>
 
-                <h3 className="font-semibold text-white text-sm">
-                  {skill.name}
-                </h3>
-              </div>
-            </div>
-          ))}
-        </div>
+                  <h3 className="font-semibold text-white text-sm group-hover:text-emerald-400 transition-colors">
+                    {skill.name}
+                  </h3>
+                </div>
+              </motion.div>
+            ))}
+          </AnimatePresence>
+        </motion.div>
 
         {/* Bottom Stats */}
-        <div
-          className={`flex flex-wrap justify-center items-center gap-12 mt-16 transition-all duration-1000 delay-600 ${
-            isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
-          }`}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.4 }}
+          className="flex flex-wrap justify-center items-center gap-12 mt-16"
         >
-          <div className="text-center animate-scale-in" style={{ animationDelay: '600ms' }}>
-            <div className="text-3xl font-bold text-gradient-animate">
+          <div className="text-center">
+            <div className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-emerald-400 to-teal-500">
               {skills.length}+
             </div>
             <div className="text-sm text-gray-400 mt-1">Technologies</div>
           </div>
-          <div className="w-px h-12 bg-gradient-to-b from-emerald-600 to-teal-600"></div>
-          <div className="text-center animate-scale-in" style={{ animationDelay: '700ms' }}>
-            <div className="text-3xl font-bold text-gradient-animate">
+          <div className="w-px h-12 bg-gradient-to-b from-emerald-600/50 to-teal-600/50"></div>
+          <div className="text-center">
+            <div className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-emerald-400 to-teal-500">
               1+
             </div>
             <div className="text-sm text-gray-400 mt-1">Years Experience</div>
           </div>
-          <div className="w-px h-12 bg-gradient-to-b from-emerald-600 to-teal-600"></div>
-          <div className="text-center animate-scale-in" style={{ animationDelay: '800ms' }}>
-            <div className="text-3xl font-bold text-gradient-animate">
+          <div className="w-px h-12 bg-gradient-to-b from-emerald-600/50 to-teal-600/50"></div>
+          <div className="text-center">
+            <div className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-emerald-400 to-teal-500">
               10+
             </div>
             <div className="text-sm text-gray-400 mt-1">Projects Completed</div>
           </div>
-        </div>
+        </motion.div>
       </div>
     </section>
   );
 };
+

@@ -1,91 +1,77 @@
 import { Code, Smartphone, Brain, ArrowRight } from "lucide-react";
-import { useEffect, useState } from "react";
+import { motion } from "framer-motion";
 import resume from "../assets/Sufyan_Liaqat_FullStack_Engineer.pdf"
 
 export const AboutSection = () => {
-  const [isVisible, setIsVisible] = useState(false);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true);
-        }
-      },
-      { threshold: 0.1 }
-    );
-
-    const section = document.getElementById('about');
-    if (section) observer.observe(section);
-    
-    return () => {
-      if (section) observer.unobserve(section);
-    };
-  }, []);
-
   const skills = [
     {
       icon: Code,
       title: "Full-Stack Development",
       description: "Building scalable web applications with MERN stack, serving 2000+ active users.",
-      delay: "delay-100"
     },
     {
       icon: Smartphone,
       title: "Mobile Development",
       description: "Cross-platform mobile apps using React Native and Expo with modern UI/UX.",
-      delay: "delay-200"
     },
     {
       icon: Brain,
       title: "DevOps & Cloud",
       description: "Deploying production applications with Docker, CI/CD, and cloud infrastructure.",
-      delay: "delay-300"
     }
   ];
 
   return (
     <section 
       id="about" 
-      className="relative min-h-screen py-20 px-4 overflow-hidden bg-black"
+      className="relative min-h-screen py-20 px-4 overflow-hidden"
     >
-      {/* Subtle grid pattern */}
-      <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:40px_40px]" />
-
       <div className="container mx-auto max-w-6xl relative z-10">
         {/* Section Header */}
-        <div className={`text-center mb-16 transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="text-center mb-16"
+        >
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4">
             <span className="text-white">About</span>
-            <span className="text-gradient-animate"> Me</span>
+            <span className="bg-clip-text text-transparent bg-gradient-to-r from-emerald-400 to-teal-500"> Me</span>
           </h2>
           
-          <div className="w-20 h-1 bg-gradient-to-r from-emerald-600 to-teal-600 rounded-full mx-auto animate-shimmer" />
-        </div>
+          <div className="w-20 h-1 bg-gradient-to-r from-emerald-600 to-teal-600 rounded-full mx-auto" />
+        </motion.div>
 
         <div className="grid lg:grid-cols-2 gap-8 items-start">
           
           {/* Left Content - About Text */}
-          <div className={`space-y-6 transition-all duration-1000 delay-200 ${isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-10'}`}>
+          <motion.div 
+            initial={{ opacity: 0, x: -50 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+            className="space-y-6"
+          >
             
             {/* Main Description Card */}
-            <div className="bg-gray-900 border border-gray-800 rounded-lg p-6 hover:border-gray-700 transition-all duration-300 shadow-elegant">
+            <div className="bg-white/5 backdrop-blur-md border border-white/10 rounded-lg p-6 hover:border-emerald-500/50 transition-all duration-300 shadow-lg">
                 
                 <h3 className="text-xl font-bold text-white mb-4 flex items-center gap-2">
-                  <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse" />
+                  <span className="w-2 h-2 bg-emerald-500 rounded-full animate-pulse" />
                   Software Engineering Student & Developer
                 </h3>
 
-                <div className="space-y-4 text-gray-400 leading-relaxed">
+                <div className="space-y-4 text-gray-300 leading-relaxed">
                   <p>
-                    As a passionate software engineering student from <span className="text-white font-semibold">Lahore, Punjab</span>, 
+                    As a passionate software engineering student from <span className="text-emerald-400 font-semibold">Lahore, Punjab</span>, 
                     I'm dedicated to crafting innovative digital solutions that solve real-world problems.
                   </p>
                   
                   <p>
                     I believe in clean code, elegant design, and user-centered thinking. Whether building web applications, 
-                    mobile apps, or cloud solutions, I approach each project with <span className="text-white font-semibold">creativity</span> and 
-                    <span className="text-white font-semibold"> precision</span>.
+                    mobile apps, or cloud solutions, I approach each project with <span className="text-emerald-400 font-semibold">creativity</span> and 
+                    <span className="text-emerald-400 font-semibold"> precision</span>.
                   </p>
                 </div>
 
@@ -94,8 +80,7 @@ export const AboutSection = () => {
                   {['React', 'Node.js', 'MongoDB', 'Express', 'React Native', 'FastAPI', 'Python'].map((tech, index) => (
                     <span 
                       key={tech}
-                      className="px-3 py-1.5 bg-gray-800 border border-gray-700 rounded-md text-xs text-gray-300 hover:border-emerald-500 hover:text-emerald-400 hover:shadow-glow-emerald transition-all duration-300 hover:scale-110 animate-fade-in"
-                      style={{ animationDelay: `${index * 100}ms` }}
+                      className="px-3 py-1.5 bg-white/5 border border-white/10 rounded-md text-xs text-gray-300 hover:border-emerald-500 hover:text-emerald-400 hover:bg-emerald-500/10 transition-all duration-300 hover:scale-110"
                     >
                       {tech}
                     </span>
@@ -107,7 +92,7 @@ export const AboutSection = () => {
             <div className="flex flex-col sm:flex-row gap-3">
               <a
                 href="#contact"
-                className="group px-6 py-3 bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 rounded-md font-semibold text-white transition-all duration-300 text-center shadow-glow-emerald hover:shadow-glow-teal hover:scale-105"
+                className="group px-6 py-3 bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 rounded-md font-semibold text-white transition-all duration-300 text-center shadow-lg shadow-emerald-500/20 hover:shadow-emerald-500/40 hover:scale-105"
               >
                 <span className="flex items-center justify-center gap-2">
                   Get In Touch
@@ -118,7 +103,7 @@ export const AboutSection = () => {
               <a
                 href={resume} 
                 download
-                className="px-6 py-3 border-2 border-emerald-600 hover:border-teal-500 hover:bg-emerald-950 rounded-md font-semibold text-emerald-400 hover:text-teal-400 transition-all duration-300 text-center hover:scale-105"
+                className="px-6 py-3 border border-white/20 hover:border-emerald-500 hover:bg-emerald-500/10 backdrop-blur-md rounded-md font-semibold text-emerald-400 hover:text-teal-400 transition-all duration-300 text-center hover:scale-105"
               >
                 <span className="flex items-center justify-center gap-2">
                   Download CV
@@ -128,21 +113,24 @@ export const AboutSection = () => {
                 </span>
               </a>
             </div>
-          </div>
+          </motion.div>
 
           {/* Right Content - Skills Cards */}
-          <div className={`space-y-4 transition-all duration-1000 delay-400 ${isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-10'}`}>
+          <div className="space-y-4">
             {skills.map((skill, index) => {
               const Icon = skill.icon;
               return (
-                <div
+                <motion.div
                   key={index}
-                  className={`bg-gray-900 border border-gray-800 rounded-lg p-5 hover:border-emerald-600 hover:shadow-glow-emerald transition-all duration-300 hover:scale-105 ${skill.delay} ${isVisible ? 'animate-scale-in' : 'opacity-0'}`}
-                  style={{ animationDelay: `${index * 150}ms` }}
+                  initial={{ opacity: 0, x: 50 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: index * 0.1 }}
+                  className="bg-white/5 backdrop-blur-md border border-white/10 rounded-lg p-5 hover:border-emerald-500/50 hover:bg-white/10 transition-all duration-300 hover:scale-105"
                 >
                     <div className="flex items-start gap-4">
                       {/* Icon Container */}
-                      <div className="p-3 rounded-lg bg-gradient-to-br from-emerald-600 to-teal-600 flex-shrink-0 animate-float">
+                      <div className="p-3 rounded-lg bg-gradient-to-br from-emerald-600 to-teal-600 flex-shrink-0 shadow-lg shadow-emerald-500/20">
                         <Icon className="w-6 h-6 text-white" />
                       </div>
 
@@ -156,7 +144,7 @@ export const AboutSection = () => {
                         </p>
                       </div>
                     </div>
-                  </div>
+                  </motion.div>
               );
             })}
           </div>
@@ -165,3 +153,4 @@ export const AboutSection = () => {
     </section>
   );
 };
+

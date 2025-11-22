@@ -1,69 +1,80 @@
 import { ArrowDown, Download, Github, Linkedin, Mail } from "lucide-react";
-import { useEffect, useState } from "react";
+import { motion } from "framer-motion";
 import resume from "../assets/Sufyan_Liaqat_FullStack_Engineer.pdf"
 
 export const HeroSection = () => {
-  const [isVisible, setIsVisible] = useState(false);
-
-  useEffect(() => {
-    setIsVisible(true);
-  }, []);
-
   return (
     <section
       id="hero"
-      className="relative h-screen flex items-center justify-center overflow-hidden bg-black"
+      className="relative min-h-screen flex items-center justify-center overflow-hidden"
     >
-      {/* Subtle grid pattern */}
-      <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:40px_40px]" />
-
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="grid lg:grid-cols-2 gap-6 lg:gap-12 items-center h-screen py-16">
+        <div className="grid lg:grid-cols-2 gap-6 lg:gap-12 items-center min-h-screen py-16">
           
-          {/* Left Content - Much Smaller */}
-          <div className="space-y-4 lg:pl-12   text-center lg:text-left order-2 lg:order-1">
-            {/* Greeting - Smaller */}
-            <div className={`space-y-1 transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0 animate-slide-in-left' : 'opacity-0 translate-y-10'}`}>
-              <p className="text-emerald-400 font-medium text-sm tracking-wide uppercase animate-shimmer">
+          {/* Left Content */}
+          <motion.div 
+            initial={{ opacity: 0, x: -50 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
+            className="space-y-6 lg:pl-12 text-center lg:text-left order-2 lg:order-1"
+          >
+            <div className="space-y-2">
+              <motion.p 
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.2 }}
+                className="text-emerald-400 font-medium text-sm tracking-wide uppercase"
+              >
                 Full-Stack Developer
-              </p>
-              <h1 className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-bold leading-tight">
-                <span className="text-white animate-fade-in">Sufyan</span>
+              </motion.p>
+              <h1 className="text-4xl sm:text-5xl lg:text-7xl font-bold leading-tight">
+                <span className="text-white">Sufyan</span>
                 <br />
-                <span className="text-gradient-animate">
+                <span className="bg-clip-text text-transparent bg-gradient-to-r from-emerald-400 to-teal-500">
                   Liaqat
                 </span>
               </h1>
             </div>
 
-            {/* Role & Description - Much Smaller */}
-            <div className={`space-y-4 transition-all duration-1000 delay-300 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
-              <div className="relative">
-                <p className="text-base sm:text-lg text-gray-400 leading-relaxed max-w-md mx-auto lg:mx-0">
-                  Specialized in <span className="text-white font-semibold">MERN Stack</span>, <span className="text-white font-semibold">React Native</span>, and <span className="text-white font-semibold">FastAPI</span>. 
-                  Building scalable, production-ready applications.
-                </p>
-              </div>  
+            <motion.div 
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.4 }}
+              className="relative"
+            >
+              <p className="text-base sm:text-lg text-gray-300 leading-relaxed max-w-md mx-auto lg:mx-0 backdrop-blur-sm bg-black/30 p-4 rounded-lg border border-white/10">
+                Specialized in <span className="text-emerald-400 font-semibold">MERN Stack</span>, <span className="text-emerald-400 font-semibold">React Native</span>, and <span className="text-emerald-400 font-semibold">FastAPI</span>. 
+                Building scalable, production-ready applications with modern 3D interfaces.
+              </p>
+            </motion.div>  
 
-              {/* Tech Stack Pills */}
-              <div className="flex flex-wrap gap-2 justify-center lg:justify-start">
-                {['React', 'Node.js', 'MongoDB', 'TypeScript', 'FastAPI', 'React Native'].map((tech, index) => (
-                  <span 
-                    key={tech}
-                    className="px-3 py-1.5 bg-gray-900 border border-gray-800 rounded-md text-xs text-gray-300 hover:border-emerald-500 hover:text-emerald-400 hover:shadow-glow-emerald transition-all duration-300 hover:scale-110 animate-fade-in"
-                    style={{ animationDelay: `${index * 100}ms` }}
-                  >
-                    {tech}
-                  </span>
-                ))}
-              </div>
-            </div>
+            {/* Tech Stack Pills */}
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.6 }}
+              className="flex flex-wrap gap-2 justify-center lg:justify-start"
+            >
+              {['React', 'Node.js', 'MongoDB', 'TypeScript', 'FastAPI', 'React Native', 'Three.js'].map((tech, index) => (
+                <span 
+                  key={tech}
+                  className="px-3 py-1.5 bg-white/5 backdrop-blur-md border border-white/10 rounded-full text-xs text-gray-300 hover:border-emerald-500 hover:text-emerald-400 hover:bg-emerald-500/10 transition-all duration-300"
+                >
+                  {tech}
+                </span>
+              ))}
+            </motion.div>
 
-            {/* CTA Buttons - Smaller */}
-            <div className={`flex flex-col sm:flex-row gap-3 justify-center lg:justify-start transition-all duration-1000 delay-500 ${isVisible ? 'opacity-100 translate-y-0 animate-bounce-in' : 'opacity-0 translate-y-10'}`}>
+            {/* CTA Buttons */}
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.8 }}
+              className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start"
+            >
               <a
                 href="#projects"
-                className="group px-6 py-3 bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 rounded-md font-semibold text-white text-sm transition-all duration-300 shadow-glow-emerald hover:shadow-glow-teal hover:scale-105"
+                className="group px-8 py-3 bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 rounded-full font-semibold text-white text-sm transition-all duration-300 shadow-lg shadow-emerald-500/20 hover:shadow-emerald-500/40 hover:scale-105"
               >
                 <span className="flex items-center justify-center gap-2">
                   View My Work
@@ -75,82 +86,86 @@ export const HeroSection = () => {
               
               <a
                 href="#contact"
-                className="px-6 py-3 border-2 border-emerald-600 hover:border-teal-500 hover:bg-emerald-950 rounded-md font-semibold text-emerald-400 hover:text-teal-400 text-sm transition-all duration-300 hover:scale-105"
+                className="px-8 py-3 border border-white/20 hover:border-emerald-500 hover:bg-emerald-500/10 backdrop-blur-md rounded-full font-semibold text-white text-sm transition-all duration-300 hover:scale-105"
               >
                 Get In Touch
               </a>
-            </div>
+            </motion.div>
 
-            {/* Social Links - Repositioned and Smaller */}
-            <div className={`flex gap-4 justify-center lg:justify-start mb-8 lg:mb-0 transition-all duration-1000 delay-700 ${isVisible ? 'opacity-100 translate-y-0 animate-scale-in' : 'opacity-0 translate-y-10'}`}>
+            {/* Social Links */}
+            <motion.div 
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 1 }}
+              className="flex gap-4 justify-center lg:justify-start"
+            >
               {[
                 { icon: Github, href: "https://github.com/sufyan2618", label: "GitHub" },
                 { icon: Linkedin, href: "https://www.linkedin.com/in/sufyanliaqat2", label: "LinkedIn" },
                 { icon: Download, href: resume, label: "Resume", download: true },
-              ].map(({ icon: Icon, href, label, download }, index) => (
+              ].map(({ icon: Icon, href, label, download }) => (
                 <a
                   key={label}
                   href={href}
                   {...(download ? { download: true } : {})}
-                  className="p-2.5 bg-gray-900 border border-gray-800 rounded-md hover:border-emerald-500 hover:bg-gray-800 hover:shadow-glow-emerald transition-all duration-300 hover:scale-110 hover:-rotate-6 animate-bounce-in"
-                  style={{ animationDelay: `${index * 150}ms` }}
+                  className="p-3 bg-white/5 border border-white/10 rounded-full hover:border-emerald-500 hover:bg-emerald-500/20 hover:text-emerald-400 transition-all duration-300 hover:scale-110"
                   aria-label={label}
                 >
                   <Icon className="w-5 h-5 text-gray-400 hover:text-emerald-400 transition-colors duration-300" />
                 </a>
               ))}
-            </div>
-          </div>
+            </motion.div>
+          </motion.div>
 
-          {/* Right Content - Photo - Much Smaller */}
-          <div className={`relative order-1 lg:order-2 transition-all duration-1000 delay-200 ${isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-10'}`}>
-            <div className="relative max-w-[170px] mx-auto lg:max-w-[280px]">
-              
-              {/* Animated border rings - smaller */}
-              <div className="absolute inset-0 rounded-full bg-gradient-to-r from-purple-500 via-pink-500 to-cyan-500 p-1 animate-spin-slow">
-                <div className="w-full h-full bg-gray-950 rounded-full" />
-              </div>
-              
-              {/* Glow effects - smaller */}
-              <div className="absolute inset-0 bg-gradient-to-r from-purple-500/30 to-cyan-500/30 rounded-full blur-lg animate-pulse" />
-              <div className="absolute inset-2 bg-gradient-to-r from-pink-500/20 to-purple-500/20 rounded-full blur-md animate-pulse delay-1000" />
+          {/* Right Content - Photo */}
+          <motion.div 
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            className="relative order-1 lg:order-2 flex justify-center"
+          >
+            <div className="relative w-64 h-64 sm:w-80 sm:h-80 lg:w-96 lg:h-96">
+              {/* Glassmorphic Circle Background */}
+              <div className="absolute inset-0 rounded-full bg-gradient-to-tr from-emerald-500/20 to-teal-500/20 backdrop-blur-xl animate-pulse" />
               
               {/* Photo container */}
-              <div className="relative z-10 p-1">
-                <div className="relative overflow-hidden rounded-full bg-gradient-to-br from-gray-800 to-gray-900 p-1">
+              <div className="relative z-10 w-full h-full p-2">
+                <div className="w-full h-full rounded-full overflow-hidden border-4 border-white/10 shadow-2xl shadow-emerald-500/20">
                   <img
                     src='./hero.webp'
-                    alt="Sufyan Liaqat - Full Stack Developer"
-                    loading="eager"
-                    fetchPriority="high"
-                    className="w-full h-full object-cover rounded-full hover:grayscale-0 transition-all duration-500 hover:scale-105"
+                    alt="Sufyan Liaqat"
+                    className="w-full h-full object-cover hover:scale-110 transition-transform duration-700"
                   />
-                  
-                  {/* Overlay gradient */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-purple-900/20 via-transparent to-cyan-900/20 rounded-full" />
                 </div>
               </div>
 
-              {/* Floating elements around photo - smaller */}
-              <div className="absolute -top-1 -right-1 w-4 h-4 bg-purple-500 rounded-full animate-bounce delay-1000" />
-              <div className="absolute -bottom-2 -left-2 w-3 h-3 bg-cyan-500 rounded-full animate-bounce delay-500" />
-              <div className="absolute top-1/2 -left-4 w-2 h-2 bg-pink-500 rounded-full animate-ping" />
+              {/* Floating Orbs */}
+              <motion.div 
+                animate={{ y: [0, -20, 0] }}
+                transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+                className="absolute -top-4 -right-4 w-12 h-12 bg-emerald-500/30 rounded-full blur-xl" 
+              />
+              <motion.div 
+                animate={{ y: [0, 20, 0] }}
+                transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+                className="absolute -bottom-8 -left-8 w-16 h-16 bg-teal-500/30 rounded-full blur-xl" 
+              />
             </div>
-
-            {/* Status indicator - smaller */}
-            <div className="absolute max-[290px]:mt-8 bottom-1  -right-6 md:right-30 lg:right-1 xl:right-10 flex items-center gap-1.5 bg-gray-900/80 backdrop-blur-sm px-2 py-1 rounded-full border border-gray-700/50">
-              <div className="w-1.5 h-1.5 max-[290px]:w-1 bg-green-500 rounded-full animate-pulse" />
-              <span className="text-xs max-[290px]:text-[10px] text-gray-300">Available for work</span>
-            </div>
-          </div>
+          </motion.div>
         </div>
       </div>
 
-      {/* Scroll indicator  */}
-      <div className="absolute mb-36 lg:mb-0 bottom-6 left-1/2 transform -translate-x-1/2 hidden sm:flex flex-col items-center animate-bounce z-20">
-        <span className="text-xs text-gray-400 mb-1">Scroll to explore</span>
-        <ArrowDown className="h-5 w-5 text-purple-400" />
-      </div>
+      {/* Scroll indicator */}
+      <motion.div 
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1, y: [0, 10, 0] }}
+        transition={{ delay: 2, duration: 2, repeat: Infinity }}
+        className="absolute bottom-10 left-1/2 transform -translate-x-1/2 hidden sm:flex flex-col items-center z-20"
+      >
+        <span className="text-xs text-gray-400 mb-2 tracking-widest uppercase">Scroll</span>
+        <ArrowDown className="h-5 w-5 text-emerald-400" />
+      </motion.div>
     </section>
   );
 };
+

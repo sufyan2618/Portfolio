@@ -15,35 +15,17 @@ import {
 } from 'react-icons/si';
 import { cn } from "@/lib/utils";
 import { useToast } from "@/hooks/use-toast";
-import { useState, useEffect } from "react";
+import { useState } from "react";
+import { motion } from "framer-motion";
 
 export const ContactSection = () => {
   const { toast } = useToast();
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [isVisible, setIsVisible] = useState(false);
   const [formData, setFormData] = useState({
     name: '',
     email: '',
     message: ''
   });
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true);
-        }
-      },
-      { threshold: 0.1 }
-    );
-
-    const section = document.getElementById('contact');
-    if (section) observer.observe(section);
-    
-    return () => {
-      if (section) observer.unobserve(section);
-    };
-  }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -137,31 +119,40 @@ export const ContactSection = () => {
   return (
     <section 
       id="contact" 
-      className="relative py-20 px-4 overflow-hidden bg-black"
+      className="relative py-20 px-4 overflow-hidden"
     >
-      {/* Subtle grid pattern */}
-      <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:40px_40px]" />
-
       <div className="container mx-auto max-w-6xl relative z-10">
         {/* Section Header */}
-        <div className={`text-center mb-16 transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="text-center mb-16"
+        >
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4">
             <span className="text-white">Get In</span>
-            <span className="text-gradient-animate"> Touch</span>
+            <span className="bg-clip-text text-transparent bg-gradient-to-r from-emerald-400 to-teal-500"> Touch</span>
           </h2>
           
-          <p className="text-gray-400 text-base max-w-2xl mx-auto leading-relaxed">
+          <p className="text-gray-300 text-base max-w-2xl mx-auto leading-relaxed">
             Have a project in mind or want to collaborate? I'm always excited to discuss new opportunities 
             and bring innovative ideas to life. Let's create something amazing together!
           </p>
           
-          <div className="w-20 h-1 bg-gradient-to-r from-emerald-600 to-teal-600 rounded-full mx-auto mt-6 animate-shimmer" />
-        </div>
+          <div className="w-20 h-1 bg-gradient-to-r from-emerald-600 to-teal-600 rounded-full mx-auto mt-6" />
+        </motion.div>
 
         <div className="grid lg:grid-cols-2 gap-8 items-start">
           
           {/* Left Side - Contact Info */}
-          <div className={`space-y-6 transition-all duration-1000 delay-200 ${isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-10'}`}>
+          <motion.div 
+            initial={{ opacity: 0, x: -50 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+            className="space-y-6"
+          >
             
             {/* Contact Information Cards */}
             <div className="space-y-4">
@@ -170,17 +161,17 @@ export const ContactSection = () => {
               {contactInfo.map((info, index) => {
                 const Icon = info.icon;
                 return (
-                  <div
+                  <motion.div
                     key={index}
-                    className="bg-gray-900 border border-gray-800 rounded-lg p-5 hover:border-emerald-600 hover:shadow-glow-emerald transition-all duration-300 animate-fade-in"
-                    style={{
-                      animationDelay: `${index * 100}ms`,
-                      animation: isVisible ? 'fadeInUp 0.6s ease-out forwards' : '',
-                    }}
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: index * 0.1 }}
+                    className="bg-white/5 backdrop-blur-md border border-white/10 rounded-lg p-5 hover:border-emerald-600 hover:bg-white/10 transition-all duration-300"
                   >
                     <div className="flex items-center gap-4">
                       {/* Icon Container */}
-                      <div className="p-3 rounded-lg bg-gradient-to-br from-emerald-600 to-teal-600 flex-shrink-0 animate-float">
+                      <div className="p-3 rounded-lg bg-gradient-to-br from-emerald-600 to-teal-600 flex-shrink-0 shadow-lg shadow-emerald-500/20">
                         <Icon className="w-5 h-5 text-white" />
                       </div>
 
@@ -199,7 +190,7 @@ export const ContactSection = () => {
 
                       <ArrowRight className="w-5 h-5 text-gray-600 hover:text-emerald-400 transition-all duration-300" />
                     </div>
-                  </div>
+                  </motion.div>
                 );
               })}
             </div>
@@ -216,8 +207,7 @@ export const ContactSection = () => {
                       href={social.href}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className={`p-3 bg-gray-900 border border-gray-800 rounded-md hover:border-emerald-600 hover:shadow-glow-emerald transition-all duration-300 hover:scale-110 ${social.color} animate-bounce-in`}
-                      style={{ animationDelay: `${index * 100}ms` }}
+                      className={`p-3 bg-white/5 backdrop-blur-md border border-white/10 rounded-md hover:border-emerald-600 hover:bg-emerald-600/20 transition-all duration-300 hover:scale-110 ${social.color}`}
                       aria-label={social.label}
                     >
                       <Icon className="w-5 h-5 text-gray-400 group-hover:text-current transition-colors duration-300" />
@@ -226,11 +216,16 @@ export const ContactSection = () => {
                 })}
               </div>
             </div>
-          </div>
+          </motion.div>
 
           {/* Right Side - Contact Form */}
-          <div className={`transition-all duration-1000 delay-400 ${isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-10'}`}>
-            <div className="bg-gray-900 border border-gray-800 rounded-lg p-6 hover:border-teal-600 hover:shadow-glow-teal transition-all duration-500 animate-scale-in">
+          <motion.div 
+            initial={{ opacity: 0, x: 50 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+          >
+            <div className="bg-white/5 backdrop-blur-md border border-white/10 rounded-lg p-6 hover:border-teal-600 hover:shadow-lg hover:shadow-teal-500/20 transition-all duration-500">
                 
                 <h3 className="text-xl font-bold text-white mb-6 flex items-center gap-2">
                   <Send className="w-5 h-5 text-emerald-400" />
@@ -250,7 +245,7 @@ export const ContactSection = () => {
                       value={formData.name}
                       onChange={handleInputChange}
                       required
-                      className="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-md text-white placeholder-gray-500 focus:outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/20 transition-all duration-300"
+                      className="w-full px-4 py-3 bg-black/20 border border-white/10 rounded-md text-white placeholder-gray-500 focus:outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/20 transition-all duration-300 backdrop-blur-sm"
                       placeholder="Enter your full name"
                     />
                   </div>
@@ -267,7 +262,7 @@ export const ContactSection = () => {
                       value={formData.email}
                       onChange={handleInputChange}
                       required
-                      className="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-md text-white placeholder-gray-500 focus:outline-none focus:border-teal-500 focus:ring-2 focus:ring-teal-500/20 transition-all duration-300"
+                      className="w-full px-4 py-3 bg-black/20 border border-white/10 rounded-md text-white placeholder-gray-500 focus:outline-none focus:border-teal-500 focus:ring-2 focus:ring-teal-500/20 transition-all duration-300 backdrop-blur-sm"
                       placeholder="your.email@example.com"
                     />
                   </div>
@@ -284,7 +279,7 @@ export const ContactSection = () => {
                       onChange={handleInputChange}
                       required
                       rows={5}
-                      className="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-md text-white placeholder-gray-500 focus:outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/20 transition-all duration-300 resize-none"
+                      className="w-full px-4 py-3 bg-black/20 border border-white/10 rounded-md text-white placeholder-gray-500 focus:outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/20 transition-all duration-300 resize-none backdrop-blur-sm"
                       placeholder="Hello! I'd love to discuss a project with you..."
                     />
                   </div>
@@ -294,7 +289,7 @@ export const ContactSection = () => {
                     type="submit"
                     disabled={isSubmitting}
                     className={cn(
-                      "w-full px-6 py-3 bg-gradient-to-r from-emerald-600 to-teal-600 hover:shadow-glow-emerald rounded-md font-semibold text-white transition-all duration-300 flex items-center justify-center gap-2 hover:scale-105",
+                      "w-full px-6 py-3 bg-gradient-to-r from-emerald-600 to-teal-600 hover:shadow-lg hover:shadow-emerald-500/40 rounded-md font-semibold text-white transition-all duration-300 flex items-center justify-center gap-2 hover:scale-105",
                       isSubmitting && "opacity-70 cursor-not-allowed"
                     )}
                   >
@@ -320,9 +315,10 @@ export const ContactSection = () => {
                   </div>
                 </div>
               </div>
-          </div>
+          </motion.div>
         </div>
       </div>
     </section>
   );
 };
+

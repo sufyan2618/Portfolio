@@ -1,6 +1,7 @@
 import { cn } from "@/lib/utils";
 import { Menu, X } from "lucide-react";
 import { useEffect, useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 
 const navItems = [
   { name: "Home", href: "#hero" },
@@ -14,7 +15,15 @@ export const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("Home");
-  const [savedScrollY, setSavedScrollY] = useState(0);
+
+  // Handle scroll effect
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 50);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   // Smooth scroll function
   const scrollToSection = (sectionId) => {
@@ -38,51 +47,16 @@ export const Navbar = () => {
     }, 100);
   };
 
-  // Handle opening the menu
-  useEffect(() => {
-    if (isMenuOpen) {
-      const currentScrollY = window.scrollY;
-      setSavedScrollY(currentScrollY);
-
-      document.body.style.position = 'fixed';
-      document.body.style.top = `-${currentScrollY}px`;
-      document.body.style.width = '100%';
-      document.body.style.overflow = 'hidden';
-    }
-  }, [isMenuOpen]);
-
-  // Handle closing the menu - FIXED VERSION
-  useEffect(() => {
-    if (!isMenuOpen) {
-      // Always restore body styles when menu closes
-      document.body.style.position = '';
-      document.body.style.top = '';
-      document.body.style.width = '';
-      document.body.style.overflow = '';
-
-      // Restore scroll position
-      requestAnimationFrame(() => {
-        window.scrollTo(0, savedScrollY);
-      });
-    }
-  }, [isMenuOpen]);
-
-  // Cleanup on unmount
-  useEffect(() => {
-    return () => {
-      document.body.style.position = '';
-      document.body.style.top = '';
-      document.body.style.width = '';
-      document.body.style.overflow = '';
-    };
-  }, []);
   return (
     <>
-      <nav
+      <motion.nav
+        initial={{ y: -100 }}
+        animate={{ y: 0 }}
+        transition={{ duration: 0.5 }}
         className={cn(
-          "fixed w-full z-50 transition-all duration-700 ease-out",
+          "fixed w-full z-50 transition-all duration-300",
           isScrolled
-            ? "py-3 bg-black/90 backdrop-blur-xl border-b border-gray-800 shadow-lg"
+            ? "py-3 bg-black/50 backdrop-blur-md border-b border-white/10"
             : "py-4 bg-transparent"
         )}
       >
@@ -94,7 +68,7 @@ export const Navbar = () => {
             className="group flex items-center space-x-3 z-10 cursor-pointer"
           >
             <div className="relative w-10 h-10">
-              <div className="relative w-full h-full rounded-full border-2 border-gray-700 group-hover:border-emerald-500 group-hover:shadow-glow-emerald transition-all duration-300 overflow-hidden">
+              <div className="relative w-full h-full rounded-full border-2 border-white/10 group-hover:border-emerald-500 transition-all duration-300 overflow-hidden">
                 <img
                   src="/logo.webp"
                   className="w-full h-full object-cover"
@@ -103,7 +77,7 @@ export const Navbar = () => {
               </div>
             </div>
             <div className="relative">
-              <span className="text-2xl font-bold text-gradient-animate">
+              <span className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-emerald-400 to-teal-500">
                 Sufyan
               </span>
               <span className="text-lg text-gray-400 ml-2 group-hover:text-emerald-400 transition-colors duration-300 hidden sm:inline">
@@ -113,19 +87,26 @@ export const Navbar = () => {
           </button>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-2 bg-gray-900 rounded-lg px-6 py-3 border border-gray-800">
-            {navItems.map((item, index) => (
+          <div className="hidden md:flex items-center space-x-1 bg-white/5 backdrop-blur-md rounded-full px-2 py-1.5 border border-white/10">
+            {navItems.map((item) => (
               <button
-                key={index}
+                key={item.name}
                 onClick={() => handleNavClick(item.href)}
                 className={cn(
-                  "relative px-4 py-2 rounded-md text-sm font-medium transition-all duration-300 cursor-pointer hover:scale-105",
+                  "relative px-4 py-2 rounded-full text-sm font-medium transition-all duration-300",
                   activeSection === item.name
-                    ? "text-white bg-gradient-to-r from-emerald-600 to-teal-600 shadow-glow-emerald"
-                    : "text-gray-300 hover:text-emerald-400 hover:bg-gray-800"
+                    ? "text-white"
+                    : "text-gray-400 hover:text-white"
                 )}
                 onMouseEnter={() => setActiveSection(item.name)}
               >
+                {activeSection === item.name && (
+                  <motion.div
+                    layoutId="activeTab"
+                    className="absolute inset-0 bg-gradient-to-r from-emerald-600 to-teal-600 rounded-full"
+                    transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
+                  />
+                )}
                 <span className="relative z-10">{item.name}</span>
               </button>
             ))}
@@ -134,54 +115,42 @@ export const Navbar = () => {
           {/* Mobile Menu Button */}
           <button
             onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="md:hidden p-3 rounded-md bg-gray-900 border border-gray-800 text-gray-300 hover:text-emerald-400 hover:border-emerald-600 hover:shadow-glow-emerald transition-all duration-300 z-50"
+            className="md:hidden p-2 rounded-full bg-white/5 border border-white/10 text-gray-300 hover:text-emerald-400 hover:border-emerald-600 transition-all duration-300 z-50"
             aria-label={isMenuOpen ? "Close Menu" : "Open Menu"}
           >
-            <div className="relative z-10">
-              {isMenuOpen ? (
-                <X size={22} className="transform rotate-90 transition-transform duration-300" />
-              ) : (
-                <Menu size={22} className="transform rotate-0 transition-transform duration-300" />
-              )}
-            </div>
+            {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
         </div>
-      </nav>
+      </motion.nav>
 
       {/* Mobile Menu */}
-      {isMenuOpen && (
-        <div className="fixed inset-0 z-[60] md:hidden">
-          {/* Backdrop */}
-          <div className="absolute inset-0 bg-black/95 backdrop-blur-xl"></div>
-
-          {/* Menu Content */}
-          <div className="relative flex flex-col items-center justify-center min-h-full py-20 space-y-6 z-10">
-            {/* Close Button */}
-            <button
-              className="absolute top-6 right-6 p-3 rounded-md bg-gray-900 border border-gray-800 text-gray-300 hover:text-white z-20 transition-all duration-300"
-              onClick={() => setIsMenuOpen(false)}
-              aria-label="Close Menu"
-            >
-              <X size={28} />
-            </button>
-
-            {/* Nav Items */}
-            {navItems.map((item, index) => (
-              <button
-                key={index}
-                onClick={() => handleNavClick(item.href)}
-                className="text-3xl font-medium text-gray-300 hover:text-white transition-all duration-300 px-8 py-4 rounded-lg border border-gray-800 hover:border-emerald-600 hover:shadow-glow-emerald bg-gray-900 hover:bg-gray-800 cursor-pointer hover:scale-105"
-                style={{
-                  animationDelay: `${index * 100}ms`,
-                  animation: 'fadeInUp 0.6s ease-out forwards',
-                }}
-              >
-                <span className="text-gradient-animate">{item.name}</span>
-              </button>
-            ))}
-          </div>
-        </div>
-      )}
+      <AnimatePresence>
+        {isMenuOpen && (
+          <motion.div
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: 0.2 }}
+            className="fixed inset-0 z-40 md:hidden bg-black/95 backdrop-blur-xl pt-24 px-4"
+          >
+            <div className="flex flex-col items-center space-y-4">
+              {navItems.map((item, index) => (
+                <motion.button
+                  key={item.name}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: index * 0.1 }}
+                  onClick={() => handleNavClick(item.href)}
+                  className="w-full max-w-xs py-4 rounded-xl bg-white/5 border border-white/10 text-lg font-medium text-gray-300 hover:text-white hover:bg-emerald-600/20 hover:border-emerald-500/50 transition-all duration-300"
+                >
+                  {item.name}
+                </motion.button>
+              ))}
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </>
   );
 };
+

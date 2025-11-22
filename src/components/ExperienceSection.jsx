@@ -1,5 +1,6 @@
 import { Briefcase, Calendar, MapPin, ArrowRight, Building2, Code2, Users, Award, ChevronDown, Zap, TrendingUp } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 
 const experiences = [
   {
@@ -65,26 +66,7 @@ const experiences = [
 ];
 
 export const ExperienceSection = () => {
-  const [isVisible, setIsVisible] = useState(false);
   const [expandedId, setExpandedId] = useState(null);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true);
-        }
-      },
-      { threshold: 0.1 }
-    );
-
-    const section = document.getElementById('experience');
-    if (section) observer.observe(section);
-    
-    return () => {
-      if (section) observer.unobserve(section);
-    };
-  }, []);
 
   const toggleExpand = (id) => {
     setExpandedId(expandedId === id ? null : id);
@@ -93,25 +75,28 @@ export const ExperienceSection = () => {
   return (
     <section 
       id="experience" 
-      className="relative min-h-screen py-20 overflow-hidden bg-black"
+      className="relative min-h-screen py-20 overflow-hidden"
     >
-      {/* Subtle grid pattern */}
-      <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:40px_40px]" />
-
       <div className="container mx-auto max-w-6xl relative z-10 px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
-        <div className={`text-center mb-20 transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="text-center mb-20"
+        >
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4">
             <span className="text-white">Professional</span>
-            <span className="text-gradient-animate"> Journey</span>
+            <span className="bg-clip-text text-transparent bg-gradient-to-r from-emerald-400 to-teal-500"> Journey</span>
           </h2>
           
-          <p className="text-gray-400 text-base max-w-2xl mx-auto leading-relaxed">
+          <p className="text-gray-300 text-base max-w-2xl mx-auto leading-relaxed">
             Building scalable solutions and innovative products across the full stack
           </p>
           
-          <div className="w-20 h-1 bg-gradient-to-r from-emerald-600 to-teal-600 rounded-full mx-auto mt-6 animate-shimmer" />
-        </div>
+          <div className="w-20 h-1 bg-gradient-to-r from-emerald-600 to-teal-600 rounded-full mx-auto mt-6" />
+        </motion.div>
 
         {/* Vertical Timeline */}
         <div className="relative">
@@ -121,14 +106,17 @@ export const ExperienceSection = () => {
           {/* Timeline Items */}
           <div className="space-y-0">
             {experiences.map((experience, index) => (
-              <div
+              <motion.div
                 key={experience.id}
-                className={`relative transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}
-                style={{ transitionDelay: `${index * 200}ms` }}
+                initial={{ opacity: 0, y: 50 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: index * 0.2 }}
+                className="relative"
               >
                 {/* Timeline Date Badge - Desktop centered */}
                 <div className="hidden md:block absolute left-1/2 top-0 transform -translate-x-1/2 z-20">
-                  <div className="bg-gray-900 border-2 border-emerald-600 rounded-full px-6 py-2 shadow-glow-emerald">
+                  <div className="bg-black/50 backdrop-blur-md border-2 border-emerald-600 rounded-full px-6 py-2 shadow-lg shadow-emerald-500/20">
                     <div className="text-center">
                       <div className="text-xs font-bold text-emerald-400">{experience.startDate}</div>
                       <div className="text-[10px] text-gray-400">to</div>
@@ -141,7 +129,7 @@ export const ExperienceSection = () => {
                 <div className="absolute left-8 md:left-1/2 top-24 transform -translate-x-1/2 z-10">
                   <div className="relative">
                     <div className="absolute inset-0 w-6 h-6 rounded-full bg-emerald-600/30 animate-ping" />
-                    <div className="relative w-6 h-6 rounded-full bg-gradient-to-br from-emerald-600 to-teal-600 shadow-glow-emerald border-4 border-black" />
+                    <div className="relative w-6 h-6 rounded-full bg-gradient-to-br from-emerald-600 to-teal-600 shadow-lg shadow-emerald-500/50 border-4 border-black" />
                   </div>
                 </div>
 
@@ -150,7 +138,7 @@ export const ExperienceSection = () => {
                   
                   {/* Date Badge - Mobile only */}
                   <div className="md:hidden mb-4 inline-block">
-                    <div className="bg-gray-900 border border-emerald-600/50 rounded-lg px-4 py-2">
+                    <div className="bg-white/5 backdrop-blur-md border border-emerald-600/50 rounded-lg px-4 py-2">
                       <div className="flex items-center gap-2 text-xs">
                         <span className="font-bold text-emerald-400">{experience.startDate}</span>
                         <span className="text-gray-500">→</span>
@@ -161,15 +149,15 @@ export const ExperienceSection = () => {
                     </div>
                   </div>
 
-                  <div className="bg-gradient-to-br from-gray-900 via-gray-900 to-gray-950 border border-gray-800 rounded-xl overflow-hidden hover:border-emerald-600 hover:shadow-glow-emerald transition-all duration-500 group animate-scale-in">
+                  <div className="bg-white/5 backdrop-blur-md border border-white/10 rounded-xl overflow-hidden hover:border-emerald-600 hover:shadow-lg hover:shadow-emerald-500/20 transition-all duration-500 group">
                 
                 {/* Compact Header */}
-                <div className="relative p-5 border-b border-gray-800/50 overflow-hidden">
+                <div className="relative p-5 border-b border-white/5 overflow-hidden">
                   <div className="absolute inset-0 bg-gradient-to-r from-emerald-600/5 via-teal-600/5 to-transparent opacity-50 group-hover:opacity-100 transition-opacity duration-500" />
                   
                   <div className="relative flex items-start gap-3">
                     {/* Company Icon */}
-                    <div className="p-2.5 rounded-lg bg-gradient-to-br from-emerald-600 to-teal-600 flex-shrink-0">
+                    <div className="p-2.5 rounded-lg bg-gradient-to-br from-emerald-600 to-teal-600 flex-shrink-0 shadow-lg shadow-emerald-500/20">
                       <Building2 className="w-5 h-5 text-white" />
                     </div>
 
@@ -185,7 +173,7 @@ export const ExperienceSection = () => {
                           </div>
                         </div>
                         {experience.isActive && (
-                          <span className="inline-flex items-center gap-1 px-2 py-0.5 bg-emerald-500/20 border border-emerald-500/50 rounded-full text-[10px] text-emerald-400 font-semibold animate-glow-pulse whitespace-nowrap">
+                          <span className="inline-flex items-center gap-1 px-2 py-0.5 bg-emerald-500/20 border border-emerald-500/50 rounded-full text-[10px] text-emerald-400 font-semibold animate-pulse whitespace-nowrap">
                             <Zap className="w-2.5 h-2.5" />
                             Active
                           </span>
@@ -232,7 +220,7 @@ export const ExperienceSection = () => {
                       {experience.technologies.slice(0, 8).map((tech) => (
                         <span 
                           key={tech}
-                          className="px-2 py-1 bg-gray-800/50 border border-gray-700 rounded text-[10px] text-gray-400 hover:border-emerald-500/50 hover:text-emerald-400 transition-all duration-300"
+                          className="px-2 py-1 bg-white/5 border border-white/10 rounded text-[10px] text-gray-400 hover:border-emerald-500/50 hover:text-emerald-400 transition-all duration-300"
                         >
                           {tech}
                         </span>
@@ -257,47 +245,56 @@ export const ExperienceSection = () => {
                   )}
 
                   {/* Expanded Content */}
-                  {expandedId === experience.id && (
-                    <div className="mt-4 pt-4 border-t border-gray-800 space-y-4 animate-fade-in">
-                      {/* All Technologies */}
-                      <div>
-                        <h4 className="text-xs font-semibold text-white mb-2 flex items-center gap-1">
-                          <Code2 className="w-3 h-3 text-emerald-400" />
-                          Full Tech Stack
-                        </h4>
-                        <div className="flex flex-wrap gap-1.5">
-                          {experience.technologies.map((tech) => (
-                            <span 
-                              key={tech}
-                              className="px-2 py-1 bg-gray-800/50 border border-gray-700 rounded text-[10px] text-gray-400 hover:border-emerald-500/50 hover:text-emerald-400 transition-all duration-300"
-                            >
-                              {tech}
-                            </span>
-                          ))}
-                        </div>
-                      </div>
-
-                      {/* Achievements */}
-                      <div>
-                        <h4 className="text-xs font-semibold text-white mb-2 flex items-center gap-1">
-                          <TrendingUp className="w-3 h-3 text-teal-400" />
-                          Key Achievements
-                        </h4>
-                        <div className="space-y-2">
-                          {experience.achievements.map((achievement, idx) => (
-                            <div key={idx} className="flex items-start gap-2 text-xs text-gray-400">
-                              <div className="w-1 h-1 bg-teal-400 rounded-full mt-1.5" />
-                              <span className="flex-1">{achievement}</span>
+                  <AnimatePresence>
+                    {expandedId === experience.id && (
+                      <motion.div 
+                        initial={{ height: 0, opacity: 0 }}
+                        animate={{ height: "auto", opacity: 1 }}
+                        exit={{ height: 0, opacity: 0 }}
+                        className="overflow-hidden"
+                      >
+                        <div className="pt-4 border-t border-white/10 space-y-4">
+                          {/* All Technologies */}
+                          <div>
+                            <h4 className="text-xs font-semibold text-white mb-2 flex items-center gap-1">
+                              <Code2 className="w-3 h-3 text-emerald-400" />
+                              Full Tech Stack
+                            </h4>
+                            <div className="flex flex-wrap gap-1.5">
+                              {experience.technologies.map((tech) => (
+                                <span 
+                                  key={tech}
+                                  className="px-2 py-1 bg-white/5 border border-white/10 rounded text-[10px] text-gray-400 hover:border-emerald-500/50 hover:text-emerald-400 transition-all duration-300"
+                                >
+                                  {tech}
+                                </span>
+                              ))}
                             </div>
-                          ))}
+                          </div>
+
+                          {/* Achievements */}
+                          <div>
+                            <h4 className="text-xs font-semibold text-white mb-2 flex items-center gap-1">
+                              <TrendingUp className="w-3 h-3 text-teal-400" />
+                              Key Achievements
+                            </h4>
+                            <div className="space-y-2">
+                              {experience.achievements.map((achievement, idx) => (
+                                <div key={idx} className="flex items-start gap-2 text-xs text-gray-400">
+                                  <div className="w-1 h-1 bg-teal-400 rounded-full mt-1.5" />
+                                  <span className="flex-1">{achievement}</span>
+                                </div>
+                              ))}
+                            </div>
+                          </div>
                         </div>
-                      </div>
-                    </div>
-                  )}
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
                 </div>
               </div>
                 </div>
-              </div>
+              </motion.div>
             ))}
           </div>
         </div>
@@ -305,3 +302,4 @@ export const ExperienceSection = () => {
     </section>
   );
 };
+

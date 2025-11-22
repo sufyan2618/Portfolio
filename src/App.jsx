@@ -1,6 +1,7 @@
 import { lazy, Suspense } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { Toaster } from "@/components/ui/toaster";
+import Background3D from "./components/Background3D";
 
 // Lazy load pages for code splitting
 const Home = lazy(() => import("./pages/Home").then(module => ({ default: module.Home })));
@@ -8,10 +9,10 @@ const NotFound = lazy(() => import("./pages/NotFound").then(module => ({ default
 
 // Loading fallback component
 const PageLoader = () => (
-  <div className="min-h-screen bg-gray-950 flex items-center justify-center">
+  <div className="min-h-screen flex items-center justify-center z-10 relative">
     <div className="text-center">
-      <div className="w-16 h-16 border-4 border-purple-500 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
-      <p className="text-gray-400">Loading...</p>
+      <div className="w-16 h-16 border-4 border-emerald-500 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
+      <p className="text-emerald-400">Loading...</p>
     </div>
   </div>
 );
@@ -19,6 +20,7 @@ const PageLoader = () => (
 function App() {
   return (
     <>
+      <Background3D />
       <Toaster />
       <BrowserRouter>
         <Suspense fallback={<PageLoader />}>
