@@ -1,62 +1,7 @@
 import { useState, useMemo } from "react";
 import { cn } from "@/lib/utils";
-import { Code, Database, Cloud, Wrench } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
-
-const skills = [
-  // Frontend
-  { name: "React.js", category: "frontend", icon: "react.png" },
-  { name: "Next.js", category: "frontend", icon: "next.webp" },
-  { name: "React Native", category: "frontend", icon: "react.png" },
-  { name: "JavaScript", category: "frontend", icon: "javaScript.png" },
-  { name: "Redux", category: "frontend", icon: "redux.webp" },
-  { name: "TypeScript", category: "frontend", icon: "typeScript.png" },
-  { name: "Tailwind CSS", category: "frontend", icon: "tailwind.png" },
-  { name: "HTML", category: "frontend", icon: "html.webp" },
-  { name: "CSS", category: "frontend", icon: "css.webp" },
-  { name: "Zustand", category: "frontend", icon: "zustand.svg" },
-
-  // Backend
-  { name: "Node.js", category: "backend", icon: "node.png" },
-  { name: "Express.js", category: "backend", icon: "express.png" },
-  { name: "FastAPI", category: "backend", icon: "fastapi.webp" },
-  { name: "Python", category: "backend", icon: "python.png" },
-  { name: "MongoDB", category: "backend", icon: "mongodb.png" },
-  { name: "PostgreSQL", category: "backend", icon: "postgres.png" },
-  { name: "GraphQL", category: "backend", icon: "GraphQL.webp" },
-  { name: "Redis", category: "backend", icon: "Redis.png" },
-  { name: "Socket.io", category: "backend", icon: "socket.io.png" },
-  { name: "Bull", category: "backend", icon: "bull.webp" },
-  { name: "Stripe", category: "backend", icon: "stripe.webp" },
-
-  // Cloud & DevOps
-  { name: "Docker", category: "cloud", icon: "Docker.png" },
-  { name: "NGINX", category: "cloud", icon: "nginx.webp" },
-  { name: "GitHub Actions", category: "cloud", icon: "github-actions.webp" },
-  { name: "Digital Ocean", category: "cloud", icon: "Digital Ocean.webp" },
-  { name: "AWS", category: "cloud", icon: "AWS.webp" },
-  { name: "Supabase", category: "cloud", icon: "supabase-logo-icon.png" },
-  { name: "Firebase", category: "cloud", icon: "firebase.png" },
-
-  // Tools & Libraries
-  { name: "Git", category: "tools", icon: "git.png" },
-  { name: "GitHub", category: "tools", icon: "github.png" },
-  { name: "VS Code", category: "tools", icon: "vs-code.webp" },
-  { name: "Postman", category: "tools", icon: "postman.png" },
-  { name: "Swagger", category: "tools", icon: "swagger.webp" },
-  { name: "Jira", category: "tools", icon: "Jira.webp" },
-  { name: "Convex", category: "tools", icon: "convex.png" },
-  { name: "Gemini AI", category: "tools", icon: "gemini.webp" },
-  { name: "SQLAlchemy", category: "tools", icon: "SQLAlchemy.webp" },
-];
-
-const categories = [
-  { id: "all", name: "All Skills", icon: Code },
-  { id: "frontend", name: "Frontend", icon: Code },
-  { id: "backend", name: "Backend", icon: Database },
-  { id: "cloud", name: "Cloud & DevOps", icon: Cloud },
-  { id: "tools", name: "Tools & Libraries", icon: Wrench },
-];
+import { skills, skillCategories } from "@/lib/data";
 
 export const SkillsSection = () => {
   const [activeCategory, setActiveCategory] = useState("all");
@@ -105,7 +50,7 @@ export const SkillsSection = () => {
           transition={{ delay: 0.2 }}
           className="flex flex-wrap justify-center gap-3 mb-10"
         >
-          {categories.map((category) => {
+          {skillCategories.map((category) => {
             const Icon = category.icon;
             return (
               <button

@@ -1,26 +1,9 @@
 import { Code, Smartphone, Brain, ArrowRight } from "lucide-react";
 import { motion } from "framer-motion";
 import resume from "../assets/Sufyan_Liaqat_FullStack_Engineer.pdf"
+import { aboutSkills } from "@/lib/data";
 
 export const AboutSection = () => {
-  const skills = [
-    {
-      icon: Code,
-      title: "Full-Stack Development",
-      description: "Building scalable web applications with MERN stack, serving 2000+ active users.",
-    },
-    {
-      icon: Smartphone,
-      title: "Mobile Development",
-      description: "Cross-platform mobile apps using React Native and Expo with modern UI/UX.",
-    },
-    {
-      icon: Brain,
-      title: "DevOps & Cloud",
-      description: "Deploying production applications with Docker, CI/CD, and cloud infrastructure.",
-    }
-  ];
-
   return (
     <section 
       id="about" 
@@ -37,10 +20,10 @@ export const AboutSection = () => {
         >
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4">
             <span className="text-white">About</span>
-            <span className="bg-clip-text text-transparent bg-gradient-to-r from-emerald-400 to-teal-500"> Me</span>
+            <span className="bg-clip-text text-transparent bg-linear-to-r from-emerald-400 to-teal-500"> Me</span>
           </h2>
           
-          <div className="w-20 h-1 bg-gradient-to-r from-emerald-600 to-teal-600 rounded-full mx-auto" />
+          <div className="w-20 h-1 bg-linear-to-r from-emerald-600 to-teal-600 rounded-full mx-auto" />
         </motion.div>
 
         <div className="grid lg:grid-cols-2 gap-8 items-start">
@@ -92,7 +75,7 @@ export const AboutSection = () => {
             <div className="flex flex-col sm:flex-row gap-3">
               <a
                 href="#contact"
-                className="group px-6 py-3 bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 rounded-md font-semibold text-white transition-all duration-300 text-center shadow-lg shadow-emerald-500/20 hover:shadow-emerald-500/40 hover:scale-105"
+                className="group px-6 py-3 bg-linear-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 rounded-md font-semibold text-white transition-all duration-300 text-center shadow-lg shadow-emerald-500/20 hover:shadow-emerald-500/40 hover:scale-105"
               >
                 <span className="flex items-center justify-center gap-2">
                   Get In Touch
@@ -117,7 +100,7 @@ export const AboutSection = () => {
 
           {/* Right Content - Skills Cards */}
           <div className="space-y-4">
-            {skills.map((skill, index) => {
+            {aboutSkills.map((skill, index) => {
               const Icon = skill.icon;
               return (
                 <motion.div
@@ -130,7 +113,7 @@ export const AboutSection = () => {
                 >
                     <div className="flex items-start gap-4">
                       {/* Icon Container */}
-                      <div className="p-3 rounded-lg bg-gradient-to-br from-emerald-600 to-teal-600 flex-shrink-0 shadow-lg shadow-emerald-500/20">
+                      <div className="p-3 rounded-lg bg-linear-to-br from-emerald-600 to-teal-600 shrink-0 shadow-lg shadow-emerald-500/20">
                         <Icon className="w-6 h-6 text-white" />
                       </div>
 

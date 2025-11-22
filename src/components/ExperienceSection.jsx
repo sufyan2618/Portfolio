@@ -1,6 +1,7 @@
 import { Briefcase, Calendar, MapPin, ArrowRight, Building2, Code2, Users, Award, ChevronDown, Zap, TrendingUp } from "lucide-react";
 import { useState, useRef } from "react";
 import { motion, AnimatePresence, useMotionValue, useSpring, useTransform } from "framer-motion";
+import { experiences } from "@/lib/data";
 
 const TiltCard = ({ children, className }) => {
   const x = useMotionValue(0);
@@ -40,69 +41,6 @@ const TiltCard = ({ children, className }) => {
     </motion.div>
   );
 };
-
-const experiences = [
-  {
-    id: 1,
-    company: "BugMonks",
-    logo: "/bug-monks.jpg",
-    role: "Full Stack Engineer",
-    location: "Onsite - Lahore, Pakistan",
-    duration: "April 2025 - Present",
-    startDate: "Apr 2025",
-    endDate: "Present",
-    period: "8 months",
-    type: "Full-time",
-    description: "Working on multiple enterprise-level SaaS projects, contributing to both frontend and backend development. Built production-grade applications serving 2000+ active users with focus on scalability, performance optimization, and modern architecture patterns.",
-    responsibilities: [
-      "Developed a full-stack real estate analysis platform that scrapes and analyzes rental data from apartments.com, calculating Cap Rate, DSCR, CFBT, and other key financial metrics using Bull queues for background processing",
-      "Built a LinkedIn email marketing tool with web scraping capabilities and bulk campaign automation for lead generation",
-      "Implemented secure authentication systems, payment integrations (Stripe), and interactive admin dashboards serving 2k+ active users",
-      "Optimized MongoDB and PostgreSQL database queries, reducing API response times by 30% through indexing and query optimization",
-      "Deployed applications using Docker, NGINX reverse proxy, and CI/CD pipelines on Digital Ocean and AWS",
-      "Collaborated with cross-functional teams using Agile methodologies and version control with Git/GitHub"
-    ],
-    technologies: ["React", "Node.js", "Express.js", "MongoDB", "PostgreSQL", "FastAPI", "Bull", "GraphQL", "Redis", "TypeScript", "Docker", "NGINX", "AWS", "Digital Ocean", "Stripe", "Git", "Postman", "Swagger", "Jira"],
-    achievements: [
-      "Successfully delivered multiple production-grade features within tight deadlines for enterprise SaaS platforms",
-      "Reduced API response times by 30% through database optimization and caching strategies",
-      "Built applications serving 2000+ active users with 99.9% uptime",
-      "Implemented scalable microservices architecture using Node.js and FastAPI"
-    ],
-    isActive: true,
-    companyType: "SaaS Development"
-  },
-  {
-    id: 2,
-    company: "Freelance",
-    logo: "/freelance-icon.png",
-    role: "Full Stack Developer",
-    location: "Remote",
-    duration: "December 2024 - April 2025",
-    startDate: "Dec 2024",
-    endDate: "Apr 2025",
-    period: "5 months",
-    type: "Contract",
-    description: "Delivered end-to-end web applications for multiple clients, focusing on e-commerce solutions, AI-powered SaaS platforms, and production-grade deployments with modern DevOps practices.",
-    responsibilities: [
-      "Developed a feature-rich e-commerce web application with user authentication, shopping cart, order management, and integrated payment system using Stripe and MongoDB",
-      "Built an AI-powered SaaS platform that conducts user interviews via chat and generates personalized biographies using Gemini API and Node.js backend",
-      "Implemented responsive UI/UX using React.js, Tailwind CSS, and modern design patterns for optimal user experience",
-      "Deployed production-grade applications on Digital Ocean with Docker containerization, NGINX reverse proxy, and automated CI/CD pipelines using GitHub Actions",
-      "Integrated third-party APIs including payment gateways, AI services, and cloud storage solutions",
-      "Managed full project lifecycle from requirements gathering to deployment and maintenance"
-    ],
-    technologies: ["React", "Node.js", "Express.js", "MongoDB", "PostgreSQL", "Docker", "NGINX", "Tailwind CSS", "Stripe", "Gemini API", "Digital Ocean", "GitHub Actions", "Redis", "Cloudinary", "EJS"],
-    achievements: [
-      "Successfully delivered multiple client projects on time with 100% client satisfaction",
-      "Implemented production-ready CI/CD pipelines reducing deployment time by 70%",
-      "Built scalable applications handling thousands of concurrent users",
-      "Gained hands-on experience with modern DevOps practices and cloud infrastructure"
-    ],
-    isActive: false,
-    companyType: "Freelance/Contract"
-  }
-];
 
 export const ExperienceSection = () => {
   const [expandedId, setExpandedId] = useState(null);

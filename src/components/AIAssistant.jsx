@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { MessageSquare, X, Send, Bot, User, Sparkles, Terminal, Cpu, Zap, ChevronRight, Command, Minimize2, Maximize2 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { skills, experiences, projects, aboutSkills } from '@/lib/data';
 
 // --- Typewriter Effect Component ---
 const TypewriterText = ({ text, onComplete }) => {
@@ -88,26 +89,69 @@ const AIAssistant = () => {
   const processQuery = (query) => {
     const lower = query.toLowerCase();
     
+    // --- Dynamic Data Search ---
+
+    // 1. Project Search
+    const foundProject = projects.find(p => 
+      lower.includes(p.title.toLowerCase()) || 
+      p.tags.some(t => lower.includes(t.toLowerCase()))
+    );
+
+    if (foundProject && (lower.includes('project') || lower.includes('app') || lower.includes('built') || lower.includes('show'))) {
+      return {
+        text: `Found project: ${foundProject.title}.\n\n${foundProject.description}\n\nTech Stack: ${foundProject.tags.join(', ')}.`,
+        action: 'SCROLL_PROJECTS',
+        suggestions: ['View Demo', 'GitHub Repo', 'Other projects']
+      };
+    }
+
+    // 2. Skill Search
+    const foundSkill = skills.find(s => lower.includes(s.name.toLowerCase()));
+    if (foundSkill) {
+      return {
+        text: `Yes, I am proficient in ${foundSkill.name}. It is part of my ${foundSkill.category} stack.`,
+        action: 'SCROLL_SKILLS',
+        suggestions: [`Other ${foundSkill.category} skills`, 'Show all skills']
+      };
+    }
+
+    // 3. Experience Search
+    const foundJob = experiences.find(e => 
+      lower.includes(e.company.toLowerCase()) || 
+      lower.includes(e.role.toLowerCase())
+    );
+    if (foundJob) {
+      return {
+        text: `At ${foundJob.company}, I worked as a ${foundJob.role} (${foundJob.duration}).\n\nKey achievement: ${foundJob.achievements[0]}`,
+        action: 'SCROLL_EXPERIENCE',
+        suggestions: ['Tell me more', 'Next role']
+      };
+    }
+
+    // --- General Commands ---
+
     // Navigation Commands
     if (lower.includes('project') || lower.includes('work') || lower.includes('portfolio')) {
       return {
-        text: "Accessing Project Archives... I've highlighted the Projects section for you. We have some high-performance web apps on display.",
+        text: `Accessing Project Archives... I have ${projects.length} featured projects on display, ranging from ${projects[0].category} to ${projects[projects.length-1].category}.`,
         action: 'SCROLL_PROJECTS',
-        suggestions: ['Tell me about the Real Estate App', 'Show me AI projects']
+        suggestions: [projects[0].title, projects[1].title, 'Show all']
       };
     }
     if (lower.includes('skill') || lower.includes('stack') || lower.includes('tech')) {
+      const topSkills = skills.slice(0, 5).map(s => s.name).join(', ');
       return {
-        text: "Scanning Technical Capabilities... \n\nCore Stack: MERN (MongoDB, Express, React, Node.js)\nSpecialties: AI Integration, Real-time Systems, 3D Web Graphics.\n\nNavigating to Skills Matrix.",
+        text: `Scanning Technical Capabilities... \n\nTotal Technologies: ${skills.length}+\nTop Skills: ${topSkills}...\n\nNavigating to Skills Matrix.`,
         action: 'SCROLL_SKILLS',
         suggestions: ['Backend skills?', 'Frontend tools?']
       };
     }
     if (lower.includes('experience') || lower.includes('job') || lower.includes('history')) {
+      const currentJob = experiences.find(e => e.isActive);
       return {
-        text: "Retrieving Professional Records... \n\nCurrent Status: Full Stack Engineer at BugMonks.\nPrevious: Freelance Developer.\n\nMoving to Experience Timeline.",
+        text: `Retrieving Professional Records... \n\nCurrent Role: ${currentJob.role} at ${currentJob.company}.\nTotal Experience: 1+ Years.\n\nMoving to Experience Timeline.`,
         action: 'SCROLL_EXPERIENCE',
-        suggestions: ['What did you do at BugMonks?', 'Freelance work?']
+        suggestions: [`What do you do at ${currentJob.company}?`, 'Previous jobs']
       };
     }
     if (lower.includes('contact') || lower.includes('email') || lower.includes('hire') || lower.includes('reach')) {
@@ -125,26 +169,10 @@ const AIAssistant = () => {
       };
     }
 
-    // Specific Project Queries
-    if (lower.includes('real estate')) {
-      return {
-        text: "The Real Estate Analyzer is a flagship project. It features automated rent comparison, investment metric calculation (Cap Rate, DSCR), and scrapes data from apartments.com. Built with Node.js and React.",
-        action: 'SCROLL_PROJECTS',
-        suggestions: ['Show me more projects']
-      };
-    }
-    if (lower.includes('voice') || lower.includes('assistant')) {
-      return {
-        text: "The AI Voice Assistant uses the Web Speech API and Gemini AI to create a natural conversational interface. It's fully voice-controlled.",
-        action: 'SCROLL_PROJECTS',
-        suggestions: ['Try it out']
-      };
-    }
-
     // Casual / Meta
     if (lower.includes('who are you') || lower.includes('identity')) {
       return {
-        text: "I am the Neural Interface V2.0 for this portfolio. I handle navigation, information retrieval, and user engagement. I run on pure JavaScript and React logic.",
+        text: "I am the Neural Interface V2.0 for this portfolio. I have full access to Sufyan's professional data including 8+ projects and 20+ skills.",
         suggestions: ['What can you do?', 'Who created you?']
       };
     }
@@ -157,7 +185,7 @@ const AIAssistant = () => {
     }
     if (lower.includes('hello') || lower.includes('hi') || lower.includes('hey')) {
       return {
-        text: "System Ready. Greetings, User. How may I assist your exploration today?",
+        text: "System Ready. Greetings, User. I can tell you about my projects, skills, or work experience. What would you like to know?",
         suggestions: ['Show me projects', 'What are your skills?', 'Contact info']
       };
     }
