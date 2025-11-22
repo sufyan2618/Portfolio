@@ -4,15 +4,12 @@ import {
   Phone,
   Send,
   ArrowRight,
-  CheckCircle
+  CheckCircle,
+  Github,
+  Linkedin,
+  Instagram,
+  Facebook
 } from "lucide-react";
-// Import Simple Icons from react-icons
-import { 
-  SiGithub, 
-  SiLinkedin, 
-  SiInstagram, 
-  SiFacebook 
-} from 'react-icons/si';
 import { cn } from "@/lib/utils";
 import { useToast } from "@/hooks/use-toast";
 import { useState } from "react";
@@ -88,28 +85,28 @@ export const ContactSection = () => {
     }
   ];
 
-  // Updated social links with Simple Icons
+  // Social links with Lucide icons
   const socialLinks = [
     { 
-      icon: SiGithub, 
+      icon: Github, 
       href: "https://github.com/sufyan2618", 
       label: "GitHub", 
       color: "hover:text-white"
     },
     { 
-      icon: SiLinkedin, 
+      icon: Linkedin, 
       href: "https://www.linkedin.com/in/sufyanliaqat2", 
       label: "LinkedIn", 
       color: "hover:text-blue-400"
     },
     { 
-      icon: SiInstagram, 
+      icon: Instagram, 
       href: "https://www.instagram.com/sufyan_liaquat1/", 
       label: "Instagram", 
       color: "hover:text-pink-400"
     },
     { 
-      icon: SiFacebook, 
+      icon: Facebook, 
       href: "https://www.facebook.com/sufyan.liaquat.73", 
       label: "Facebook", 
       color: "hover:text-blue-500"

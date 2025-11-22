@@ -18,16 +18,6 @@ export default defineConfig({
     },
   },
   build: {
-    // Enable minification
-    minify: 'terser',
-    terserOptions: {
-      compress: {
-        // Remove console logs in production
-        drop_console: true,
-        drop_debugger: true,
-        pure_funcs: ['console.log', 'console.info'],
-      },
-    },
     // Optimize chunk splitting
     rollupOptions: {
       output: {
@@ -35,7 +25,9 @@ export default defineConfig({
           // Vendor chunk for React and related libraries
           'react-vendor': ['react', 'react-dom', 'react-router-dom'],
           // UI components chunk
-          'ui-vendor': ['lucide-react', 'react-icons'],
+          'ui-vendor': ['lucide-react', 'framer-motion'],
+          // Three.js chunk
+          'three-vendor': ['three', '@react-three/fiber', '@react-three/drei'],
         },
       },
     },

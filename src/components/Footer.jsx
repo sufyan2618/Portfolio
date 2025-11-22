@@ -1,10 +1,4 @@
-import { ArrowUp, Heart, Coffee, Code, Sparkles } from "lucide-react";
-// Import Simple Icons from react-icons
-import { 
-  SiGithub, 
-  SiLinkedin, 
-  SiGmail 
-} from 'react-icons/si';
+import { ArrowUp, Heart, Coffee, Code, Sparkles, Github, Linkedin, Mail } from "lucide-react";
 import { motion } from "framer-motion";
 
 export const Footer = () => {
@@ -16,9 +10,9 @@ export const Footer = () => {
   };
 
   const socialLinks = [
-    { icon: SiGithub, href: "https://github.com/sufyan2618", label: "GitHub" },
-    { icon: SiLinkedin, href: "https://www.linkedin.com/in/sufyanliaqat2", label: "LinkedIn" },
-    { icon: SiGmail, href: "mailto:sufyan.li2618@gmail.com", label: "Email" }
+    { icon: Github, href: "https://github.com/sufyan2618", label: "GitHub" },
+    { icon: Linkedin, href: "https://www.linkedin.com/in/sufyanliaqat2", label: "LinkedIn" },
+    { icon: Mail, href: "mailto:sufyan.li2618@gmail.com", label: "Email" }
   ];
 
   const quickLinks = [
