@@ -3,7 +3,7 @@ import { Canvas, useFrame } from '@react-three/fiber';
 import { Points, PointMaterial, Float, Icosahedron } from '@react-three/drei';
 import * as THREE from 'three';
 
-const ParticleField = ({ count = 3000, color = "#10b981", size = 0.002, radius = 1.5 }) => {
+const ParticleField = ({ count = 1500, color = "#10b981", size = 0.002, radius = 1.5 }) => {
   const ref = useRef();
   
   const positions = useMemo(() => {
@@ -79,10 +79,10 @@ const Background3D = () => {
         <fog attach="fog" args={['#000000', 1, 5]} />
         
         {/* Background Stars */}
-        <ParticleField count={4000} color="#059669" size={0.003} radius={2.5} />
+        <ParticleField count={1500} color="#059669" size={0.003} radius={2.5} />
         
         {/* Foreground Particles */}
-        <ParticleField count={300} color="#34d399" size={0.008} radius={1.5} />
+        <ParticleField count={100} color="#34d399" size={0.008} radius={1.5} />
 
         {/* Hero Object - Moved to be more visible */}
         <group position={[1, 0, -0.5]}>

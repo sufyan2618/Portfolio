@@ -1,5 +1,5 @@
 import { ArrowRight, ExternalLink, Github, Star, Eye } from "lucide-react";
-import { useRef, lazy, Suspense } from "react";
+import { useRef } from "react";
 import { motion } from "framer-motion";
 
 
@@ -125,7 +125,7 @@ export const ProjectsSection = () => {
         >
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4">
             <span className="text-white">Featured</span>
-            <span className="bg-clip-text text-transparent bg-gradient-to-r from-emerald-400 to-teal-500"> Projects</span>
+            <span className="bg-clip-text text-transparent bg-linear-to-r from-emerald-400 to-teal-500"> Projects</span>
           </h2>
 
           <p className="text-gray-300 text-base max-w-2xl mx-auto leading-relaxed">
@@ -133,7 +133,7 @@ export const ProjectsSection = () => {
             AI integration, and modern web technologies.
           </p>
 
-          <div className="w-20 h-1 bg-gradient-to-r from-emerald-600 to-teal-600 rounded-full mx-auto mt-6" />
+          <div className="w-20 h-1 bg-linear-to-r from-emerald-600 to-teal-600 rounded-full mx-auto mt-6" />
         </motion.div>
 
         {/* Projects Container - reduced spacing */}

@@ -1,6 +1,45 @@
 import { Briefcase, Calendar, MapPin, ArrowRight, Building2, Code2, Users, Award, ChevronDown, Zap, TrendingUp } from "lucide-react";
-import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { useState, useRef } from "react";
+import { motion, AnimatePresence, useMotionValue, useSpring, useTransform } from "framer-motion";
+
+const TiltCard = ({ children, className }) => {
+  const x = useMotionValue(0);
+  const y = useMotionValue(0);
+
+  const mouseX = useSpring(x, { stiffness: 500, damping: 100 });
+  const mouseY = useSpring(y, { stiffness: 500, damping: 100 });
+
+  function onMouseMove({ currentTarget, clientX, clientY }) {
+    const { left, top, width, height } = currentTarget.getBoundingClientRect();
+    x.set(clientX - left - width / 2);
+    y.set(clientY - top - height / 2);
+  }
+
+  function onMouseLeave() {
+    x.set(0);
+    y.set(0);
+  }
+
+  const rotateX = useTransform(mouseY, [-100, 100], [5, -5]);
+  const rotateY = useTransform(mouseX, [-100, 100], [-5, 5]);
+
+  return (
+    <motion.div
+      onMouseMove={onMouseMove}
+      onMouseLeave={onMouseLeave}
+      style={{
+        rotateX,
+        rotateY,
+        transformStyle: "preserve-3d",
+      }}
+      className={className}
+    >
+      <div style={{ transform: "translateZ(20px)" }}>
+        {children}
+      </div>
+    </motion.div>
+  );
+};
 
 const experiences = [
   {
@@ -88,20 +127,20 @@ export const ExperienceSection = () => {
         >
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4">
             <span className="text-white">Professional</span>
-            <span className="bg-clip-text text-transparent bg-gradient-to-r from-emerald-400 to-teal-500"> Journey</span>
+            <span className="bg-clip-text text-transparent bg-linear-to-r from-emerald-400 to-teal-500"> Journey</span>
           </h2>
           
           <p className="text-gray-300 text-base max-w-2xl mx-auto leading-relaxed">
             Building scalable solutions and innovative products across the full stack
           </p>
           
-          <div className="w-20 h-1 bg-gradient-to-r from-emerald-600 to-teal-600 rounded-full mx-auto mt-6" />
+          <div className="w-20 h-1 bg-linear-to-r from-emerald-600 to-teal-600 rounded-full mx-auto mt-6" />
         </motion.div>
 
         {/* Vertical Timeline */}
         <div className="relative">
           {/* Timeline Line */}
-          <div className="absolute left-8 md:left-1/2 top-0 bottom-0 w-0.5 bg-gradient-to-b from-emerald-600/20 via-teal-600/40 to-transparent" />
+          <div className="absolute left-8 md:left-1/2 top-0 bottom-0 w-0.5 bg-linear-to-b from-emerald-600/20 via-teal-600/40 to-transparent" />
 
           {/* Timeline Items */}
           <div className="space-y-0">
@@ -129,7 +168,7 @@ export const ExperienceSection = () => {
                 <div className="absolute left-8 md:left-1/2 top-24 transform -translate-x-1/2 z-10">
                   <div className="relative">
                     <div className="absolute inset-0 w-6 h-6 rounded-full bg-emerald-600/30 animate-ping" />
-                    <div className="relative w-6 h-6 rounded-full bg-gradient-to-br from-emerald-600 to-teal-600 shadow-lg shadow-emerald-500/50 border-4 border-black" />
+                    <div className="relative w-6 h-6 rounded-full bg-linear-to-br from-emerald-600 to-teal-600 shadow-lg shadow-emerald-500/50 border-4 border-black" />
                   </div>
                 </div>
 
@@ -149,15 +188,15 @@ export const ExperienceSection = () => {
                     </div>
                   </div>
 
-                  <div className="bg-white/5 backdrop-blur-md border border-white/10 rounded-xl overflow-hidden hover:border-emerald-600 hover:shadow-lg hover:shadow-emerald-500/20 transition-all duration-500 group">
+                  <TiltCard className="bg-white/5 backdrop-blur-md border border-white/10 rounded-xl overflow-hidden hover:border-emerald-600 hover:shadow-lg hover:shadow-emerald-500/20 transition-all duration-500 group perspective-1000">
                 
                 {/* Compact Header */}
                 <div className="relative p-5 border-b border-white/5 overflow-hidden">
-                  <div className="absolute inset-0 bg-gradient-to-r from-emerald-600/5 via-teal-600/5 to-transparent opacity-50 group-hover:opacity-100 transition-opacity duration-500" />
+                  <div className="absolute inset-0 bg-linear-to-r from-emerald-600/5 via-teal-600/5 to-transparent opacity-50 group-hover:opacity-100 transition-opacity duration-500" />
                   
                   <div className="relative flex items-start gap-3">
                     {/* Company Icon */}
-                    <div className="p-2.5 rounded-lg bg-gradient-to-br from-emerald-600 to-teal-600 flex-shrink-0 shadow-lg shadow-emerald-500/20">
+                    <div className="p-2.5 rounded-lg bg-linear-to-br from-emerald-600 to-teal-600 shrink-0 shadow-lg shadow-emerald-500/20">
                       <Building2 className="w-5 h-5 text-white" />
                     </div>
 
@@ -292,7 +331,7 @@ export const ExperienceSection = () => {
                     )}
                   </AnimatePresence>
                 </div>
-              </div>
+                  </TiltCard>
                 </div>
               </motion.div>
             ))}

@@ -84,7 +84,7 @@ export const SkillsSection = () => {
         >
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4">
             <span className="text-white">My</span>
-            <span className="bg-clip-text text-transparent bg-gradient-to-r from-emerald-400 to-teal-500">
+            <span className="bg-clip-text text-transparent bg-linear-to-r from-emerald-400 to-teal-500">
               {" "}
               Skills
             </span>
@@ -94,7 +94,7 @@ export const SkillsSection = () => {
             A comprehensive toolkit of modern technologies spanning frontend, backend, cloud infrastructure, and development tools.
           </p>
 
-          <div className="w-20 h-1 bg-gradient-to-r from-emerald-600 to-teal-600 rounded-full mx-auto mt-6" />
+          <div className="w-20 h-1 bg-linear-to-r from-emerald-600 to-teal-600 rounded-full mx-auto mt-6" />
         </motion.div>
 
         {/* Category Filter */}
@@ -114,7 +114,7 @@ export const SkillsSection = () => {
                 className={cn(
                   "px-5 py-2.5 rounded-full font-medium text-sm transition-all duration-300 flex items-center gap-2 hover:scale-105 backdrop-blur-md",
                   activeCategory === category.id
-                    ? "bg-gradient-to-r from-emerald-600 to-teal-600 text-white shadow-lg shadow-emerald-500/20"
+                    ? "bg-linear-to-r from-emerald-600 to-teal-600 text-white shadow-lg shadow-emerald-500/20"
                     : "bg-white/5 text-gray-300 border border-white/10 hover:border-emerald-500 hover:text-emerald-400"
                 )}
               >
@@ -180,21 +180,21 @@ export const SkillsSection = () => {
           className="flex flex-wrap justify-center items-center gap-12 mt-16"
         >
           <div className="text-center">
-            <div className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-emerald-400 to-teal-500">
+            <div className="text-3xl font-bold bg-clip-text text-transparent bg-linear-to-r from-emerald-400 to-teal-500">
               {skills.length}+
             </div>
             <div className="text-sm text-gray-400 mt-1">Technologies</div>
           </div>
-          <div className="w-px h-12 bg-gradient-to-b from-emerald-600/50 to-teal-600/50"></div>
+          <div className="w-px h-12 bg-linear-to-b from-emerald-600/50 to-teal-600/50"></div>
           <div className="text-center">
-            <div className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-emerald-400 to-teal-500">
+            <div className="text-3xl font-bold bg-clip-text text-transparent bg-linear-to-r from-emerald-400 to-teal-500">
               1+
             </div>
             <div className="text-sm text-gray-400 mt-1">Years Experience</div>
           </div>
-          <div className="w-px h-12 bg-gradient-to-b from-emerald-600/50 to-teal-600/50"></div>
+          <div className="w-px h-12 bg-linear-to-b from-emerald-600/50 to-teal-600/50"></div>
           <div className="text-center">
-            <div className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-emerald-400 to-teal-500">
+            <div className="text-3xl font-bold bg-clip-text text-transparent bg-linear-to-r from-emerald-400 to-teal-500">
               10+
             </div>
             <div className="text-sm text-gray-400 mt-1">Projects Completed</div>

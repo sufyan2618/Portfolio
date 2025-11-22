@@ -1,15 +1,47 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { MessageSquare, X, Send, Bot, User, Sparkles, Terminal, Cpu, Zap } from 'lucide-react';
+import { MessageSquare, X, Send, Bot, User, Sparkles, Terminal, Cpu, Zap, ChevronRight, Command, Minimize2, Maximize2 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
+
+// --- Typewriter Effect Component ---
+const TypewriterText = ({ text, onComplete }) => {
+  const [displayedText, setDisplayedText] = useState('');
+  const indexRef = useRef(0);
+
+  useEffect(() => {
+    indexRef.current = 0;
+    setDisplayedText('');
+    
+    const intervalId = setInterval(() => {
+      if (indexRef.current < text.length) {
+        setDisplayedText((prev) => prev + text.charAt(indexRef.current));
+        indexRef.current += 1;
+      } else {
+        clearInterval(intervalId);
+        if (onComplete) onComplete();
+      }
+    }, 20); // Typing speed
+
+    return () => clearInterval(intervalId);
+  }, [text]);
+
+  return <span>{displayedText}</span>;
+};
 
 const AIAssistant = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [isMinimized, setIsMinimized] = useState(false);
   const [messages, setMessages] = useState([
-    { type: 'bot', text: "SYSTEM ONLINE. I am the Neural Interface for this portfolio. Accessing data banks... Ready for queries." }
+    { 
+      id: 1, 
+      type: 'bot', 
+      text: "SYSTEM ONLINE. I am the Neural Interface for this portfolio. I can navigate the site, explain projects, or just chat. How can I assist?",
+      isTyping: false 
+    }
   ]);
   const [inputValue, setInputValue] = useState('');
-  const [isTyping, setIsTyping] = useState(false);
+  const [isProcessing, setIsProcessing] = useState(false);
   const messagesEndRef = useRef(null);
+  const inputRef = useRef(null);
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -17,50 +49,162 @@ const AIAssistant = () => {
 
   useEffect(() => {
     scrollToBottom();
-  }, [messages, isOpen]);
+  }, [messages, isOpen, isProcessing]);
 
-  const generateResponse = (query) => {
-    const lowerQuery = query.toLowerCase();
+  useEffect(() => {
+    if (isOpen && !isMinimized) {
+      inputRef.current?.focus();
+    }
+  }, [isOpen, isMinimized]);
+
+  // --- Knowledge Base & Actions ---
+  const executeAction = (action) => {
+    if (!action) return;
     
-    // Enhanced Logic Pattern Matching
-    if (lowerQuery.includes('skill') || lowerQuery.includes('stack') || lowerQuery.includes('tech')) {
-      return "Scanning technical capabilities... \n\n• Frontend: React, Three.js, Tailwind, Framer Motion\n• Backend: Node.js, Express\n• Tools: Vite, Git, Vercel\n\nProficiency level: HIGH.";
+    switch(action) {
+      case 'SCROLL_PROJECTS':
+        document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' });
+        break;
+      case 'SCROLL_SKILLS':
+        document.getElementById('skills')?.scrollIntoView({ behavior: 'smooth' });
+        break;
+      case 'SCROLL_EXPERIENCE':
+        document.getElementById('experience')?.scrollIntoView({ behavior: 'smooth' });
+        break;
+      case 'SCROLL_CONTACT':
+        document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
+        break;
+      case 'SCROLL_ABOUT':
+        document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' });
+        break;
+      case 'OPEN_GITHUB':
+        window.open('https://github.com/sufyan2618', '_blank');
+        break;
+      default:
+        break;
     }
-    if (lowerQuery.includes('project') || lowerQuery.includes('work') || lowerQuery.includes('built')) {
-      return "Accessing project archives... \n\nFeatured projects include high-performance 3D web apps and interactive interfaces. Scroll to the 'Projects' sector for visual data.";
-    }
-    if (lowerQuery.includes('contact') || lowerQuery.includes('email') || lowerQuery.includes('hire')) {
-      return "Communication channels open. \n\nYou can transmit a message via the Contact form below, or reach out directly via email. I am programmed to facilitate connections.";
-    }
-    if (lowerQuery.includes('hello') || lowerQuery.includes('hi') || lowerQuery.includes('hey')) {
-      return "Greetings, User. Identity verified. How may I assist your exploration of this digital space?";
-    }
-    if (lowerQuery.includes('who are you') || lowerQuery.includes('ai') || lowerQuery.includes('real')) {
-      return "I am a Level 1 Simulated Intelligence. While I lack a GPT backend (for now), I am fully integrated into this portfolio's React ecosystem to guide you.";
-    }
-    if (lowerQuery.includes('joke')) {
-      return "Why did the React component feel sad? Because it didn't have any state. *Beep boop*";
-    }
-    
-    return "Query not recognized in local database. Please rephrase or ask about: Skills, Projects, or Contact info.";
   };
 
-  const handleSend = async () => {
-    if (!inputValue.trim()) return;
+  const processQuery = (query) => {
+    const lower = query.toLowerCase();
+    
+    // Navigation Commands
+    if (lower.includes('project') || lower.includes('work') || lower.includes('portfolio')) {
+      return {
+        text: "Accessing Project Archives... I've highlighted the Projects section for you. We have some high-performance web apps on display.",
+        action: 'SCROLL_PROJECTS',
+        suggestions: ['Tell me about the Real Estate App', 'Show me AI projects']
+      };
+    }
+    if (lower.includes('skill') || lower.includes('stack') || lower.includes('tech')) {
+      return {
+        text: "Scanning Technical Capabilities... \n\nCore Stack: MERN (MongoDB, Express, React, Node.js)\nSpecialties: AI Integration, Real-time Systems, 3D Web Graphics.\n\nNavigating to Skills Matrix.",
+        action: 'SCROLL_SKILLS',
+        suggestions: ['Backend skills?', 'Frontend tools?']
+      };
+    }
+    if (lower.includes('experience') || lower.includes('job') || lower.includes('history')) {
+      return {
+        text: "Retrieving Professional Records... \n\nCurrent Status: Full Stack Engineer at BugMonks.\nPrevious: Freelance Developer.\n\nMoving to Experience Timeline.",
+        action: 'SCROLL_EXPERIENCE',
+        suggestions: ['What did you do at BugMonks?', 'Freelance work?']
+      };
+    }
+    if (lower.includes('contact') || lower.includes('email') || lower.includes('hire') || lower.includes('reach')) {
+      return {
+        text: "Opening Communication Channels. You can send a message directly through the form below.",
+        action: 'SCROLL_CONTACT',
+        suggestions: ['Copy email address', 'GitHub profile']
+      };
+    }
+    if (lower.includes('github') || lower.includes('code') || lower.includes('repo')) {
+      return {
+        text: "Redirecting to GitHub Repository mainframe...",
+        action: 'OPEN_GITHUB',
+        suggestions: ['Show Projects', 'Back to site']
+      };
+    }
 
-    const userMessage = { type: 'user', text: inputValue };
-    setMessages(prev => [...prev, userMessage]);
+    // Specific Project Queries
+    if (lower.includes('real estate')) {
+      return {
+        text: "The Real Estate Analyzer is a flagship project. It features automated rent comparison, investment metric calculation (Cap Rate, DSCR), and scrapes data from apartments.com. Built with Node.js and React.",
+        action: 'SCROLL_PROJECTS',
+        suggestions: ['Show me more projects']
+      };
+    }
+    if (lower.includes('voice') || lower.includes('assistant')) {
+      return {
+        text: "The AI Voice Assistant uses the Web Speech API and Gemini AI to create a natural conversational interface. It's fully voice-controlled.",
+        action: 'SCROLL_PROJECTS',
+        suggestions: ['Try it out']
+      };
+    }
+
+    // Casual / Meta
+    if (lower.includes('who are you') || lower.includes('identity')) {
+      return {
+        text: "I am the Neural Interface V2.0 for this portfolio. I handle navigation, information retrieval, and user engagement. I run on pure JavaScript and React logic.",
+        suggestions: ['What can you do?', 'Who created you?']
+      };
+    }
+    if (lower.includes('created') || lower.includes('maker') || lower.includes('author')) {
+      return {
+        text: "I was architected by Sufyan Liaqat, a Full Stack Engineer specializing in scalable web solutions.",
+        action: 'SCROLL_ABOUT',
+        suggestions: ['See his skills', 'Contact him']
+      };
+    }
+    if (lower.includes('hello') || lower.includes('hi') || lower.includes('hey')) {
+      return {
+        text: "System Ready. Greetings, User. How may I assist your exploration today?",
+        suggestions: ['Show me projects', 'What are your skills?', 'Contact info']
+      };
+    }
+    if (lower.includes('help')) {
+      return {
+        text: "Available Commands:\n- 'Projects': View work\n- 'Skills': Tech stack\n- 'Experience': Work history\n- 'Contact': Get in touch\n- 'GitHub': View code",
+        suggestions: ['Projects', 'Skills', 'Contact']
+      };
+    }
+
+    // Default
+    return {
+      text: "Command not recognized in local database. Try asking about 'Projects', 'Skills', or 'Experience'.",
+      suggestions: ['Show Projects', 'List Skills', 'Help']
+    };
+  };
+
+  const handleSend = async (text = inputValue) => {
+    if (!text.trim()) return;
+
+    const userMsgId = Date.now();
+    setMessages(prev => [...prev, { id: userMsgId, type: 'user', text: text }]);
     setInputValue('');
-    setIsTyping(true);
+    setIsProcessing(true);
 
-    // Simulate AI processing with random delay
-    const delay = Math.random() * 1000 + 500;
+    // Simulate "Thinking" time
+    const delay = Math.random() * 800 + 600;
     
     setTimeout(() => {
-      const responseText = generateResponse(userMessage.text);
-      const botResponse = { type: 'bot', text: responseText };
-      setMessages(prev => [...prev, botResponse]);
-      setIsTyping(false);
+      const response = processQuery(text);
+      const botMsgId = Date.now() + 1;
+      
+      setMessages(prev => [...prev, { 
+        id: botMsgId, 
+        type: 'bot', 
+        text: response.text,
+        action: response.action,
+        suggestions: response.suggestions,
+        isTyping: true // Start typing effect
+      }]);
+      
+      setIsProcessing(false);
+      
+      // Execute action after a slight delay to let user read
+      if (response.action) {
+        setTimeout(() => executeAction(response.action), 1000);
+      }
     }, delay);
   };
 
@@ -70,124 +214,162 @@ const AIAssistant = () => {
 
   return (
     <>
-      {/* Floating Trigger Button with "Crazy" Glow */}
+      {/* Floating Trigger Button */}
       <motion.button
         initial={{ scale: 0 }}
         animate={{ scale: 1 }}
         whileHover={{ scale: 1.1, rotate: 5 }}
         whileTap={{ scale: 0.9 }}
         onClick={() => setIsOpen(true)}
-        className={`fixed bottom-6 right-6 z-50 p-4 rounded-full shadow-[0_0_30px_rgba(16,185,129,0.5)] transition-all duration-300 group ${
-          isOpen ? 'scale-0 opacity-0 pointer-events-none' : 'bg-black border border-emerald-500 text-emerald-400'
+        className={`fixed bottom-6 right-6 z-50 p-4 rounded-full shadow-[0_0_30px_rgba(16,185,129,0.4)] transition-all duration-300 group ${
+          isOpen ? 'scale-0 opacity-0 pointer-events-none' : 'bg-black border border-emerald-500/50 text-emerald-400'
         }`}
       >
-        <Cpu size={28} className="group-hover:animate-spin-slow" />
-        <span className="absolute -top-1 -right-1 flex h-4 w-4">
-          <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-          <span className="relative inline-flex rounded-full h-4 w-4 bg-emerald-500"></span>
-        </span>
+        <div className="absolute inset-0 rounded-full bg-emerald-500/20 animate-ping"></div>
+        <Cpu size={28} className="relative z-10 group-hover:animate-spin-slow" />
       </motion.button>
 
-      {/* Chat Interface - Cyberpunk Style */}
+      {/* Chat Interface */}
       <AnimatePresence>
         {isOpen && (
           <motion.div
-            initial={{ opacity: 0, y: 50, scale: 0.9, rotateX: 10 }}
-            animate={{ opacity: 1, y: 0, scale: 1, rotateX: 0 }}
-            exit={{ opacity: 0, y: 50, scale: 0.9, rotateX: 10 }}
-            transition={{ type: "spring", damping: 20, stiffness: 100 }}
-            className="fixed bottom-6 right-6 z-50 w-[90vw] max-w-[380px] h-[500px] max-h-[80vh] bg-black/95 backdrop-blur-xl border border-emerald-500/50 rounded-lg shadow-[0_0_50px_rgba(16,185,129,0.2)] flex flex-col overflow-hidden font-mono"
+            initial={{ opacity: 0, y: 100, scale: 0.9 }}
+            animate={{ 
+              opacity: 1, 
+              y: 0, 
+              scale: 1,
+              height: isMinimized ? '60px' : '500px',
+              width: isMinimized ? '300px' : 'min(90vw, 400px)'
+            }}
+            exit={{ opacity: 0, y: 100, scale: 0.9 }}
+            transition={{ type: "spring", damping: 25, stiffness: 300 }}
+            className="fixed bottom-6 right-6 z-50 bg-black/90 backdrop-blur-xl border border-emerald-500/30 rounded-lg shadow-[0_0_50px_rgba(16,185,129,0.15)] flex flex-col overflow-hidden font-mono"
           >
-            {/* Scanline Effect */}
-            <div className="absolute inset-0 pointer-events-none bg-[linear-gradient(transparent_50%,rgba(0,0,0,0.5)_50%)] bg-[length:100%_4px] opacity-20 z-10"></div>
-
             {/* Header */}
-            <div className="p-4 bg-emerald-900/20 border-b border-emerald-500/30 flex justify-between items-center relative overflow-hidden">
-              <div className="absolute inset-0 bg-emerald-500/5 animate-pulse"></div>
-              <div className="flex items-center gap-3 text-emerald-400 z-10">
-                <div className="p-1.5 bg-emerald-500/20 rounded border border-emerald-500/50">
-                  <Bot size={18} />
-                </div>
-                <div>
-                  <span className="block text-xs text-emerald-600 font-bold tracking-widest">SYSTEM</span>
-                  <span className="font-bold text-sm tracking-wider text-emerald-300">NEURAL_LINK_V2</span>
-                </div>
+            <div 
+              className="p-3 bg-emerald-950/30 border-b border-emerald-500/20 flex justify-between items-center cursor-pointer"
+              onClick={() => setIsMinimized(!isMinimized)}
+            >
+              <div className="flex items-center gap-2 text-emerald-400">
+                <Terminal size={16} />
+                <span className="text-xs font-bold tracking-widest">NEURAL_LINK_V2</span>
+                <span className="flex h-2 w-2 relative">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                  <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+                </span>
               </div>
-              <button 
-                onClick={() => setIsOpen(false)}
-                className="text-emerald-500/70 hover:text-emerald-400 transition-colors z-10 hover:rotate-90 duration-300"
-              >
-                <X size={20} />
-              </button>
-            </div>
-
-            {/* Messages Area */}
-            <div className="flex-1 overflow-y-auto p-4 space-y-4 scrollbar-thin scrollbar-thumb-emerald-900/50 scrollbar-track-transparent relative">
-              {messages.map((msg, idx) => (
-                <motion.div
-                  initial={{ opacity: 0, x: msg.type === 'user' ? 20 : -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  key={idx}
-                  className={`flex gap-3 ${msg.type === 'user' ? 'flex-row-reverse' : ''}`}
+              <div className="flex items-center gap-2">
+                <button 
+                  onClick={(e) => { e.stopPropagation(); setIsMinimized(!isMinimized); }}
+                  className="text-emerald-500/50 hover:text-emerald-400 p-1"
                 >
-                  <div className={`w-8 h-8 rounded flex items-center justify-center shrink-0 border ${
-                    msg.type === 'user' 
-                      ? 'bg-blue-900/20 border-blue-500/50 text-blue-400' 
-                      : 'bg-emerald-900/20 border-emerald-500/50 text-emerald-400'
-                  }`}>
-                    {msg.type === 'user' ? <User size={14} /> : <Zap size={14} />}
-                  </div>
-                  <div className={`p-3 rounded max-w-[80%] text-sm border backdrop-blur-sm ${
-                    msg.type === 'user' 
-                      ? 'bg-blue-900/10 text-blue-100 border-blue-500/30 rounded-tr-none' 
-                      : 'bg-emerald-900/10 text-emerald-100 border-emerald-500/30 rounded-tl-none shadow-[0_0_15px_rgba(16,185,129,0.1)]'
-                  }`}>
-                    <p className="whitespace-pre-wrap leading-relaxed">{msg.text}</p>
-                  </div>
-                </motion.div>
-              ))}
-              {isTyping && (
-                <motion.div 
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  className="flex gap-3"
+                  {isMinimized ? <Maximize2 size={14} /> : <Minimize2 size={14} />}
+                </button>
+                <button 
+                  onClick={(e) => { e.stopPropagation(); setIsOpen(false); }}
+                  className="text-emerald-500/50 hover:text-red-400 p-1 transition-colors"
                 >
-                  <div className="w-8 h-8 rounded bg-emerald-900/20 border border-emerald-500/50 text-emerald-400 flex items-center justify-center shrink-0">
-                    <Zap size={14} />
-                  </div>
-                  <div className="bg-emerald-900/10 p-3 rounded rounded-tl-none border border-emerald-500/30 flex items-center gap-1">
-                    <span className="w-1.5 h-1.5 bg-emerald-400 animate-pulse"></span>
-                    <span className="w-1.5 h-1.5 bg-emerald-400 animate-pulse delay-75"></span>
-                    <span className="w-1.5 h-1.5 bg-emerald-400 animate-pulse delay-150"></span>
-                  </div>
-                </motion.div>
-              )}
-              <div ref={messagesEndRef} />
-            </div>
-
-            {/* Input Area */}
-            <div className="p-4 bg-black/60 border-t border-emerald-500/30 backdrop-blur-md">
-              <div className="flex gap-2 relative">
-                <input
-                  type="text"
-                  value={inputValue}
-                  onChange={(e) => setInputValue(e.target.value)}
-                  onKeyPress={handleKeyPress}
-                  placeholder="Enter command..."
-                  className="flex-1 bg-emerald-900/5 border border-emerald-500/30 rounded px-4 py-3 text-sm text-emerald-100 placeholder-emerald-700/50 focus:outline-none focus:border-emerald-500/80 focus:bg-emerald-900/10 transition-all font-mono"
-                />
-                <button
-                  onClick={handleSend}
-                  disabled={!inputValue.trim()}
-                  className="p-3 bg-emerald-600/20 text-emerald-400 border border-emerald-500/50 rounded hover:bg-emerald-500/30 hover:shadow-[0_0_15px_rgba(16,185,129,0.3)] disabled:opacity-50 disabled:cursor-not-allowed transition-all"
-                >
-                  <Send size={18} />
+                  <X size={16} />
                 </button>
               </div>
-              <div className="text-[10px] text-emerald-800 mt-2 text-center uppercase tracking-widest">
-                System Status: Online // Latency: 12ms
-              </div>
             </div>
+
+            {/* Main Content Area (Hidden when minimized) */}
+            {!isMinimized && (
+              <>
+                {/* Messages */}
+                <div className="flex-1 overflow-y-auto p-4 space-y-4 scrollbar-thin scrollbar-thumb-emerald-900/50 scrollbar-track-transparent">
+                  {messages.map((msg) => (
+                    <motion.div
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      key={msg.id}
+                      className={`flex gap-3 ${msg.type === 'user' ? 'flex-row-reverse' : ''}`}
+                    >
+                      <div className={`w-8 h-8 rounded flex items-center justify-center shrink-0 border ${
+                        msg.type === 'user' 
+                          ? 'bg-blue-950/30 border-blue-500/30 text-blue-400' 
+                          : 'bg-emerald-950/30 border-emerald-500/30 text-emerald-400'
+                      }`}>
+                        {msg.type === 'user' ? <User size={14} /> : <Bot size={14} />}
+                      </div>
+                      
+                      <div className="flex flex-col gap-2 max-w-[80%]">
+                        <div className={`p-3 rounded text-sm border backdrop-blur-sm ${
+                          msg.type === 'user' 
+                            ? 'bg-blue-900/10 text-blue-100 border-blue-500/20 rounded-tr-none' 
+                            : 'bg-emerald-900/10 text-emerald-100 border-emerald-500/20 rounded-tl-none'
+                        }`}>
+                          {msg.type === 'bot' && msg.isTyping ? (
+                            <TypewriterText text={msg.text} />
+                          ) : (
+                            <p className="whitespace-pre-wrap leading-relaxed">{msg.text}</p>
+                          )}
+                        </div>
+                        
+                        {/* Suggestions Chips */}
+                        {msg.type === 'bot' && msg.suggestions && (
+                          <div className="flex flex-wrap gap-2 mt-1">
+                            {msg.suggestions.map((suggestion, idx) => (
+                              <button
+                                key={idx}
+                                onClick={() => handleSend(suggestion)}
+                                className="text-[10px] px-2 py-1 bg-emerald-500/10 border border-emerald-500/20 rounded hover:bg-emerald-500/20 hover:border-emerald-500/40 text-emerald-400 transition-all"
+                              >
+                                {suggestion}
+                              </button>
+                            ))}
+                          </div>
+                        )}
+                      </div>
+                    </motion.div>
+                  ))}
+                  
+                  {isProcessing && (
+                    <motion.div 
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      className="flex gap-3"
+                    >
+                      <div className="w-8 h-8 rounded bg-emerald-950/30 border border-emerald-500/30 text-emerald-400 flex items-center justify-center shrink-0">
+                        <Bot size={14} />
+                      </div>
+                      <div className="bg-emerald-900/10 p-3 rounded rounded-tl-none border border-emerald-500/20 flex items-center gap-1">
+                        <span className="w-1.5 h-1.5 bg-emerald-400 animate-pulse"></span>
+                        <span className="w-1.5 h-1.5 bg-emerald-400 animate-pulse delay-75"></span>
+                        <span className="w-1.5 h-1.5 bg-emerald-400 animate-pulse delay-150"></span>
+                      </div>
+                    </motion.div>
+                  )}
+                  <div ref={messagesEndRef} />
+                </div>
+
+                {/* Input Area */}
+                <div className="p-3 bg-black/40 border-t border-emerald-500/20">
+                  <div className="flex gap-2 relative">
+                    <div className="absolute left-3 top-1/2 -translate-y-1/2 text-emerald-500/50">
+                      <ChevronRight size={14} />
+                    </div>
+                    <input
+                      ref={inputRef}
+                      type="text"
+                      value={inputValue}
+                      onChange={(e) => setInputValue(e.target.value)}
+                      onKeyPress={handleKeyPress}
+                      placeholder="Enter command..."
+                      className="flex-1 bg-emerald-950/10 border border-emerald-500/20 rounded pl-8 pr-4 py-2.5 text-sm text-emerald-100 placeholder-emerald-700/30 focus:outline-none focus:border-emerald-500/50 focus:bg-emerald-950/20 transition-all font-mono"
+                    />
+                    <button
+                      onClick={() => handleSend()}
+                      disabled={!inputValue.trim() || isProcessing}
+                      className="p-2.5 bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 rounded hover:bg-emerald-500/20 hover:shadow-[0_0_10px_rgba(16,185,129,0.2)] disabled:opacity-50 disabled:cursor-not-allowed transition-all"
+                    >
+                      <Send size={16} />
+                    </button>
+                  </div>
+                </div>
+              </>
+            )}
           </motion.div>
         )}
       </AnimatePresence>
