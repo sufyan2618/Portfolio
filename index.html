@@ -46,7 +46,10 @@
       
       #root {
         min-height: 100vh;
-        background-color: #0a0a0f;
+        /* Background must be transparent for 3D canvas to show through */
+        background-color: transparent; 
+        position: relative;
+        z-index: 1;
       }
     </style>
   </head>
