@@ -42,12 +42,11 @@ export const Home = () => {
         {/* Hero - Always loaded (above the fold) */}
         <HeroSection />
         
-        {/* Below the fold sections - Lazy loaded with Suspense */}
+        {/* Professional Journey Flow */}
         <Suspense fallback={<SectionLoader />}>
           <AboutSection />
         </Suspense>
         
-        {/* Professional Journey Flow */}
         <Suspense fallback={<SectionLoader />}>
           <SkillsSection />
         </Suspense>

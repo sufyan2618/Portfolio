@@ -137,13 +137,19 @@ export const SkillsSection = () => {
                 initial={{ opacity: 0, scale: 0.8 }}
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.8 }}
+                whileHover={{ 
+                  scale: 1.05, 
+                  rotateX: 10, 
+                  rotateY: 10,
+                  boxShadow: "0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1)"
+                }}
                 transition={{ duration: 0.3 }}
                 key={skill.name}
-                className="bg-white/5 backdrop-blur-md border border-white/10 rounded-xl p-4 hover:border-emerald-500/50 transition-colors duration-200 group"
+                className="bg-white/5 backdrop-blur-md border border-white/10 rounded-xl p-4 hover:border-emerald-500/50 transition-colors duration-200 group perspective-1000"
               >
                 {/* Skill Content */}
-                <div className="flex flex-col items-center gap-3 text-center">
-                  <div className="w-12 h-12 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                <div className="flex flex-col items-center gap-3 text-center transform transition-transform duration-300 group-hover:translate-z-10">
+                  <div className="w-12 h-12 flex items-center justify-center group-hover:scale-110 transition-transform duration-300 group-hover:rotate-12">
                     {typeof skill.icon === "string" &&
                     !skill.icon.includes(".") ? (
                       <span className="text-3xl">{skill.icon}</span>

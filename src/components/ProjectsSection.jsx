@@ -1,6 +1,7 @@
 import { ArrowRight, ExternalLink, Github, Star, Eye } from "lucide-react";
-import { useRef } from "react";
+import { useRef, lazy, Suspense } from "react";
 import { motion } from "framer-motion";
+
 
 const projects = [
   {
@@ -186,7 +187,7 @@ export const ProjectsSection = () => {
                 {/* Featured Badge */}
                 {project.featured && (
                   <div className="absolute top-3 right-3 z-20">
-                    <div className="bg-gradient-to-r from-emerald-600 to-teal-600 rounded-full p-2 shadow-lg shadow-emerald-500/50 animate-pulse">
+                    <div className="bg-linear-to-r from-emerald-600 to-teal-600 rounded-full p-2 shadow-lg shadow-emerald-500/50 animate-pulse">
                       <Star className="w-4 h-4 text-white" />
                     </div>
                   </div>
@@ -304,7 +305,7 @@ export const ProjectsSection = () => {
             href="https://github.com/sufyan2618"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-emerald-600 to-teal-600 hover:shadow-lg hover:shadow-emerald-500/40 rounded-full font-semibold text-white transition-all duration-300 hover:scale-105"
+            className="inline-flex items-center gap-2 px-8 py-4 bg-linear-to-r from-emerald-600 to-teal-600 hover:shadow-lg hover:shadow-emerald-500/40 rounded-full font-semibold text-white transition-all duration-300 hover:scale-105"
           >
             Explore All Projects on GitHub
             <ArrowRight className="w-5 h-5" />

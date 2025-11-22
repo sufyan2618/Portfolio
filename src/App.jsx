@@ -2,6 +2,7 @@ import { lazy, Suspense } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { Toaster } from "@/components/ui/toaster";
 import Background3D from "./components/Background3D";
+import AIAssistant from "./components/AIAssistant";
 
 // Lazy load pages for code splitting
 const Home = lazy(() => import("./pages/Home").then(module => ({ default: module.Home })));
@@ -21,6 +22,7 @@ function App() {
   return (
     <>
       <Background3D />
+      <AIAssistant />
       <Toaster />
       <BrowserRouter>
         <Suspense fallback={<PageLoader />}>
