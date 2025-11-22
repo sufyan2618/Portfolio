@@ -13,9 +13,9 @@ export const HeroSection = () => {
           
           {/* Left Content */}
           <motion.div 
-            initial={{ opacity: 0, x: -50 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.5 }}
             className="space-y-6 lg:pl-12 text-center lg:text-left order-2 lg:order-1"
           >
             <div className="space-y-2">
@@ -134,7 +134,8 @@ export const HeroSection = () => {
                   <img
                     src='./hero.webp'
                     alt="Sufyan Liaqat"
-                    className="w-full h-full object-cover hover:scale-110 transition-transform duration-700"
+                    className="w-full h-full object-cover"
+                    loading="eager"
                   />
                 </div>
               </div>

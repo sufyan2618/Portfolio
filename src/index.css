@@ -5,6 +5,8 @@
     @apply bg-transparent text-white overflow-x-hidden;
     overscroll-behavior: none;
     -webkit-overscroll-behavior: none;
+    /* Improve scrolling performance on mobile */
+    -webkit-overflow-scrolling: touch;
   }
   
   #root {
@@ -15,6 +17,18 @@
   html {
     scroll-behavior: smooth;
   }
+  
+  /* Optimize rendering performance */
+  * {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  
+  /* Prevent layout shifts */
+  img, video {
+    max-width: 100%;
+    height: auto;
+  }
 }
 
 @layer utilities {
@@ -24,6 +38,12 @@
   
   .glass-card {
     @apply bg-white/5 backdrop-blur-md border border-white/10;
+  }
+  
+  /* Hardware acceleration for animations */
+  .gpu-accelerated {
+    transform: translateZ(0);
+    will-change: transform;
   }
 }
 

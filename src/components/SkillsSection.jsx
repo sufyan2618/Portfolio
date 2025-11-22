@@ -139,7 +139,7 @@ export const SkillsSection = () => {
                 exit={{ opacity: 0, scale: 0.8 }}
                 transition={{ duration: 0.3 }}
                 key={skill.name}
-                className="bg-white/5 backdrop-blur-md border border-white/10 rounded-xl p-4 hover:border-emerald-500/50 hover:bg-white/10 transition-all duration-300 hover:scale-110 hover:-rotate-2 group"
+                className="bg-white/5 backdrop-blur-md border border-white/10 rounded-xl p-4 hover:border-emerald-500/50 transition-colors duration-200 group"
               >
                 {/* Skill Content */}
                 <div className="flex flex-col items-center gap-3 text-center">

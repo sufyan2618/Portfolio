@@ -35,10 +35,14 @@ export default defineConfig({
     chunkSizeWarningLimit: 1000,
     // Disable source maps in production for smaller bundle
     sourcemap: false,
+    // Additional optimizations
+    minify: 'esbuild',
+    target: 'esnext',
   },
   // Optimize dependencies
   optimizeDeps: {
     include: ['react', 'react-dom', 'react-router-dom'],
+    exclude: ['three'],
   },
   // Performance optimizations
   server: {
