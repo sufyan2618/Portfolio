@@ -58,6 +58,37 @@ export const skillCategories = [
 export const experiences = [
   {
     id: 1,
+    company: "OrcaOps",
+    logo: "/orcaops-logo.png",
+    role: "Associate Software Engineer",
+    location: "Remote",
+    duration: "November 2025 - Present",
+    startDate: "Nov 2025",
+    endDate: "Present",
+    period: "2 months",
+    type: "Full-time",
+    description: "Building a comprehensive construction project management platform using modern backend technologies and cross-platform mobile development. Focused on performance optimization, real-time collaboration features, and scalable architecture for enterprise-level project tracking and team coordination.",
+    responsibilities: [
+      "Architected and developed core features of a construction project management system using FastAPI, PostgreSQL, and SQLAlchemy with task tracking, milestone management, and team collaboration workflows",
+      "Eliminated N+1 query issues through SQLAlchemy eager loading and relationship optimization, reducing database query execution time by 65% and improving overall system responsiveness",
+      "Built high-performance streaming platform with Next.js Server-Side Rendering (SSR), implementing efficient data fetching and link aggregation, resulting in 40% increase in user retention through faster page loads",
+      "Developed React Native mobile application for project management using Expo, enabling on-site access to project data with offline-first architecture and seamless synchronization",
+      "Implemented production-ready push notification system using Firebase Cloud Messaging (FCM) for real-time project updates, boosting team communication efficiency by 50%",
+      "Integrated Celery with RabbitMQ for asynchronous task processing, handling background jobs for report generation, email notifications, and data synchronization",
+      "Designed and implemented RESTful APIs with comprehensive documentation using FastAPI's automatic OpenAPI generation, improving developer onboarding and integration time"
+    ],
+    technologies: ["FastAPI", "PostgreSQL", "SQLAlchemy", "React", "Material-UI", "Next.js", "React Native", "Expo", "Celery", "RabbitMQ", "Firebase", "TypeScript", "Python", "Docker"],
+    achievements: [
+      "Reduced database query execution time by 65% through advanced SQLAlchemy optimization techniques",
+      "Increased streaming platform user retention by 40% with Next.js SSR implementation",
+      "Improved team communication efficiency by 50% with real-time FCM notification system",
+      "Successfully delivered cross-platform project management solution serving construction teams across web and mobile"
+    ],
+    isActive: true,
+    companyType: "Construction Tech / SaaS"
+  },
+  {
+    id: 2,
     company: "BugMonks",
     logo: "/bug-monks.jpg",
     role: "Full Stack Engineer",
@@ -87,7 +118,7 @@ export const experiences = [
     companyType: "SaaS Development"
   },
   {
-    id: 2,
+    id: 3,
     company: "Freelance",
     logo: "/freelance-icon.png",
     role: "Full Stack Developer",
