@@ -134,8 +134,12 @@ export const ExperienceSection = () => {
                   
                   <div className="relative flex items-start gap-3">
                     {/* Company Icon */}
-                    <div className="p-2.5 rounded-lg bg-linear-to-br from-emerald-600 to-teal-600 shrink-0 shadow-lg shadow-emerald-500/20">
-                      <Building2 className="w-5 h-5 text-white" />
+                    <div className ="w-10 h-10 flex-shrink-0 rounded-lg bg-white/10 border border-white/10 flex items-center justify-center overflow-hidden">
+                      <img 
+                        src={experience.logo} 
+                        alt={`${experience.company} Logo`} 
+                        className="w-8 h-8 object-cover"
+                      />
                     </div>
 
                     <div className="flex-1 min-w-0">

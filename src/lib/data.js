@@ -2,48 +2,49 @@ import { Code, Database, Cloud, Wrench, Smartphone, Brain } from "lucide-react";
 
 export const skills = [
   // Frontend
-  { name: "React.js", category: "frontend", icon: "react.png" },
+  { name: "React.js", category: "frontend", icon: "react.webp" },
   { name: "Next.js", category: "frontend", icon: "next.webp" },
-  { name: "React Native", category: "frontend", icon: "react.png" },
-  { name: "JavaScript", category: "frontend", icon: "javaScript.png" },
+  { name: "React Native", category: "frontend", icon: "react.webp" },
+  { name: "JavaScript", category: "frontend", icon: "javaScript.webp" },
   { name: "Redux", category: "frontend", icon: "redux.webp" },
-  { name: "TypeScript", category: "frontend", icon: "typeScript.png" },
-  { name: "Tailwind CSS", category: "frontend", icon: "tailwind.png" },
+  { name: "TypeScript", category: "frontend", icon: "typeScript.webp" },
+  { name: "Tailwind CSS", category: "frontend", icon: "tailwind.webp" },
   { name: "HTML", category: "frontend", icon: "html.webp" },
   { name: "CSS", category: "frontend", icon: "css.webp" },
   { name: "Zustand", category: "frontend", icon: "zustand.svg" },
 
   // Backend
-  { name: "Node.js", category: "backend", icon: "node.png" },
-  { name: "Express.js", category: "backend", icon: "express.png" },
+  { name: "Node.js", category: "backend", icon: "node.webp" },
+  { name: "Express.js", category: "backend", icon: "express.webp" },
   { name: "FastAPI", category: "backend", icon: "fastapi.webp" },
-  { name: "Python", category: "backend", icon: "python.png" },
-  { name: "MongoDB", category: "backend", icon: "mongodb.png" },
-  { name: "PostgreSQL", category: "backend", icon: "postgres.png" },
+  { name: "Python", category: "backend", icon: "python.webp" },
+  { name: "MongoDB", category: "backend", icon: "mongodb.webp" },
+  { name: "PostgreSQL", category: "backend", icon: "postgres.webp" },
   { name: "GraphQL", category: "backend", icon: "GraphQL.webp" },
-  { name: "Redis", category: "backend", icon: "Redis.png" },
-  { name: "Socket.io", category: "backend", icon: "socket.io.png" },
+  { name: "Redis", category: "backend", icon: "Redis.webp" },
+  { name: "Socket.io", category: "backend", icon: "socket.io.webp" },
   { name: "Bull", category: "backend", icon: "bull.webp" },
   { name: "SQLAlchemy", category: "tools", icon: "SQLAlchemy.webp" },
   { name: "Stripe", category: "backend", icon: "stripe.webp" },
 
   // Cloud & DevOps
-  { name: "Docker", category: "cloud", icon: "Docker.png" },
+  { name: "Docker", category: "cloud", icon: "Docker.webp" },
+  { name: "Kubernetes", category: "cloud", icon: "kubernetes.webp" },
   { name: "NGINX", category: "cloud", icon: "nginx.webp" },
   { name: "GitHub Actions", category: "cloud", icon: "github-actions.webp" },
   { name: "Digital Ocean", category: "cloud", icon: "Digital Ocean.webp" },
   { name: "AWS", category: "cloud", icon: "AWS.webp" },
-  { name: "Supabase", category: "cloud", icon: "supabase-logo-icon.png" },
-  { name: "Firebase", category: "cloud", icon: "firebase.png" },
+  { name: "Supabase", category: "cloud", icon: "supabase-logo-icon.webp" },
+  { name: "Firebase", category: "cloud", icon: "firebase.webp" },
 
   // Tools & Libraries
-  { name: "Git", category: "tools", icon: "git.png" },
-  { name: "GitHub", category: "tools", icon: "github.png" },
+  { name: "Git", category: "tools", icon: "git.webp" },
+  { name: "GitHub", category: "tools", icon: "github.webp" },
   { name: "VS Code", category: "tools", icon: "vs-code.webp" },
-  { name: "Postman", category: "tools", icon: "postman.png" },
+  { name: "Postman", category: "tools", icon: "postman.webp" },
   { name: "Swagger", category: "tools", icon: "swagger.webp" },
   { name: "Jira", category: "tools", icon: "Jira.webp" },
-  { name: "Convex", category: "tools", icon: "convex.png" },
+  { name: "Convex", category: "tools", icon: "convex.webp" },
   { name: "Gemini AI", category: "tools", icon: "gemini.webp" },
 ];
 
@@ -59,7 +60,7 @@ export const experiences = [
   {
     id: 1,
     company: "OrcaOps",
-    logo: "/orcaops-logo.png",
+    logo: "/orcaops-logo.webp",
     role: "Associate Software Engineer",
     location: "Remote",
     duration: "November 2025 - Present",
@@ -114,13 +115,13 @@ export const experiences = [
       "Built applications serving 2000+ active users with 99.9% uptime",
       "Implemented scalable microservices architecture using Node.js and FastAPI"
     ],
-    isActive: true,
+    isActive: false,
     companyType: "SaaS Development"
   },
   {
     id: 3,
     company: "Freelance",
-    logo: "/freelance-icon.png",
+    logo: "/fiverr.webp",
     role: "Full Stack Developer",
     location: "Remote",
     duration: "December 2024 - April 2025",
@@ -161,8 +162,19 @@ export const projects = [
     featured: true,
     category: "Full Stack / Real Estate Tech"
   },
-  {
+    {
     id: 2,
+    title: "AI Stylist",
+    description: "Personalized Fashion Assistant with AI-powered recommendations, virtual try-on, and outfit generation. Built interactive questionnaires delivering personalized style recommendations via fine-tuned LLMs, integrated virtual try-on technology, and outfit combination generation.",
+    image: "/projects/ai-stylist.webp",
+    tags: ["MERN", "Tanstack Query", "ChatGPT API", "fal.ai", "Freepik API", "JWT", "Stripe"],
+    demoUrl: "http://18.211.196.168/",
+    githubUrl: "https://github.com/sufyan2618",
+    featured: true,
+    category: "AI / Full Stack"
+  },
+  {
+    id: 3,
     title: "Online-Identity",
     description: "Create stunning portfolios with Online-Identity, a full-stack MERN application featuring user authentication, data caching, dynamic portfolio creation, and real-time updates.",
     image: "/projects/portfolio_creator.webp",
@@ -173,7 +185,7 @@ export const projects = [
     category: "Full Stack / Dev Ops"
   },
   {
-    id: 3,
+    id: 4,
     title: "AI Voice Assistant",
     description: "Voice-activated AI assistant web app built with MERN stack featuring natural speech interaction and real-time responses.",
     image: "/projects/assistant.webp",
@@ -184,7 +196,7 @@ export const projects = [
     category: "AI / MERN Stack"
   },
   {
-    id: 4,
+    id: 5,
     title: "Devnity AI Code Editor",
     description: "AI-powered Code Editor built with React and Next.js, having Convex for database and Gemini AI for error correction ",
     image: "/projects/editor.webp",
@@ -194,17 +206,7 @@ export const projects = [
     featured: true,
     category: "AI / Web Development"
   },
-  {
-    id: 5,
-    title: "Modern Portfolio Website",
-    description: "Stunning dark-themed portfolio website with advanced animations, glassmorphism effects, and responsive design.",
-    image: "/projects/portfolio.webp",
-    tags: ["React", "Next.js", "Tailwind CSS", "Framer Motion"],
-    demoUrl: "https://sufyanliaqat.me",
-    githubUrl: "https://github.com/sufyan2618/Portfolio",
-    featured: true,
-    category: "Frontend / Web Development"
-  },
+
   {
     id: 6,
     title: "Linkit: A Chat App",

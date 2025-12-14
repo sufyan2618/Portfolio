@@ -30,19 +30,19 @@ export const HeroSection = () => {
   return (
     <section
       id="hero"
-      className="relative min-h-screen flex items-center justify-center overflow-hidden pt-28 pb-20 perspective-1000"
+      className="relative h-screen flex items-center justify-center overflow-hidden pt-24 pb-16 perspective-1000"
     >
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+        <div className="grid lg:grid-cols-2 gap-6 lg:gap-8 items-center">
           
           {/* Left Content */}
           <motion.div 
             initial={{ opacity: 0, x: -50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, ease: "easeOut" }}
-            className="space-y-6 lg:pl-12 text-center lg:text-left order-2 lg:order-1"
+            className="space-y-5 lg:pl-12 text-center lg:text-left order-2 lg:order-1"
           >
-            <div className="space-y-3">
+            <div className="space-y-2.5">
               <motion.div 
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -51,7 +51,7 @@ export const HeroSection = () => {
               >
                 <Typewriter text="Full-Stack Developer" delay={0.5} />
               </motion.div>
-              <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-display leading-[0.9] tracking-tight">
+              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-display leading-[0.9] tracking-tight">
                 <motion.span 
                   className="text-white inline-block"
                   whileHover={{ scale: 1.05, x: 5 }}
@@ -85,7 +85,7 @@ export const HeroSection = () => {
               className="relative group"
             >
               <div className="absolute -inset-1 bg-gradient-to-r from-emerald-600 to-teal-600 rounded-lg blur opacity-25 group-hover:opacity-50 transition duration-1000 group-hover:duration-200"></div>
-              <p className="relative text-sm sm:text-base text-gray-300 leading-relaxed max-w-md mx-auto lg:mx-0 backdrop-blur-sm bg-black/30 p-4 rounded-lg border border-white/10">
+              <p className="relative text-sm text-gray-300 leading-relaxed max-w-md mx-auto lg:mx-0 backdrop-blur-sm bg-black/30 p-3.5 rounded-lg border border-white/10">
                 Specialized in <span className="text-emerald-400 font-semibold">MERN Stack</span>, <span className="text-emerald-400 font-semibold">React Native</span>, and <span className="text-emerald-400 font-semibold">FastAPI</span>. 
                 Building scalable, production-ready applications with modern 3D interfaces.
               </p>
@@ -96,13 +96,13 @@ export const HeroSection = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.6 }}
-              className="flex flex-wrap gap-2 justify-center lg:justify-start"
+              className="flex flex-wrap gap-1.5 justify-center lg:justify-start"
             >
               {['React', 'Node.js', 'MongoDB', 'TypeScript', 'FastAPI', 'React Native', 'Three.js'].map((tech, index) => (
                 <motion.span 
                   key={tech}
                   whileHover={{ scale: 1.1, rotate: Math.random() * 10 - 5 }}
-                  className="px-3 py-1 bg-white/5 backdrop-blur-md border border-white/10 rounded-full text-xs text-gray-300 hover:border-emerald-500 hover:text-emerald-400 hover:bg-emerald-500/10 transition-colors cursor-pointer"
+                  className="px-2.5 py-0.5 bg-white/5 backdrop-blur-md border border-white/10 rounded-full text-[10px] text-gray-300 hover:border-emerald-500 hover:text-emerald-400 hover:bg-emerald-500/10 transition-colors cursor-pointer"
                 >
                   {tech}
                 </motion.span>
@@ -114,7 +114,7 @@ export const HeroSection = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.8 }}
-              className="flex flex-col sm:flex-row gap-3 justify-center lg:justify-start"
+              className="flex flex-col sm:flex-row gap-2.5 justify-center lg:justify-start"
             >
               <motion.a
                 href="#projects"
@@ -145,7 +145,7 @@ export const HeroSection = () => {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 1 }}
-              className="flex gap-3 justify-center lg:justify-start"
+              className="flex gap-2.5 justify-center lg:justify-start"
             >
               {[
                 { icon: Github, href: "https://github.com/sufyan2618", label: "GitHub" },
@@ -175,7 +175,7 @@ export const HeroSection = () => {
           >
             <motion.div 
               style={{ y: y2 }}
-              className="relative w-56 h-56 sm:w-72 sm:h-72 lg:w-80 lg:h-80"
+              className="relative w-52 h-52 sm:w-64 sm:h-64 lg:w-80 lg:h-80"
             >
               {/* Glassmorphic Circle Background */}
               <div className="absolute inset-0 rounded-full bg-gradient-to-tr from-emerald-500/20 to-teal-500/20 backdrop-blur-xl animate-pulse" />
