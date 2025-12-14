@@ -42,21 +42,39 @@ export const HeroSection = () => {
             transition={{ duration: 0.8, ease: "easeOut" }}
             className="space-y-6 lg:pl-12 text-center lg:text-left order-2 lg:order-1"
           >
-            <div className="space-y-2">
+            <div className="space-y-3">
               <motion.div 
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.2 }}
-                className="text-emerald-400 font-medium text-sm tracking-wide uppercase"
+                className="text-emerald-400 font-medium text-xs sm:text-sm tracking-[0.3em] uppercase font-mono"
               >
                 <Typewriter text="Full-Stack Developer" delay={0.5} />
               </motion.div>
-              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight">
-                <span className="text-white inline-block hover:scale-105 transition-transform cursor-default">Sufyan</span>
+              <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-display leading-[0.9] tracking-tight">
+                <motion.span 
+                  className="text-white inline-block"
+                  whileHover={{ scale: 1.05, x: 5 }}
+                  transition={{ type: "spring", stiffness: 400, damping: 10 }}
+                  style={{ 
+                    textShadow: '0 0 40px rgba(16, 185, 129, 0.3), 0 0 80px rgba(16, 185, 129, 0.1)',
+                    fontWeight: 800
+                  }}
+                >
+                  Sufyan
+                </motion.span>
                 <br />
-                <span className="bg-clip-text text-transparent bg-gradient-to-r from-emerald-400 to-teal-500 inline-block hover:scale-105 transition-transform cursor-default">
+                <motion.span 
+                  className="bg-clip-text text-transparent bg-gradient-to-r from-emerald-400 via-teal-400 to-cyan-400 inline-block relative"
+                  whileHover={{ scale: 1.05, x: 5 }}
+                  transition={{ type: "spring", stiffness: 400, damping: 10 }}
+                  style={{ 
+                    fontWeight: 900,
+                    filter: 'drop-shadow(0 0 20px rgba(16, 185, 129, 0.5))'
+                  }}
+                >
                   Liaqat
-                </span>
+                </motion.span>
               </h1>
             </div>
 

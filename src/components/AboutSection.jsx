@@ -18,7 +18,7 @@ export const AboutSection = () => {
           transition={{ duration: 0.4 }}
           className="text-center mb-16"
         >
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-heading mb-4">
             <span className="text-white">About</span>
             <span className="bg-clip-text text-transparent bg-linear-to-r from-emerald-400 to-teal-500"> Me</span>
           </h2>
@@ -40,7 +40,7 @@ export const AboutSection = () => {
             {/* Main Description Card */}
             <div className="bg-white/5 backdrop-blur-md border border-white/10 rounded-lg p-6 hover:border-emerald-500/50 transition-all duration-300 shadow-lg">
                 
-                <h3 className="text-xl font-bold text-white mb-4 flex items-center gap-2">
+                <h3 className="text-xl font-heading text-white mb-4 flex items-center gap-2">
                   <span className="w-2 h-2 bg-emerald-500 rounded-full animate-pulse" />
                   Software Engineering Student & Developer
                 </h3>

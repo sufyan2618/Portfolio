@@ -7,6 +7,7 @@
     -webkit-overscroll-behavior: none;
     /* Improve scrolling performance on mobile */
     -webkit-overflow-scrolling: touch;
+    font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   }
   
   #root {
@@ -44,6 +45,22 @@
   .gpu-accelerated {
     transform: translateZ(0);
     will-change: transform;
+  }
+  
+  /* Modern Typography */
+  .font-display {
+    font-family: 'Space Grotesk', 'Poppins', sans-serif;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+  }
+  
+  .font-heading {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+  }
+  
+  .font-mono {
+    font-family: 'JetBrains Mono', monospace;
   }
 }
 

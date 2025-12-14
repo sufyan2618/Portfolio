@@ -77,7 +77,7 @@ export const experiences = [
       "Integrated Celery with RabbitMQ for asynchronous task processing, handling background jobs for report generation, email notifications, and data synchronization",
       "Designed and implemented RESTful APIs with comprehensive documentation using FastAPI's automatic OpenAPI generation, improving developer onboarding and integration time"
     ],
-    technologies: ["FastAPI", "PostgreSQL", "SQLAlchemy", "React", "Material-UI", "Next.js", "React Native", "Expo", "Celery", "RabbitMQ", "Firebase", "TypeScript", "Python", "Docker"],
+    technologies: ["FastAPI", "PostgreSQL", "SQLAlchemy", "React", "Material-UI", "Next.js", "React Native", "Expo", "Celery", "RabbitMQ", "Firebase", "TypeScript", "Python", "Docker", "Kubernetes","Jira"],
     achievements: [
       "Reduced database query execution time by 65% through advanced SQLAlchemy optimization techniques",
       "Increased streaming platform user retention by 40% with Next.js SSR implementation",

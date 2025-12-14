@@ -32,7 +32,7 @@ export const ProjectsSection = () => {
           transition={{ duration: 0.6 }}
           className="text-center mb-12"
         >
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-heading mb-4">
             <span className="text-white">Featured</span>
             <span className="bg-clip-text text-transparent bg-linear-to-r from-emerald-400 to-teal-500"> Projects</span>
           </h2>
