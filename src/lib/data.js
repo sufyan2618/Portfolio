@@ -21,7 +21,7 @@ export const skills = [
   { name: "MongoDB", category: "backend", icon: "mongodb.webp" },
   { name: "PostgreSQL", category: "backend", icon: "postgres.webp" },
   { name: "GraphQL", category: "backend", icon: "GraphQL.webp" },
-  { name: "Redis", category: "backend", icon: "Redis.webp" },
+  { name: "Redis", category: "backend", icon: "redis.webp" },
   { name: "Socket.io", category: "backend", icon: "socket.io.webp" },
   { name: "Bull", category: "backend", icon: "bull.webp" },
   { name: "SQLAlchemy", category: "tools", icon: "SQLAlchemy.webp" },
