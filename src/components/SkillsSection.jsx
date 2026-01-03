@@ -133,7 +133,7 @@ export const SkillsSection = () => {
           <div className="w-px h-12 bg-linear-to-b from-emerald-600/50 to-teal-600/50"></div>
           <div className="text-center">
             <div className="text-3xl font-bold bg-clip-text text-transparent bg-linear-to-r from-emerald-400 to-teal-500">
-              1+
+              2+
             </div>
             <div className="text-sm text-gray-400 mt-1">Years Experience</div>
           </div>

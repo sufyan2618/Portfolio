@@ -149,7 +149,7 @@ const AIAssistant = () => {
     if (lower.includes('experience') || lower.includes('job') || lower.includes('history')) {
       const currentJob = experiences.find(e => e.isActive);
       return {
-        text: `Retrieving Professional Records... \n\nCurrent Role: ${currentJob.role} at ${currentJob.company}.\nTotal Experience: 1+ Years.\n\nMoving to Experience Timeline.`,
+        text: `Retrieving Professional Records... \n\nCurrent Role: ${currentJob.role} at ${currentJob.company}.\nTotal Experience: 2+ Years.\n\nMoving to Experience Timeline.`,
         action: 'SCROLL_EXPERIENCE',
         suggestions: [`What do you do at ${currentJob.company}?`, 'Previous jobs']
       };
