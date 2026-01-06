@@ -155,7 +155,7 @@ const Background3D = () => {
     return (
       <div className="fixed inset-0 z-[-1] bg-black">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_0%,#000000_100%)] opacity-70 pointer-events-none" />
-        <div className="absolute inset-0 bg-gradient-to-b from-black/10 via-transparent to-black/80 pointer-events-none" />
+        <div className="absolute inset-0 bg-linear-to-b from-black/10 via-transparent to-black/80 pointer-events-none" />
       </div>
     );
   }
@@ -218,7 +218,7 @@ const Background3D = () => {
       
       {/* Vignette & Gradient Overlay */}
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_0%,#000000_100%)] opacity-70 pointer-events-none" />
-      <div className="absolute inset-0 bg-gradient-to-b from-black/10 via-transparent to-black/80 pointer-events-none" />
+      <div className="absolute inset-0 bg-linear-to-b from-black/10 via-transparent to-black/80 pointer-events-none" />
     </div>
   );
 };

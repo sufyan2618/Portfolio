@@ -65,7 +65,7 @@ export const HeroSection = () => {
                 </motion.span>
                 <br />
                 <motion.span 
-                  className="bg-clip-text text-transparent bg-gradient-to-r from-emerald-400 via-teal-400 to-cyan-400 inline-block relative"
+                  className="bg-clip-text text-transparent bg-linear-to-r from-emerald-400 via-teal-400 to-cyan-400 inline-block relative"
                   whileHover={{ scale: 1.05, x: 5 }}
                   transition={{ type: "spring", stiffness: 400, damping: 10 }}
                   style={{ 
@@ -84,7 +84,7 @@ export const HeroSection = () => {
               transition={{ delay: 0.4 }}
               className="relative group"
             >
-              <div className="absolute -inset-1 bg-gradient-to-r from-emerald-600 to-teal-600 rounded-lg blur opacity-25 group-hover:opacity-50 transition duration-1000 group-hover:duration-200"></div>
+              <div className="absolute -inset-1 bg-linear-to-r from-emerald-600 to-teal-600 rounded-lg blur opacity-25 group-hover:opacity-50 transition duration-1000 group-hover:duration-200"></div>
               <p className="relative text-sm text-gray-300 leading-relaxed max-w-md mx-auto lg:mx-0 backdrop-blur-sm bg-black/30 p-3.5 rounded-lg border border-white/10">
                 Specialized in <span className="text-emerald-400 font-semibold">MERN Stack</span>, <span className="text-emerald-400 font-semibold">React Native</span>, and <span className="text-emerald-400 font-semibold">FastAPI</span>. 
                 Building scalable, production-ready applications with modern 3D interfaces.
@@ -120,7 +120,7 @@ export const HeroSection = () => {
                 href="#projects"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="group px-6 py-2.5 bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 rounded-full font-semibold text-white text-sm transition-all duration-300 shadow-lg shadow-emerald-500/20 hover:shadow-emerald-500/40"
+                className="group px-6 py-2.5 bg-linear-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 rounded-full font-semibold text-white text-sm transition-all duration-300 shadow-lg shadow-emerald-500/20 hover:shadow-emerald-500/40"
               >
                 <span className="flex items-center justify-center gap-2">
                   View My Work
@@ -178,7 +178,7 @@ export const HeroSection = () => {
               className="relative w-52 h-52 sm:w-64 sm:h-64 lg:w-80 lg:h-80"
             >
               {/* Glassmorphic Circle Background */}
-              <div className="absolute inset-0 rounded-full bg-gradient-to-tr from-emerald-500/20 to-teal-500/20 backdrop-blur-xl animate-pulse" />
+              <div className="absolute inset-0 rounded-full bg-linear-to-tr from-emerald-500/20 to-teal-500/20 backdrop-blur-xl animate-pulse" />
               
               {/* Photo container */}
               <motion.div 

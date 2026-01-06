@@ -129,7 +129,7 @@ export const ContactSection = () => {
         >
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-heading mb-4">
             <span className="text-white">Get In</span>
-            <span className="bg-clip-text text-transparent bg-gradient-to-r from-emerald-400 to-teal-500"> Touch</span>
+            <span className="bg-clip-text text-transparent bg-linear-to-r from-emerald-400 to-teal-500"> Touch</span>
           </h2>
           
           <p className="text-gray-300 text-base max-w-2xl mx-auto leading-relaxed">
@@ -137,7 +137,7 @@ export const ContactSection = () => {
             and bring innovative ideas to life. Let's create something amazing together!
           </p>
           
-          <div className="w-20 h-1 bg-gradient-to-r from-emerald-600 to-teal-600 rounded-full mx-auto mt-6" />
+          <div className="w-20 h-1 bg-linear-to-r from-emerald-600 to-teal-600 rounded-full mx-auto mt-6" />
         </motion.div>
 
         <div className="grid lg:grid-cols-2 gap-8 items-start">
@@ -168,7 +168,7 @@ export const ContactSection = () => {
                   >
                     <div className="flex items-center gap-4">
                       {/* Icon Container */}
-                      <div className="p-3 rounded-lg bg-gradient-to-br from-emerald-600 to-teal-600 flex-shrink-0 shadow-lg shadow-emerald-500/20">
+                      <div className="p-3 rounded-lg bg-linear-to-br from-emerald-600 to-teal-600 shrink-0 shadow-lg shadow-emerald-500/20">
                         <Icon className="w-5 h-5 text-white" />
                       </div>
 
@@ -286,7 +286,7 @@ export const ContactSection = () => {
                     type="submit"
                     disabled={isSubmitting}
                     className={cn(
-                      "w-full px-6 py-3 bg-gradient-to-r from-emerald-600 to-teal-600 hover:shadow-lg hover:shadow-emerald-500/40 rounded-md font-semibold text-white transition-all duration-300 flex items-center justify-center gap-2 hover:scale-105",
+                      "w-full px-6 py-3 bg-linear-to-r from-emerald-600 to-teal-600 hover:shadow-lg hover:shadow-emerald-500/40 rounded-md font-semibold text-white transition-all duration-300 flex items-center justify-center gap-2 hover:scale-105",
                       isSubmitting && "opacity-70 cursor-not-allowed"
                     )}
                   >

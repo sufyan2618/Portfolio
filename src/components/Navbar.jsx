@@ -77,7 +77,7 @@ export const Navbar = () => {
               </div>
             </div>
             <div className="relative">
-              <span className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-emerald-400 to-teal-500">
+              <span className="text-2xl font-bold bg-clip-text text-transparent bg-linear-to-r from-emerald-400 to-teal-500">
                 Sufyan
               </span>
               <span className="text-lg text-gray-400 ml-2 group-hover:text-emerald-400 transition-colors duration-300 hidden sm:inline">
@@ -103,7 +103,7 @@ export const Navbar = () => {
                 {activeSection === item.name && (
                   <motion.div
                     layoutId="activeTab"
-                    className="absolute inset-0 bg-gradient-to-r from-emerald-600 to-teal-600 rounded-full"
+                    className="absolute inset-0 bg-linear-to-r from-emerald-600 to-teal-600 rounded-full"
                     transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
                   />
                 )}

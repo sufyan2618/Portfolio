@@ -25,7 +25,7 @@ export const Footer = () => {
   return (
     <footer className="relative bg-black/40 backdrop-blur-xl border-t border-white/10 overflow-hidden">
       {/* Animated gradient background */}
-      <div className="absolute inset-0 bg-gradient-to-r from-emerald-900/10 via-teal-900/10 to-emerald-900/10 animate-gradient-shift" />
+      <div className="absolute inset-0 bg-linear-to-r from-emerald-900/10 via-teal-900/10 to-emerald-900/10 animate-gradient-shift" />
       
       <div className="container mx-auto max-w-7xl relative z-10 px-6 py-12">
         <motion.div 
@@ -41,10 +41,10 @@ export const Footer = () => {
             {/* Brand Section */}
             <div className="space-y-4">
               <div className="flex items-center gap-3">
-                <div className="p-2.5 rounded-lg bg-gradient-to-br from-emerald-600 to-teal-600 shadow-lg shadow-emerald-500/20">
+                <div className="p-2.5 rounded-lg bg-linear-to-br from-emerald-600 to-teal-600 shadow-lg shadow-emerald-500/20">
                   <Code className="w-6 h-6 text-white" />
                 </div>
-                <span className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-emerald-400 to-teal-500">
+                <span className="text-2xl font-bold bg-clip-text text-transparent bg-linear-to-r from-emerald-400 to-teal-500">
                   Sufyan Liaqat
                 </span>
               </div>
@@ -61,7 +61,7 @@ export const Footer = () => {
             {/* Quick Links */}
             <div>
               <h3 className="text-white font-semibold mb-4 flex items-center gap-2">
-                <div className="w-1 h-5 bg-gradient-to-b from-emerald-600 to-teal-600 rounded-full" />
+                <div className="w-1 h-5 bg-linear-to-b from-emerald-600 to-teal-600 rounded-full" />
                 Quick Links
               </h3>
               <ul className="space-y-3">
@@ -82,7 +82,7 @@ export const Footer = () => {
             {/* Connect Section */}
             <div>
               <h3 className="text-white font-semibold mb-4 flex items-center gap-2">
-                <div className="w-1 h-5 bg-gradient-to-b from-teal-600 to-emerald-600 rounded-full" />
+                <div className="w-1 h-5 bg-linear-to-b from-teal-600 to-emerald-600 rounded-full" />
                 Connect
               </h3>
               <div className="flex gap-3 mb-4">
@@ -110,7 +110,7 @@ export const Footer = () => {
 
           {/* Divider with gradient */}
           <div className="relative my-8">
-            <div className="h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
+            <div className="h-px bg-linear-to-r from-transparent via-white/10 to-transparent" />
             <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 px-4 bg-black/40 backdrop-blur-xl">
               <div className="flex items-center gap-2">
                 <div className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
@@ -144,7 +144,7 @@ export const Footer = () => {
             {/* Back to Top */}
             <button
               onClick={scrollToTop}
-              className="group p-3 rounded-full bg-gradient-to-r from-emerald-600 to-teal-600 text-white hover:shadow-lg hover:shadow-emerald-500/40 hover:scale-110 transition-all duration-300"
+              className="group p-3 rounded-full bg-linear-to-r from-emerald-600 to-teal-600 text-white hover:shadow-lg hover:shadow-emerald-500/40 hover:scale-110 transition-all duration-300"
               aria-label="Back to top"
             >
               <ArrowUp size={18} className="transform transition-transform duration-300 group-hover:-translate-y-1" />
@@ -154,7 +154,7 @@ export const Footer = () => {
       </div>
 
       {/* Animated bottom accent */}
-      <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-emerald-600 via-teal-600 to-emerald-600" />
+      <div className="absolute bottom-0 left-0 right-0 h-1 bg-linear-to-r from-emerald-600 via-teal-600 to-emerald-600" />
     </footer>
   );
 };
