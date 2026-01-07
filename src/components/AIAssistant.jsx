@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { MessageSquare, X, Send, Bot, User, Sparkles, Terminal, Cpu, Zap, ChevronRight, Command, Minimize2, Maximize2 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { skills, experiences, projects, aboutSkills } from '@/lib/data';
+
 
 // --- Typewriter Effect Component ---
 const TypewriterText = ({ text, onComplete }) => {
@@ -10,6 +10,7 @@ const TypewriterText = ({ text, onComplete }) => {
 
   useEffect(() => {
     indexRef.current = 0;
+
     setDisplayedText('');
     
     const intervalId = setInterval(() => {
@@ -58,7 +59,6 @@ const AIAssistant = () => {
     }
   }, [isOpen, isMinimized]);
 
-  // --- Knowledge Base & Actions ---
   const executeAction = (action) => {
     if (!action) return;
     
@@ -86,123 +86,6 @@ const AIAssistant = () => {
     }
   };
 
-  const processQuery = (query) => {
-    const lower = query.toLowerCase();
-    
-    // --- Dynamic Data Search ---
-
-    // 1. Project Search
-    const foundProject = projects.find(p => 
-      lower.includes(p.title.toLowerCase()) || 
-      p.tags.some(t => lower.includes(t.toLowerCase()))
-    );
-
-    if (foundProject && (lower.includes('project') || lower.includes('app') || lower.includes('built') || lower.includes('show'))) {
-      return {
-        text: `Found project: ${foundProject.title}.\n\n${foundProject.description}\n\nTech Stack: ${foundProject.tags.join(', ')}.`,
-        action: 'SCROLL_PROJECTS',
-        suggestions: ['View Demo', 'GitHub Repo', 'Other projects']
-      };
-    }
-
-    // 2. Skill Search
-    const foundSkill = skills.find(s => lower.includes(s.name.toLowerCase()));
-    if (foundSkill) {
-      return {
-        text: `Yes, I am proficient in ${foundSkill.name}. It is part of my ${foundSkill.category} stack.`,
-        action: 'SCROLL_SKILLS',
-        suggestions: [`Other ${foundSkill.category} skills`, 'Show all skills']
-      };
-    }
-
-    // 3. Experience Search
-    const foundJob = experiences.find(e => 
-      lower.includes(e.company.toLowerCase()) || 
-      lower.includes(e.role.toLowerCase())
-    );
-    if (foundJob) {
-      return {
-        text: `At ${foundJob.company}, I worked as a ${foundJob.role} (${foundJob.duration}).\n\nKey achievement: ${foundJob.achievements[0]}`,
-        action: 'SCROLL_EXPERIENCE',
-        suggestions: ['Tell me more', 'Next role']
-      };
-    }
-
-    // --- General Commands ---
-
-    // Navigation Commands
-    if (lower.includes('project') || lower.includes('work') || lower.includes('portfolio')) {
-      return {
-        text: `Accessing Project Archives... I have ${projects.length} featured projects on display, ranging from ${projects[0].category} to ${projects[projects.length-1].category}.`,
-        action: 'SCROLL_PROJECTS',
-        suggestions: [projects[0].title, projects[1].title, 'Show all']
-      };
-    }
-    if (lower.includes('skill') || lower.includes('stack') || lower.includes('tech')) {
-      const topSkills = skills.slice(0, 5).map(s => s.name).join(', ');
-      return {
-        text: `Scanning Technical Capabilities... \n\nTotal Technologies: ${skills.length}+\nTop Skills: ${topSkills}...\n\nNavigating to Skills Matrix.`,
-        action: 'SCROLL_SKILLS',
-        suggestions: ['Backend skills?', 'Frontend tools?']
-      };
-    }
-    if (lower.includes('experience') || lower.includes('job') || lower.includes('history')) {
-      const currentJob = experiences.find(e => e.isActive);
-      return {
-        text: `Retrieving Professional Records... \n\nCurrent Role: ${currentJob.role} at ${currentJob.company}.\nTotal Experience: 2+ Years.\n\nMoving to Experience Timeline.`,
-        action: 'SCROLL_EXPERIENCE',
-        suggestions: [`What do you do at ${currentJob.company}?`, 'Previous jobs']
-      };
-    }
-    if (lower.includes('contact') || lower.includes('email') || lower.includes('hire') || lower.includes('reach')) {
-      return {
-        text: "Opening Communication Channels. You can send a message directly through the form below.",
-        action: 'SCROLL_CONTACT',
-        suggestions: ['Copy email address', 'GitHub profile']
-      };
-    }
-    if (lower.includes('github') || lower.includes('code') || lower.includes('repo')) {
-      return {
-        text: "Redirecting to GitHub Repository mainframe...",
-        action: 'OPEN_GITHUB',
-        suggestions: ['Show Projects', 'Back to site']
-      };
-    }
-
-    // Casual / Meta
-    if (lower.includes('who are you') || lower.includes('identity')) {
-      return {
-        text: "I am the Neural Interface V2.0 for this portfolio. I have full access to Sufyan's professional data including 8+ projects and 20+ skills.",
-        suggestions: ['What can you do?', 'Who created you?']
-      };
-    }
-    if (lower.includes('created') || lower.includes('maker') || lower.includes('author')) {
-      return {
-        text: "I was architected by Sufyan Liaqat, a Full Stack Engineer specializing in scalable web solutions.",
-        action: 'SCROLL_ABOUT',
-        suggestions: ['See his skills', 'Contact him']
-      };
-    }
-    if (lower.includes('hello') || lower.includes('hi') || lower.includes('hey')) {
-      return {
-        text: "System Ready. Greetings, User. I can tell you about my projects, skills, or work experience. What would you like to know?",
-        suggestions: ['Show me projects', 'What are your skills?', 'Contact info']
-      };
-    }
-    if (lower.includes('help')) {
-      return {
-        text: "Available Commands:\n- 'Projects': View work\n- 'Skills': Tech stack\n- 'Experience': Work history\n- 'Contact': Get in touch\n- 'GitHub': View code",
-        suggestions: ['Projects', 'Skills', 'Contact']
-      };
-    }
-
-    // Default
-    return {
-      text: "Command not recognized in local database. Try asking about 'Projects', 'Skills', or 'Experience'.",
-      suggestions: ['Show Projects', 'List Skills', 'Help']
-    };
-  };
-
   const handleSend = async (text = inputValue) => {
     if (!text.trim()) return;
 
@@ -211,29 +94,73 @@ const AIAssistant = () => {
     setInputValue('');
     setIsProcessing(true);
 
-    // Simulate "Thinking" time
-    const delay = Math.random() * 800 + 600;
-    
-    setTimeout(() => {
-      const response = processQuery(text);
+    try {
+      const response = await fetch('https://portfolio-backend-2gmq.onrender.com/chat', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ prompt: text }),
+      });
+
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+
+      const data = await response.json();
       const botMsgId = Date.now() + 1;
       
+      // Detect navigation actions from user query
+      const lower = text.toLowerCase();
+      let action = null;
+      let suggestions = ['Show Projects', 'List Skills', 'Contact'];
+
+      if (lower.includes('project') || lower.includes('work') || lower.includes('portfolio')) {
+        action = 'SCROLL_PROJECTS';
+        suggestions = ['Tell me about skills', 'Experience', 'Contact'];
+      } else if (lower.includes('skill') || lower.includes('stack') || lower.includes('tech')) {
+        action = 'SCROLL_SKILLS';
+        suggestions = ['Show projects', 'Experience', 'Contact'];
+      } else if (lower.includes('experience') || lower.includes('job') || lower.includes('history')) {
+        action = 'SCROLL_EXPERIENCE';
+        suggestions = ['Show projects', 'Skills', 'Contact'];
+      } else if (lower.includes('contact') || lower.includes('email') || lower.includes('hire') || lower.includes('reach')) {
+        action = 'SCROLL_CONTACT';
+        suggestions = ['Show projects', 'Skills', 'Experience'];
+      } else if (lower.includes('about')) {
+        action = 'SCROLL_ABOUT';
+        suggestions = ['Show projects', 'Skills', 'Contact'];
+      } else if (lower.includes('github') || lower.includes('repo')) {
+        action = 'OPEN_GITHUB';
+        suggestions = ['Show projects', 'Back to site'];
+      }
+
       setMessages(prev => [...prev, { 
         id: botMsgId, 
         type: 'bot', 
-        text: response.text,
-        action: response.action,
-        suggestions: response.suggestions,
-        isTyping: true // Start typing effect
+        text: data.response_text || "I couldn't process that request. Please try again.",
+        action: action,
+        suggestions: suggestions,
+        isTyping: true
       }]);
       
-      setIsProcessing(false);
-      
       // Execute action after a slight delay to let user read
-      if (response.action) {
-        setTimeout(() => executeAction(response.action), 1000);
+      if (action) {
+        setTimeout(() => executeAction(action), 1000);
       }
-    }, delay);
+    } catch (error) {
+      console.error('Error fetching response:', error);
+      const botMsgId = Date.now() + 1;
+      setMessages(prev => [...prev, { 
+        id: botMsgId, 
+        type: 'bot', 
+        text: "Connection error. Unable to reach the neural network. Please try again.",
+        suggestions: ['Try again', 'Show Projects', 'Contact'],
+        isTyping: true
+      }]);
+    } finally {
+      setIsProcessing(false);
+    }
   };
 
   const handleKeyPress = (e) => {

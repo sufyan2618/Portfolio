@@ -7,7 +7,8 @@
     -webkit-overscroll-behavior: none;
     /* Improve scrolling performance on mobile */
     -webkit-overflow-scrolling: touch;
-    font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-family: 'Space Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    letter-spacing: -0.01em;
   }
   
   #root {
@@ -46,21 +47,88 @@
     transform: translateZ(0);
     will-change: transform;
   }
+
+  /* Fade-in animation for delayed components */
+  .animate-fadeIn {
+    animation: fadeIn 1.5s ease-in-out forwards;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Extended transition durations */
+  .duration-1500 {
+    transition-duration: 1500ms;
+  }
+
+  .duration-2000 {
+    transition-duration: 2000ms;
+  }
+
+  /* Slide up fade animation */
+  .animate-slideUpFade {
+    animation: slideUpFade 1s ease-out forwards;
+  }
+
+  @keyframes slideUpFade {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Scale fade in animation */
+  .animate-scaleFadeIn {
+    animation: scaleFadeIn 1.2s ease-out forwards;
+  }
+
+  @keyframes scaleFadeIn {
+    from {
+      opacity: 0;
+      transform: scale(0.95);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
   
   /* Modern Typography */
   .font-display {
-    font-family: 'Space Grotesk', 'Poppins', sans-serif;
+    font-family: 'Space Grotesk', sans-serif;
     font-weight: 700;
-    letter-spacing: -0.02em;
+    letter-spacing: -0.03em;
+    line-height: 1.1;
   }
   
   .font-heading {
-    font-family: 'Poppins', sans-serif;
-    font-weight: 700;
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+  }
+  
+  .font-body {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 400;
+    letter-spacing: -0.01em;
+    line-height: 1.6;
   }
   
   .font-mono {
     font-family: 'JetBrains Mono', monospace;
+    letter-spacing: -0.02em;
   }
 }
 

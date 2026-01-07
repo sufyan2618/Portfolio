@@ -139,15 +139,22 @@ const OptimizedCyberShape = ({ enableFloat, frameSkip }) => {
 const Background3D = () => {
   const [quality, setQuality] = useState(null);
   const [isLoaded, setIsLoaded] = useState(false);
+  const [isCanvasReady, setIsCanvasReady] = useState(false);
 
   useEffect(() => {
-    // Delay initialization slightly to not block initial page render
-    const timer = setTimeout(() => {
+    // Use requestIdleCallback for non-blocking initialization
+    const initQuality = () => {
       setQuality(getQualitySettings());
       setIsLoaded(true);
-    }, 100);
+      // Small delay before showing canvas for smooth transition
+      setTimeout(() => setIsCanvasReady(true), 200);
+    };
 
-    return () => clearTimeout(timer);
+    if ('requestIdleCallback' in window) {
+      requestIdleCallback(initQuality, { timeout: 500 });
+    } else {
+      setTimeout(initQuality, 50);
+    }
   }, []);
 
   // Show static background until 3D is ready
@@ -161,7 +168,11 @@ const Background3D = () => {
   }
 
   return (
-    <div className="fixed inset-0 z-[-1] bg-black">
+    <div 
+      className={`fixed inset-0 z-[-1] bg-black transition-opacity duration-1000 ${
+        isCanvasReady ? 'opacity-100' : 'opacity-0'
+      }`}
+    >
       <Canvas 
         camera={{ position: [0, 0, 2.5], fov: 75 }}
         dpr={quality.pixelRatio}
