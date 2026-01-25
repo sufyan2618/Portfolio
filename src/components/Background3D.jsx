@@ -160,16 +160,16 @@ const Background3D = () => {
   // Show static background until 3D is ready
   if (!isLoaded || !quality) {
     return (
-      <div className="fixed inset-0 z-[-1] bg-black">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_0%,#000000_100%)] opacity-70 pointer-events-none" />
-        <div className="absolute inset-0 bg-linear-to-b from-black/10 via-transparent to-black/80 pointer-events-none" />
+      <div className="fixed inset-0 z-[-1] bg-black pointer-events-none">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_0%,#000000_100%)] opacity-70" />
+        <div className="absolute inset-0 bg-linear-to-b from-black/10 via-transparent to-black/80" />
       </div>
     );
   }
 
   return (
     <div 
-      className={`fixed inset-0 z-[-1] bg-black transition-opacity duration-1000 ${
+      className={`fixed inset-0 z-[-1] bg-black transition-opacity duration-1000 pointer-events-none ${
         isCanvasReady ? 'opacity-100' : 'opacity-0'
       }`}
     >
@@ -177,6 +177,8 @@ const Background3D = () => {
         camera={{ position: [0, 0, 2.5], fov: 75 }}
         dpr={quality.pixelRatio}
         performance={{ min: 0.5 }}
+        style={{ pointerEvents: 'none' }}
+        events={() => ({})}
         gl={{ 
           antialias: false, // Disable antialiasing for performance
           powerPreference: 'high-performance',

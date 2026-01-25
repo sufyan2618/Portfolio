@@ -82,9 +82,9 @@ const Preloader = ({ onComplete }) => {
 
 // Static background fallback (super lightweight)
 const StaticBackground = () => (
-  <div className="fixed inset-0 z-[-1] bg-black">
-    <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_0%,#000000_100%)] opacity-70 pointer-events-none" />
-    <div className="absolute inset-0 bg-gradient-to-b from-black/10 via-transparent to-black/80 pointer-events-none" />
+  <div className="fixed inset-0 z-[-1] bg-black pointer-events-none">
+    <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_0%,#000000_100%)] opacity-70" />
+    <div className="absolute inset-0 bg-gradient-to-b from-black/10 via-transparent to-black/80" />
   </div>
 );
 
@@ -137,7 +137,7 @@ function App() {
       {show3D && (
         <Suspense fallback={<StaticBackground />}>
           <div 
-            className={`transition-opacity duration-1500 ease-in-out ${
+            className={`transition-opacity duration-1500 ease-in-out pointer-events-none ${
               is3DVisible ? 'opacity-100' : 'opacity-0'
             }`}
           >

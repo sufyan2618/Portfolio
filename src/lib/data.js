@@ -1,5 +1,4 @@
-import { Code, Database, Cloud, Wrench, Smartphone, Brain } from "lucide-react";
-
+import { Code, Database, Cloud, Wrench, Smartphone, Brain, Bot } from "lucide-react";
 export const skills = [
   // Frontend
   { name: "React.js", category: "frontend", icon: "react.webp" },
@@ -25,8 +24,8 @@ export const skills = [
   { name: "Socket.io", category: "backend", icon: "socket.io.webp" },
   { name: "Bull", category: "backend", icon: "bull.webp" },
   { name: "RabbitMQ", category: "backend", icon: "rabbitmq.webp" },
-  { name: }
-  { name: "SQLAlchemy", category: "tools", icon: "SQLAlchemy.webp" },
+  { name: "Drizzle ORM", category: "backend", icon: "drizzle-orm.webp" },
+  { name: "SQLAlchemy", category: "backend", icon: "SQLAlchemy.webp" },
   { name: "Stripe", category: "backend", icon: "stripe.webp" },
 
   // Cloud & DevOps
@@ -42,11 +41,10 @@ export const skills = [
   { name: "Grafana", category: "cloud", icon: "grafana.webp" },
 
   // Applied AI Technologies
-  { name: "LangChain", category: "tools", icon: "langchain.webp" },
-  { name: "LangGraph", category: "tools", icon: "langgraph.webp" },
-  { name: "GPT-5/5.2", category: "tools", icon: "gpt.webp" },
-  { name: "Vector Databases", category: "tools", icon: "vector-database.webp" },
-
+  { name: "LangChain", category: "AI", icon: "langchain.webp" },
+  { name: "LangGraph", category: "AI", icon: "langgraph.webp" },
+  { name: "GPT-5/5.2", category: "AI", icon: "chatgpt.png" },
+  { name: "Vector Databases", category: "AI", icon: "vectordb.jpg" },
 
   // Tools & Libraries
   { name: "Git", category: "tools", icon: "git.webp" },
@@ -64,6 +62,7 @@ export const skillCategories = [
   { id: "frontend", name: "Frontend", icon: Code },
   { id: "backend", name: "Backend", icon: Database },
   { id: "cloud", name: "Cloud & DevOps", icon: Cloud },
+  { id: "AI", name: "Applied AI Technologies", icon: Bot },
   { id: "tools", name: "Tools & Libraries", icon: Wrench },
 ];
 
