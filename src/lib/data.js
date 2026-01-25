@@ -24,6 +24,8 @@ export const skills = [
   { name: "Redis", category: "backend", icon: "redis.webp" },
   { name: "Socket.io", category: "backend", icon: "socket.io.webp" },
   { name: "Bull", category: "backend", icon: "bull.webp" },
+  { name: "RabbitMQ", category: "backend", icon: "rabbitmq.webp" },
+  { name: }
   { name: "SQLAlchemy", category: "tools", icon: "SQLAlchemy.webp" },
   { name: "Stripe", category: "backend", icon: "stripe.webp" },
 
@@ -36,6 +38,15 @@ export const skills = [
   { name: "AWS", category: "cloud", icon: "AWS.webp" },
   { name: "Supabase", category: "cloud", icon: "supabase-logo-icon.webp" },
   { name: "Firebase", category: "cloud", icon: "firebase.webp" },
+  { name: "Prometheus", category: "cloud", icon: "prometheus.webp" },
+  { name: "Grafana", category: "cloud", icon: "grafana.webp" },
+
+  // Applied AI Technologies
+  { name: "LangChain", category: "tools", icon: "langchain.webp" },
+  { name: "LangGraph", category: "tools", icon: "langgraph.webp" },
+  { name: "GPT-5/5.2", category: "tools", icon: "gpt.webp" },
+  { name: "Vector Databases", category: "tools", icon: "vector-database.webp" },
+
 
   // Tools & Libraries
   { name: "Git", category: "tools", icon: "git.webp" },
